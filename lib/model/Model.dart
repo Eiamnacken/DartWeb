@@ -109,8 +109,56 @@ enum Effect {
   ///
   smallerPlayer
 }
+///
+/// Ein [GameField] ist ein Level im Spiel
+///
+/// Enthält alle [Brick] die zuvor generiert wurden. Diese werden aus der Config
+/// generiert die in [_readLevel] übergeben werden vom Constructor
+///
+class GameField {
 
-class GameField {}
+  ///
+  /// Breite des Spielfelds
+  ///
+  int _width;
+  ///
+  /// Länge des Spielfelds
+  ///
+  int _length;
+  ///
+  /// Anzahl der positiven [Item] die dieses Level enthält
+  ///
+  int _countPositiveItems;
+  ///
+  /// Anzahl der negativen [Item] die dieses Level enthält
+  ///
+  int _countNegativeItems;
+  ///
+  /// Alle [Brick] die auf dem [GameField] enthalten sind
+  ///
+  List<Brick> bricks;
+  ///
+  /// Generiert das Level aus der übergebenen [config]
+  ///
+  void _readLevel(String config){
+
+  }
+  ///
+  /// Setzt einen [Brick]
+  ///
+  void _setBrick(){
+
+  }
+  ///
+  /// Zerstört einen [Brick] an der angegebenen Position
+  ///
+  /// Kann ein [Item] liefern wenn dieser [Brick] ein Item enthielt
+  ///
+  Item removeBrick(Brick brick){
+
+  }
+
+}
 
 ///
 /// Leben eines [Brick] [green] bedeutet noch 3 treffer [yellow] 2 und [red] 1
