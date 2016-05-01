@@ -1,0 +1,13 @@
+name: DartWeb
+version: 0.0.1
+description: >
+ > Ein Spiel.
+author:
+- Sven Marquardt <Sven2q@hotmail.de>
+- Cedric Pantermehl
+- Heiko Pantermehl
+- Markus Krebs
+homepage: https://github.com/Eiamnacken/DartWeb
+dependencies:
+enviroment:
+  sdk: ">=1.1.5"
