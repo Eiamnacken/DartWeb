@@ -11,12 +11,29 @@ class Ball extends MoveableObject {
   ///
   /// Ändert den [_damage] den ein [Ball] einem [Brick] zufügt
   ///
-  void changeDamage(int damage) {}
+  void changeDamage(int damage) {
+    //TODO: Implement Method
+  }
 
   ///
   /// Ändert die geschwindigkeit die der [Ball] pro zeiteinheit zurück legt
   ///
-  void changeSpeed(int speed) {}
+  void changeSpeed(int speed) {
+    //TODO: Implement Method
+  }
+
+  @override
+  void collision(Direction direction, List<List<GameObject>> gameField) {
+    // TODO: implement collision
+  }
+  ///
+  /// Wird nur von [move()] angesprochen
+  ///
+  /// Ändert die richtung in die der Ball fliegt
+  ///
+  void _changeDirection(Direction direction){
+    //TODO: Implement Method
+  }
 }
 
 ///
@@ -55,18 +72,24 @@ class Brick {
   /// Wenn der [Brick] vorher auf [red] stand wird ein `false` zurück gegeben
   /// ansonsten `true`
   ///
-  bool decHealth() {}
+  bool decHealth() {
+    //TODO: Implement Method
+  }
 
   ///
   /// Zerstört diesen [Brick] und prüft ob es ein [Item] enthält
   /// Gibt ein [Item] zurück wenn es eines enthält ansonsten null
   ///
-  Item destroy() {}
+  Item destroy() {
+    //TODO: Implement Method
+  }
 
   ///
   /// Legt ein neues [Item] an und gibt diese zurück
   ///
-  Item _release() {}
+  Item _release() {
+    //TODO: Implement Method
+  }
 }
 
 ///
@@ -110,12 +133,12 @@ enum Effect {
   smallerPlayer
 }
 ///
-/// Ein [GameField] ist ein Level im Spiel
+/// Ein [Level] ist ein Level im Spiel
 ///
 /// Enthält alle [Brick] die zuvor generiert wurden. Diese werden aus der Config
 /// generiert die in [_readLevel] übergeben werden vom Constructor
 ///
-class GameField {
+class Level {
 
   ///
   /// Breite des Spielfelds
@@ -134,20 +157,24 @@ class GameField {
   ///
   int _countNegativeItems;
   ///
-  /// Alle [Brick] die auf dem [GameField] enthalten sind
+  /// Enthält das gesamte Spielfeld als 2d Liste
   ///
-  List<Brick> bricks;
+  /// Felder ohne ein relevantes Objekt enthalten einfach nur die Oberklasse
+  /// [GameObject] andere Felder haben dementsprechend [Ball],[Brick],[Item]
+  /// oder [Player]
+  ///
+  List<List<GameObject>> gameField;
   ///
   /// Generiert das Level aus der übergebenen [config]
   ///
   void _readLevel(String config){
-
+    //TODO: Implement Method
   }
   ///
   /// Setzt einen [Brick]
   ///
   void _setBrick(){
-
+    //TODO: Implement Method
   }
   ///
   /// Zerstört einen [Brick] an der angegebenen Position
@@ -155,7 +182,7 @@ class GameField {
   /// Kann ein [Item] liefern wenn dieser [Brick] ein Item enthielt
   ///
   Item removeBrick(Brick brick){
-
+    //TODO: Implement Method
   }
 
 }
@@ -184,18 +211,23 @@ class Item extends MoveableObject {
   ///
   /// Gibt an ob es ein Positiv Effekt ist
   ///
-  bool isPositive() {}
+  bool isPositive() {
+    //TODO: Implement Method
+  }
+
+  @override
+  void collision(Direction direction, List<List<GameObject>> gameField) {
+    // TODO: implement collision
+  }
+  ///
+  /// Wendet die eigenschaften dieses Items auf den Player an
+  ///
+  void _activateItem(Player player){
+    //TODO: Implement Method
+  }
 }
 
-///
-/// Objekte die sich im [GameField] bewegen können
-///
-class MoveableObject {
-  ///
-  /// Wie viel abstand legt ein [MoveableObject] pro zeiteinheit/tastendruck zurück
-  ///
-  int _moveSpeed;
-
+class GameObject{
   ///
   /// X position des [MoveableObject] auf dem Spielfeld
   /// Zeigt immer den Mittelpunkt des [MoveableObject] an
@@ -218,10 +250,35 @@ class MoveableObject {
   ///
   int _length;
 
+}
+
+///
+/// Objekte die sich im [Level] bewegen können
+///
+abstract class MoveableObject extends GameObject{
   ///
+  /// Wie viel abstand legt ein [MoveableObject] pro zeiteinheit/tastendruck zurück
   ///
+  int _moveSpeed;
   ///
-  void move(int x, int y) {}
+  /// Bewegt ein [MoveableObject] in eine Richtung
+  /// [direction] gibt an in welche richtung sich das Objekt bewegt
+  /// [gameField] gibt die nötigen Informationen für die [collision]
+  ///
+  void move(Direction direction,List<List<GameObject>> gameField) {
+    //TODO: Implement Method
+  }
+  ///
+  /// Kümmert sich um Kollisionen und passt das gamefield an wenn eine entsteht
+  ///
+  void collision(Direction direction,List<List<GameObject>> gameField);
+  ///
+  /// Gibt an ob beim nächsten Schritt in diese Richtung eine kollision stattfinden wird
+  ///
+  bool collisionAhead(Direction direction,List<List<GameObject>> gameField){
+    //TODO: Implement Method
+    return true;
+  }
 }
 
 ///
@@ -232,10 +289,19 @@ class Player extends MoveableObject {
   ///
   /// Ändert die Länge des [Player]
   ///
-  void changeLength(int length) {}
+  void changeLength(int length) {
+    //TODO: Implement Method
+  }
 
   ///
   /// Ändert den Abstand den der [Player] pro tastendruck zurück legt
   ///
-  void changeSpeed(int speed) {}
+  void changeSpeed(int speed) {
+    //TODO: Implement Method
+  }
+
+  @override
+  void collision(Direction direction, List<List<GameObject>> gameField) {
+    // TODO: implement collision
+  }
 }

@@ -8,29 +8,32 @@ import 'Model.dart';
 ///
 class Game {
   ///
-  /// Enthält die angabe für den Positiven [Effekt] [longerPLayer] wird zum Start
+  /// Enthält die angabe für den Positiven [Effect] [longerPLayer] wird zum Start
   /// festgelegt
   ///
   int _incLength;
 
   ///
-  /// Enthält die angabe für den negativen [Effekt] [smallerPlayer] wird zum Start
+  /// Enthält die angabe für den negativen [Effect] [smallerPlayer] wird zum Start
   /// festgelegt
   ///
   int _decLength;
 
   ///
-  /// Enthält die angabe für den negativen [Effekt] [slowerPLayer] wird zum Start
+  /// Enthält die angabe für den negativen [Effect] [slowerPLayer] wird zum Start
   /// festgelegt
   ///
   int _decSpeedPLayer;
 
   ///
-  /// Enthält die angabe für den positiven [Effekt] [damageBall] wird zum Start
+  /// Enthält die angabe für den positiven [Effect] [damageBall] wird zum Start
   /// festgelegt
   ///
   int _incDamageBall;
-
+  ///
+  /// In welchem [Level] befinden wir uns
+  ///
+  int countLevel;
   ///
   /// Enthält alle [MoveableObject] die sich auf der Karte befinden
   ///
@@ -39,56 +42,39 @@ class Game {
   ///
   /// Die level
   ///
-  List<GameField> gameFields;
+  List<Level> gameFields;
 
   ///
-  /// Alle [Ball] objekte  objekte werden um ihren [_moveSpeed] bewegt
+  /// Bewegt einen Ball in eine Richtung
+  /// [direction] In welche Richtung soll sich der [Ball] bewegen
+  /// [ball]      Welcher [Ball] soll sich bewegen
   ///
-  void moveBalls() {}
+  void moveBall(Direction direction, Ball ball) {}
 
   ///
-  /// Alle [Item] objekte werden um ihren [_moveSpeed] bewegt
+  /// Bewegt ein Item in eine Richtung
+  /// [direction] in welche richtung soll es sich bewegen
+  /// [item]      Welches [Item] soll sich bewegen
   ///
-  void moveItems() {}
+  void moveItem(Direction direction, Item item) {}
 
   ///
   /// Bewegt den [Player] in die richtung von [x]
-  /// [x]   Die richtung in die der Spieler sich bewegt
+  /// [direction]   Die richtung in die der Spieler sich bewegt
   ///
-  void movePLayer(int x) {}
+  void movePLayer(Direction direction) {}
 
   ///
-  /// Bereitet das nächste level vor in [GameField]
+  /// Bereitet das nächste level vor in [Level]
   ///
-  void nextLevel() {}
-
-  ///
-  /// Aktiviert ein [Item] auf den [PLayer]
-  ///
-  void _activateItem() {}
-
-  ///
-  /// Kümmert sich um kollisioen des [Ball] mit anderen Objekten
-  ///
-  void _collisionBall() {}
-
-  ///
-  /// Kümmert sich um kollisionen des [Item] mit anderen Objekten
-  ///
-  void _collisionItem() {}
-
-  ///
-  /// Kümmert sich um die kollisioen des [PLayer] mit anderen Objekten
-  ///
-  void _collisionPLayer() {}
-
+  void newLevel() {}
   ///
   /// Ließt die Json Config um die darin enthaltenen Level anzulgegen
   ///
   void _readConfig() {}
 
   ///
-  /// LÖscht ein [MoveableObject] aus dem Spiel
+  /// Löscht ein [MoveableObject] aus dem Spiel
   ///
   void _removeObject(MoveableObject object) {}
 
