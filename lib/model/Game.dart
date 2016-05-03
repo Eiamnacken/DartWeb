@@ -34,10 +34,6 @@ class Game {
   /// In welchem [Level] befinden wir uns
   ///
   int countLevel;
-  ///
-  /// Enthält alle [MoveableObject] die sich auf der Karte befinden
-  ///
-  List<MoveableObject> objects;
 
   ///
   /// Die level

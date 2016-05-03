@@ -163,7 +163,7 @@ class Level {
   /// [GameObject] andere Felder haben dementsprechend [Ball],[Brick],[Item]
   /// oder [Player]
   ///
-  List<List<GameObject>> gameField;
+  List<List<GameObject>> _gameField;
   ///
   /// Generiert das Level aus der übergebenen [config]
   ///
