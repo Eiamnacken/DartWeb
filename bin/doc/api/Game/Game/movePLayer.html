@@ -85,6 +85,7 @@
       <li class="section-title">
         <a href="Game/Game-class.html#instance-properties">Properties</a>
       </li>
+      <li><a href="Game/Game/countLevel.html">countLevel</a></li>
       <li><a href="Game/Game/gameFields.html">gameFields</a></li>
       <li class="inherited"><a href="Game/Game/hashCode.html">hashCode</a></li>
       <li><a href="Game/Game/objects.html">objects</a></li>
@@ -94,10 +95,10 @@
       <li class="inherited"><a href="Game/Game/operator_equals.html">operator ==</a></li>
     
       <li class="section-title"><a href="Game/Game-class.html#instance-methods">Methods</a></li>
-      <li><a href="Game/Game/moveBalls.html">moveBalls</a></li>
-      <li><a href="Game/Game/moveItems.html">moveItems</a></li>
+      <li><a href="Game/Game/moveBall.html">moveBall</a></li>
+      <li><a href="Game/Game/moveItem.html">moveItem</a></li>
       <li><a href="Game/Game/movePLayer.html">movePLayer</a></li>
-      <li><a href="Game/Game/nextLevel.html">nextLevel</a></li>
+      <li><a href="Game/Game/newLevel.html">newLevel</a></li>
       <li class="inherited"><a href="Game/Game/noSuchMethod.html">noSuchMethod</a></li>
       <li class="inherited"><a href="Game/Game/toString.html">toString</a></li>
     </ol>
@@ -107,16 +108,16 @@
   <div class="col-xs-12 col-sm-9 col-md-8 main-content">
     <section class="multi-line-signature">
       <span class="returntype">void</span>
-      <span class="name ">movePLayer</span>(<wbr><span class="parameter" id="movePLayer-param-x"><span class="type-annotation">int</span> <span class="parameter-name">x</span></span>)
+      <span class="name ">movePLayer</span>(<wbr><span class="parameter" id="movePLayer-param-direction"><span class="type-annotation"><a href="Model/Direction-class.html">Direction</a></span> <span class="parameter-name">direction</span></span>)
     </section>
     <section class="desc markdown">
       <p>Bewegt den <a href="Model/Player-class.html">Player</a> in die richtung von [x]
-[x]   Die richtung in die der Spieler sich bewegt</p>
+[direction]   Die richtung in die der Spieler sich bewegt</p>
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Source</span> </h2>
-      <pre><code class="prettyprint lang-dart">void movePLayer(int x) {}</code></pre>
+      <pre><code class="prettyprint lang-dart">void movePLayer(Direction direction) {}</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

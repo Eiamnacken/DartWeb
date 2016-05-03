@@ -117,9 +117,19 @@ Für nähere Informationen siehe Dokumentation der Funktionen und Attribute</p>
       <h2>Properties</h2>
 
       <dl class="properties">
+        <dt id="countLevel" class="property">
+          <span class="name"><a href="Game/Game/countLevel.html">countLevel</a></span>
+          <span class="signature">&#8594; int</span>
+        </dt>
+        <dd>
+          <p>In welchem <a href="Model/Level-class.html">Level</a> befinden wir uns</p>
+          <div class="features">
+    read / write
+  </div>
+</dd>
         <dt id="gameFields" class="property">
           <span class="name"><a href="Game/Game/gameFields.html">gameFields</a></span>
-          <span class="signature">&#8594; List&lt;<a href="Model/GameField-class.html">GameField</a>&gt;</span>
+          <span class="signature">&#8594; List&lt;<a href="Model/Level-class.html">Level</a>&gt;</span>
         </dt>
         <dd>
           <p>Die level</p>
@@ -180,38 +190,42 @@ Für nähere Informationen siehe Dokumentation der Funktionen und Attribute</p>
     <section class="summary offset-anchor" id="instance-methods">
       <h2>Methods</h2>
       <dl class="callables">
-        <dt id="moveBalls" class="callable">
-          <span class="name"><a href="Game/Game/moveBalls.html">moveBalls</a></span><span class="signature">(<wbr>)
+        <dt id="moveBall" class="callable">
+          <span class="name"><a href="Game/Game/moveBall.html">moveBall</a></span><span class="signature">(<wbr><span class="parameter" id="moveBall-param-direction"><span class="type-annotation"><a href="Model/Direction-class.html">Direction</a></span> <span class="parameter-name">direction</span></span>, <span class="parameter" id="moveBall-param-ball"><span class="type-annotation"><a href="Model/Ball-class.html">Ball</a></span> <span class="parameter-name">ball</span></span>)
             <span class="returntype parameter">&#8594; void</span>
           </span>
         </dt>
         <dd>
-          <p>Alle <a href="Model/Ball-class.html">Ball</a> objekte  objekte werden um ihren <code>_moveSpeed</code> bewegt</p>
+          <p>Bewegt einen Ball in eine Richtung
+<code>direction</code> In welche Richtung soll sich der <a href="Model/Ball-class.html">Ball</a> bewegen
+<code>ball</code>      Welcher <a href="Model/Ball-class.html">Ball</a> soll sich bewegen</p>
         </dd>
-        <dt id="moveItems" class="callable">
-          <span class="name"><a href="Game/Game/moveItems.html">moveItems</a></span><span class="signature">(<wbr>)
+        <dt id="moveItem" class="callable">
+          <span class="name"><a href="Game/Game/moveItem.html">moveItem</a></span><span class="signature">(<wbr><span class="parameter" id="moveItem-param-direction"><span class="type-annotation"><a href="Model/Direction-class.html">Direction</a></span> <span class="parameter-name">direction</span></span>, <span class="parameter" id="moveItem-param-item"><span class="type-annotation"><a href="Model/Item-class.html">Item</a></span> <span class="parameter-name">item</span></span>)
             <span class="returntype parameter">&#8594; void</span>
           </span>
         </dt>
         <dd>
-          <p>Alle <a href="Model/Item-class.html">Item</a> objekte werden um ihren <code>_moveSpeed</code> bewegt</p>
+          <p>Bewegt ein Item in eine Richtung
+<code>direction</code> in welche richtung soll es sich bewegen
+<code>item</code>      Welches <a href="Model/Item-class.html">Item</a> soll sich bewegen</p>
         </dd>
         <dt id="movePLayer" class="callable">
-          <span class="name"><a href="Game/Game/movePLayer.html">movePLayer</a></span><span class="signature">(<wbr><span class="parameter" id="movePLayer-param-x"><span class="type-annotation">int</span> <span class="parameter-name">x</span></span>)
+          <span class="name"><a href="Game/Game/movePLayer.html">movePLayer</a></span><span class="signature">(<wbr><span class="parameter" id="movePLayer-param-direction"><span class="type-annotation"><a href="Model/Direction-class.html">Direction</a></span> <span class="parameter-name">direction</span></span>)
             <span class="returntype parameter">&#8594; void</span>
           </span>
         </dt>
         <dd>
           <p>Bewegt den <a href="Model/Player-class.html">Player</a> in die richtung von [x]
-[x]   Die richtung in die der Spieler sich bewegt</p>
+[direction]   Die richtung in die der Spieler sich bewegt</p>
         </dd>
-        <dt id="nextLevel" class="callable">
-          <span class="name"><a href="Game/Game/nextLevel.html">nextLevel</a></span><span class="signature">(<wbr>)
+        <dt id="newLevel" class="callable">
+          <span class="name"><a href="Game/Game/newLevel.html">newLevel</a></span><span class="signature">(<wbr>)
             <span class="returntype parameter">&#8594; void</span>
           </span>
         </dt>
         <dd>
-          <p>Bereitet das nächste level vor in <a href="Model/GameField-class.html">GameField</a></p>
+          <p>Bereitet das nächste level vor in <a href="Model/Level-class.html">Level</a></p>
         </dd>
         <dt id="noSuchMethod" class="callable inherited">
           <span class="name"><a href="Game/Game/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation">Invocation</span> <span class="parameter-name">invocation</span></span>)
@@ -249,6 +263,7 @@ Für nähere Informationen siehe Dokumentation der Funktionen und Attribute</p>
       <li class="section-title">
         <a href="Game/Game-class.html#instance-properties">Properties</a>
       </li>
+      <li><a href="Game/Game/countLevel.html">countLevel</a></li>
       <li><a href="Game/Game/gameFields.html">gameFields</a></li>
       <li class="inherited"><a href="Game/Game/hashCode.html">hashCode</a></li>
       <li><a href="Game/Game/objects.html">objects</a></li>
@@ -258,10 +273,10 @@ Für nähere Informationen siehe Dokumentation der Funktionen und Attribute</p>
       <li class="inherited"><a href="Game/Game/operator_equals.html">operator ==</a></li>
     
       <li class="section-title"><a href="Game/Game-class.html#instance-methods">Methods</a></li>
-      <li><a href="Game/Game/moveBalls.html">moveBalls</a></li>
-      <li><a href="Game/Game/moveItems.html">moveItems</a></li>
+      <li><a href="Game/Game/moveBall.html">moveBall</a></li>
+      <li><a href="Game/Game/moveItem.html">moveItem</a></li>
       <li><a href="Game/Game/movePLayer.html">movePLayer</a></li>
-      <li><a href="Game/Game/nextLevel.html">nextLevel</a></li>
+      <li><a href="Game/Game/newLevel.html">newLevel</a></li>
       <li class="inherited"><a href="Game/Game/noSuchMethod.html">noSuchMethod</a></li>
       <li class="inherited"><a href="Game/Game/toString.html">toString</a></li>
     </ol>

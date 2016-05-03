@@ -53,7 +53,7 @@
         </ol>
         <div class="title-description">
           <h1 class="title">
-            <span class="kind">class</span> MoveableObject
+            <span class="kind">abstract class</span> MoveableObject
           </h1>
         </div>
         <ul class="subnav">
@@ -87,8 +87,9 @@
       <li class="section-title"><a href="Model/Model-library.html#classes">Classes</a></li>
       <li><a href="Model/Ball-class.html">Ball</a></li>
       <li><a href="Model/Brick-class.html">Brick</a></li>
-      <li><a href="Model/GameField-class.html">GameField</a></li>
+      <li><a href="Model/GameObject-class.html">GameObject</a></li>
       <li><a href="Model/Item-class.html">Item</a></li>
+      <li><a href="Model/Level-class.html">Level</a></li>
       <li><a href="Model/MoveableObject-class.html">MoveableObject</a></li>
       <li><a href="Model/Player-class.html">Player</a></li>
     
@@ -98,11 +99,17 @@
   <div class="col-xs-12 col-sm-9 col-md-8 main-content">
 
     <section class="desc markdown">
-      <p>Objekte die sich im <a href="Model/GameField-class.html">GameField</a> bewegen können</p>
+      <p>Objekte die sich im <a href="Model/Level-class.html">Level</a> bewegen können</p>
     </section>
     
     <section>
       <dl class="dl-horizontal">
+        <dt>Inheritance</dt>
+        <dd><ul class="gt-separated dark clazz-relationships">
+          <li>Object</li>
+          <li><a href="Model/GameObject-class.html">GameObject</a></li>
+          <li>MoveableObject</li>
+        </ul></dd>
 
 
 
@@ -179,13 +186,31 @@
     <section class="summary offset-anchor" id="instance-methods">
       <h2>Methods</h2>
       <dl class="callables">
-        <dt id="move" class="callable">
-          <span class="name"><a href="Model/MoveableObject/move.html">move</a></span><span class="signature">(<wbr><span class="parameter" id="move-param-x"><span class="type-annotation">int</span> <span class="parameter-name">x</span></span>, <span class="parameter" id="move-param-y"><span class="type-annotation">int</span> <span class="parameter-name">y</span></span>)
+        <dt id="collision" class="callable">
+          <span class="name"><a href="Model/MoveableObject/collision.html">collision</a></span><span class="signature">(<wbr><span class="parameter" id="collision-param-direction"><span class="type-annotation"><a href="Model/Direction-class.html">Direction</a></span> <span class="parameter-name">direction</span></span>, <span class="parameter" id="collision-param-gameField"><span class="type-annotation">List&lt;List&lt;<a href="Model/GameObject-class.html">GameObject</a>&gt;&gt;</span> <span class="parameter-name">gameField</span></span>)
             <span class="returntype parameter">&#8594; void</span>
           </span>
         </dt>
         <dd>
-          <p></p>
+          <p>Kümmert sich um Kollisionen und passt das gamefield an wenn eine entsteht</p>
+        </dd>
+        <dt id="collisionAhead" class="callable">
+          <span class="name"><a href="Model/MoveableObject/collisionAhead.html">collisionAhead</a></span><span class="signature">(<wbr><span class="parameter" id="collisionAhead-param-direction"><span class="type-annotation"><a href="Model/Direction-class.html">Direction</a></span> <span class="parameter-name">direction</span></span>, <span class="parameter" id="collisionAhead-param-gameField"><span class="type-annotation">List&lt;List&lt;<a href="Model/GameObject-class.html">GameObject</a>&gt;&gt;</span> <span class="parameter-name">gameField</span></span>)
+            <span class="returntype parameter">&#8594; bool</span>
+          </span>
+        </dt>
+        <dd>
+          <p>Gibt an ob beim nächsten Schritt in diese Richtung eine kollision stattfinden wird</p>
+        </dd>
+        <dt id="move" class="callable">
+          <span class="name"><a href="Model/MoveableObject/move.html">move</a></span><span class="signature">(<wbr><span class="parameter" id="move-param-direction"><span class="type-annotation"><a href="Model/Direction-class.html">Direction</a></span> <span class="parameter-name">direction</span></span>, <span class="parameter" id="move-param-gameField"><span class="type-annotation">List&lt;List&lt;<a href="Model/GameObject-class.html">GameObject</a>&gt;&gt;</span> <span class="parameter-name">gameField</span></span>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+        </dt>
+        <dd>
+          <p>Bewegt ein <a href="Model/MoveableObject-class.html">MoveableObject</a> in eine Richtung
+<code>direction</code> gibt an in welche richtung sich das Objekt bewegt
+<code>gameField</code> gibt die nötigen Informationen für die <a href="Model/MoveableObject/collision.html">collision</a></p>
         </dd>
         <dt id="noSuchMethod" class="callable inherited">
           <span class="name"><a href="Model/MoveableObject/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation">Invocation</span> <span class="parameter-name">invocation</span></span>)
@@ -230,6 +255,8 @@
       <li class="inherited"><a href="Model/MoveableObject/operator_equals.html">operator ==</a></li>
     
       <li class="section-title"><a href="Model/MoveableObject-class.html#instance-methods">Methods</a></li>
+      <li><a href="Model/MoveableObject/collision.html">collision</a></li>
+      <li><a href="Model/MoveableObject/collisionAhead.html">collisionAhead</a></li>
       <li><a href="Model/MoveableObject/move.html">move</a></li>
       <li class="inherited"><a href="Model/MoveableObject/noSuchMethod.html">noSuchMethod</a></li>
       <li class="inherited"><a href="Model/MoveableObject/toString.html">toString</a></li>
