@@ -25,7 +25,7 @@ class Ball extends MoveableObject {
     //TODO: Implement Method
   }
 
-  @override
+
   void collision(Direction direction, List<List<GameObject>> gameField) {
     // TODO: implement collision
   }
