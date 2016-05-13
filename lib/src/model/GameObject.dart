@@ -1,5 +1,6 @@
 
 import 'package:DartWeb/src/model/Enums.dart';
+import 'package:DartWeb/src/controller/GameController.dart';
 
 abstract class GameObject{
   ///
@@ -45,12 +46,12 @@ abstract class MoveableObject extends GameObject{
   /// [direction] gibt an in welche richtung sich das Objekt bewegt
   /// [gameField] gibt die nötigen Informationen für die [collision]
   ///
-  void move(Direction direction,List<List<GameObject>> gameField);
+  void move(Direction direction,List<List<GameObject>> gameField,GameController controller);
 
   ///
   /// Gibt an ob beim nächsten Schritt in diese Richtung eine kollision stattfinden wird
   ///
-  bool collisionAhead(Direction direction,List<List<GameObject>> gameField,int x,[int y]);
+  bool collisionAhead(Direction direction,List<List<GameObject>> gameField,int x,[GameController controller,int y]);
 
   ///
   /// Tauscht den platz zwei [GameObject] im [gameField]
@@ -62,7 +63,7 @@ abstract class MoveableObject extends GameObject{
   ///
   void switchObjects(List<List<GameObject>> gameField, x,y){
     MoveableObject buffer = gameField[xPosition][yPosition];
-    gameField[xPosition][yPosition]= gameField[x][y];
+    gameField[xPosition][yPosition]= null;
     gameField[x][y]=buffer;
   }
 
