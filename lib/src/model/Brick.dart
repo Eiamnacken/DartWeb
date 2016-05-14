@@ -1,11 +1,13 @@
-import 'package:DartWeb/model/Item.dart';
-import 'package:DartWeb/model/Enums.dart';
+
+import 'package:DartWeb/src/model/GameObject.dart';
+import 'package:DartWeb/src/model/Enums.dart';
+import 'package:DartWeb/src/model/Item.dart';
 
 ///
 /// Sind kleine rechtecke die auf dem Spielfeld platziert werden
 /// Es ist Ziel des Spieles diese zu zerstören
 ///
-class Brick {
+class Brick extends GameObject{
   ///
   /// Gibt an ob dieser [Brick] ein Item enthält welches nach dem [destroy] freigelassen
   /// wird
@@ -32,12 +34,14 @@ class Brick {
   ///
   Health health;
 
+  Brick(int xPosition, int yPosition, int width, int length) : super(xPosition, yPosition, width, length);
+
   ///
   /// Verringert die [health] um eine Stufe
   /// Wenn der [Brick] vorher auf [red] stand wird ein `false` zurück gegeben
   /// ansonsten `true`
   ///
-  bool decHealth() {
+  bool decHealth(int damage,List<List<GameObject>> gameField) {
     //TODO: Implement Method
   }
 

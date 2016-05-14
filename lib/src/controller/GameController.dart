@@ -1,4 +1,7 @@
 import 'dart:async';
+import 'package:DartWeb/src/model/GameObject.dart';
+import 'package:DartWeb/src/view/View.dart';
+import 'package:DartWeb/src/model/Model.dart';
 
 
 ///
@@ -21,6 +24,9 @@ const gameKeyHost = "";
 /// Portnummer des GameKeyServers
 ///
 const gameKeyPort=9000;
+
+
+
 ///
 /// Ist verantwortlich für alle bewegungen
 ///
@@ -30,10 +36,16 @@ const gameKeyPort=9000;
 ///
 class GameController{
 
+  Game model;
+  View view;
   ///
   /// Triggert die bewegung des [Ball] und ruft dessen [Ball] move methode auf
   ///
   Timer _ballTrigger;
+
+  void updateView(){
+    view.generateField(model);
+  }
 
 
 }

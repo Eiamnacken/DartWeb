@@ -1,6 +1,9 @@
 import 'package:DartWeb/model/GameObject.dart';
 import 'package:DartWeb/model/Enums.dart';
 import 'package:DartWeb/model/Player.dart';
+import 'package:DartWeb/src/model/GameObject.dart';
+import 'package:DartWeb/src/model/Enums.dart';
+import 'package:DartWeb/src/controller/GameController.dart';
 
 ///
 /// [Item] sind die Positiven oder Negativen effekte die der Player im laufe des
@@ -16,6 +19,8 @@ class Item extends MoveableObject {
   /// Um welche art von [Item] handelt es sich
   ///
   Effect effect;
+
+  Item(int xPosition, int yPosition, int width, int length, int moveSpeed) : super(xPosition, yPosition, width, length, moveSpeed);
 
   ///
   /// Gibt an ob es ein Positiv Effekt ist
@@ -33,5 +38,15 @@ class Item extends MoveableObject {
   ///
   void _activateItem(Player player){
     //TODO: Implement Method
+  }
+
+  @override
+  bool collisionAhead(Direction direction, List<List<GameObject>> gameField, int x, [int y]) {
+    // TODO: implement collisionAhead
+  }
+
+  @override
+  void move(Direction direction, List<List<GameObject>> gameField, GameController controller) {
+    // TODO: implement move
   }
 }

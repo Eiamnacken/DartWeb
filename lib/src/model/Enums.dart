@@ -1,7 +1,7 @@
 ///
 /// Gibt eine bewegungsrichtung an
 ///
-enum Direction { leftUp, leftDown, rightUp, rightDown, up, down }
+enum Direction { leftUp, leftDown, rightUp, rightDown, up, down,left,right }
 
 
 ///
