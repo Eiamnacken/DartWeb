@@ -1,41 +1,48 @@
-import 'package:DartWeb/model/GameObject.dart';
-import 'package:DartWeb/model/Enums.dart';
-
-///
+part of brickGame;
 /// Wird durch den Spieler Kontrolliert. Ein rechteck am unteren Rand des
 /// des Spieles das den Ball reflektiert
 ///
 class Player extends MoveableObject {
 
 
-
+  Player(int xPosition, int yPosition, int width, int length,int moveSpeed) : super(xPosition, yPosition, width, length,moveSpeed);
 
   ///
   /// Ändert die Länge des [Player]
   ///
   void changeLength(int length) {
-    //TODO: Implement Method
+    length=length;
   }
 
   ///
   /// Ändert den Abstand den der [Player] pro tastendruck zurück legt
   ///
   void changeSpeed(int speed) {
-
+    moveSpeed=speed;
   }
+
 
   @override
-  bool collisionAhead(Direction direction, List<List<GameObject>> gameField) {
-    // TODO: implement collisionAhead
+  void move(Direction direction, List<List<GameObject>> gameField,GameController controller) {
+    int x = getValuesForDirection(direction)["X"];
+    Map response=collisionAhead(direction,gameField,0,x);
+    if(!response.keys.first){
+      if(response[false]!=null){
+        response[false].collision(gameField,this);
+      }
+      switchObjects(gameField,x);
+      xPosition+=x;
+      controller.updateView();
+    }
   }
+
+
+
+
+
 
   @override
-  void move(Direction direction, List<List<GameObject>> gameField) {
-    // TODO: implement move
+  void collision(Direction direction, List<List<GameObject>> gameField, GameController controller, GameObject collisionObject) {
+    return;
   }
-
-  Player(int xPosition,int yPosition,int moveSpeed,int width,int length) {
-    super();
-  }
-
 }

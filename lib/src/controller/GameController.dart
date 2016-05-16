@@ -1,4 +1,4 @@
-import 'dart:async';
+part of brickGame;
 
 
 ///
@@ -21,6 +21,9 @@ const gameKeyHost = "";
 /// Portnummer des GameKeyServers
 ///
 const gameKeyPort=9000;
+
+
+
 ///
 /// Ist verantwortlich für alle bewegungen
 ///
@@ -30,10 +33,47 @@ const gameKeyPort=9000;
 ///
 class GameController{
 
-  ///
-  /// Triggert die bewegung des [Ball] und ruft dessen [Ball] move methode auf
-  ///
+  final Game game = new Game();
+
+  final View view = new View();
+
   Timer _ballTrigger;
+
+  GameController(){
+
+    view.startButton.onClick.listen((_){
+      if(_ballTrigger!=null) _ballTrigger.cancel();
+      _ballTrigger = new Timer.periodic(ballSpeed,(_)=> game.moveBall(this));
+    });
+    ButtonElement right = view.leftButton;
+    right.onClick.listen((_){
+      if(game.gameOver()) return;
+      game.movePLayer(Direction.right,this);
+    });
+
+    ButtonElement left = view.rightButton;
+    left.onClick.listen((_){
+      if(game.gameOver()) return;
+      game.movePLayer(Direction.left,this);
+    });
+    window.onKeyDown.listen((event){
+      if(game.gameOver()) return;
+      if(event.keyCode==KeyCode.LEFT){
+        game.movePLayer(Direction.left,this);
+      }else if(event.keyCode==KeyCode.RIGHT){
+        game.movePLayer(Direction.right,this);
+      }
+    });
+  }
+
+
+
+
+
+
+  void updateView(){
+    view.generateField(game);
+  }
 
 
 }

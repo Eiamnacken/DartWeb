@@ -1,6 +1,4 @@
-import 'package:DartWeb/model/GameObject.dart';
-import 'package:DartWeb/model/Brick.dart';
-import 'package:DartWeb/model/Item.dart';
+part of brickGame;
 
 ///
 /// Ein [Level] ist ein Level im Spiel
@@ -13,7 +11,7 @@ class Level {
   ///
   /// Breite des Spielfelds
   ///
-  int _width;
+  int _height;
   ///
   /// Länge des Spielfelds
   ///
@@ -34,25 +32,78 @@ class Level {
   /// oder [Player]
   ///
   List<List<GameObject>> _gameField;
+
+  Player player;
+
+  List<Ball> balls;
+
+  List<Item> items;
+
+  List<Brick> bricks;
   ///
   /// Generiert das Level aus der übergebenen [config]
   ///
-  void _readLevel(String config){
-    //TODO: Implement Method
+  void readLevel(String config){
+    int playerHeight, playerLength, brickHeight, brickLength, ballHeight, ballLength, ballSpeed, playerSpeed, itemSpeed;
+
+    Map jsonLevel = JSON.decode(config);
+
+    _height = int.parse(jsonLevel['levelHeight'].toString());
+    _length = int.parse(jsonLevel['levelLength'].toString());
+    _countPositiveItems = int.parse(jsonLevel['countPosItems'].toString());
+    _countNegativeItems = int.parse(jsonLevel['countNegItems'].toString());
+    playerHeight = int.parse(jsonLevel['playerHeight'].toString());
+    playerLength = int.parse(jsonLevel['playerLength'].toString());
+    brickHeight = int.parse(jsonLevel['brickHeight'].toString());
+    brickLength = int.parse(jsonLevel['brickLength'].toString());
+    ballHeight = int.parse(jsonLevel['ballHeight'].toString());
+    ballLength = int.parse(jsonLevel['ballLength'].toString());
+    ballSpeed = int.parse(jsonLevel['ballSpeed'].toString());
+    playerSpeed = int.parse(jsonLevel['playerSpeed'].toString());
+    //itemSpeed = int.parse(jsonLevel['itemSpeed'].toString());
+
+    // level field from the json file (only contains strings like 'redbrick' or 'player')
+    List<List<String>> jsonField = jsonLevel['levelField'];
+    _gameField = new Iterable.generate(_height, (row) {
+      return new Iterable.generate(_length, (col) => null).toList();
+    }).toList();
+
+    for(int row = 0; row < jsonField.length; row++) {
+      for(int col = 0; col < jsonField[row].length; col++) {
+        if(jsonField[row][col].compareTo('empty') == 0) {
+          _gameField[row][col] = null;
+        }
+        else if(jsonField[row][col].compareTo('redbrick') == 0) {
+          Brick brick = new Brick(col, row, brickHeight, brickLength, 'red');
+          _gameField[row][col] = brick;
+          bricks.add(brick);
+        }
+        else if(jsonField[row][col].compareTo('yellowbrick') == 0) {
+          Brick brick = new Brick(col, row, brickHeight, brickLength, 'yellow');
+          _gameField[row][col] = brick;
+        }
+        else if(jsonField[row][col].compareTo('greenbrick') == 0) {
+          Brick brick = new Brick(col, row, brickHeight, brickLength, 'green');
+          _gameField[row][col] = brick;
+          bricks.add(brick);
+        }
+        /*else if(jsonField[row][col].compareTo('item') == 0) {
+        }*/
+        else if(jsonField[row][col].compareTo('ball') == 0) {
+          Ball ball = new Ball(col, row, ballHeight, ballLength, ballSpeed);
+          _gameField[row][col] = ball;
+          balls.add(ball);
+        }
+        else if(jsonField[row][col].compareTo('player') == 0) {
+          player = new Player(col, row, playerHeight, playerLength, playerSpeed);
+          _gameField[row][col] = player;
+        }
+      }
+    }
   }
-  ///
-  /// Setzt einen [Brick]
-  ///
-  void _setBrick(){
-    //TODO: Implement Method
-  }
-  ///
-  /// Zerstört einen [Brick] an der angegebenen Position
-  ///
-  /// Kann ein [Item] liefern wenn dieser [Brick] ein Item enthielt
-  ///
-  Item removeBrick(Brick brick){
-    //TODO: Implement Method
+
+  List<List<GameObject>> getGameField(){
+    return _gameField;
   }
 
 }

@@ -1,33 +1,35 @@
 
-import 'Enums.dart';
+part of brickGame;
 
-class GameObject{
+abstract class GameObject{
   ///
   /// X position des [MoveableObject] auf dem Spielfeld
   /// Zeigt immer den Mittelpunkt des [MoveableObject] an
   ///
-  int _xPosition;
+  int xPosition;
 
   ///
   /// Y position des [MoveableObject] auf dem Spielfeld
   /// Zeigt immer den Mittelpunkt des [MoveableObject] an
   ///
-  int _yPosition;
+  int yPosition;
 
   ///
   /// Die Breite des [MoveableObject]
   ///
-  int _width;
+  int width;
 
   ///
   /// Die Länge des [MoveableObject]
   ///
-  int _length;
+  int length;
 
-  GameObject(this._xPosition, this._yPosition, this._width, this._length) {
+  GameObject(this.xPosition, this.yPosition, this.width, this.length);
 
-  }
-
+  ///
+  /// Wird aufgerufen wenn eine Kollision mit diesem Objekt entsteht
+  ///
+  void collision(List<List<GameObject>> gameField,GameObject collisionObject);
 
 }
 
@@ -38,32 +40,56 @@ abstract class MoveableObject extends GameObject{
   ///
   /// Wie viel abstand legt ein [MoveableObject] pro zeiteinheit/tastendruck zurück
   ///
-  int _moveSpeed;
+  int moveSpeed;
+
+  MoveableObject(int xPosition, int yPosition, int width, int length,this.moveSpeed): super(xPosition, yPosition, width, length);
+
   ///
   /// Bewegt ein [MoveableObject] in eine Richtung
   /// [direction] gibt an in welche richtung sich das Objekt bewegt
   /// [gameField] gibt die nötigen Informationen für die [collision]
   ///
-  void move(Direction direction,List<List<GameObject>> gameField);
+  void move(Direction direction,List<List<GameObject>> gameField,GameController controller);
 
   ///
   /// Gibt an ob beim nächsten Schritt in diese Richtung eine kollision stattfinden wird
   ///
-  bool collisionAhead(Direction direction,List<List<GameObject>> gameField);
+  /// Wenn der [Player] auf den [Ball] trifft gibt es einen `{false:Ball}` zurück
+  /// Ist das ende des Levels erreicht gibt es ein `{true:null}` zurück
+  ///
+  ///
+  Map<bool,GameObject> collisionAhead(Direction direction,List<List<GameObject>> gameField,[int y=0,int x=0]){
+    GameObject buffer;
+    //Für die grenzen des Spielfeldes
+    if(xPosition+x==gameField.length||xPosition+x==0){
+      return {true:null};
+    }if(yPosition+y==gameField[0].length||yPosition+y==0){
+      return {true:null};
+    }
+    buffer = gameField[xPosition+x][yPosition+y];
+    if(buffer==null){
+      return {false:null};
+    }if(this is Player&&buffer is Ball){
+      return {false:buffer};
+    }
+    return {true:buffer};
+  }
 
   ///
   /// Tauscht den platz zwei [GameObject] im [gameField]
   ///
+  /// Diese Methode braucht überarbeitung für flüssige bewegungen
+  /// [x] momentane Position des Objekts mit dem dieses Objekt die position tauscht
+  /// [y] Dito
   ///
-  void switchObjects(List<List<GameObject>> gameField, GameObject object1, GameObject object2){
-    MoveableObject buffer = gameField.elementAt(object1._yPosition).removeAt(object1._xPosition);
-    gameField.elementAt(object1._yPosition).insert(object1._yPosition,object2);
-    gameField.elementAt(object2._yPosition).insert(object2._xPosition,buffer);
+  ///
+  void switchObjects(List<List<GameObject>> gameField,[int x=0,int y=0]){
+    MoveableObject buffer = gameField[xPosition][yPosition];
+    gameField[xPosition][yPosition]= null;
+    gameField[x][y]=buffer;
   }
 
-  MoveableObject(this._moveSpeed) {
 
-  }
 
 
 }
