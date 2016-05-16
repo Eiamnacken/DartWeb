@@ -50,7 +50,7 @@ class View {
 
     // Updates the field
     final field = model.gameFields[model.countLevel].gameField;
-    print(field);
+
     for (int row = 0; row < field.length; row++) {
       for (int col = 0; col < field[row].length; col++) {
         final td = gameFields[row][col];

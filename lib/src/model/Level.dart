@@ -91,25 +91,25 @@ class Level {
         if (jsonField[row][col].compareTo('empty') == 0) {
           _gameField[row][col] = null;
         } else if (jsonField[row][col].compareTo('redbrick') == 0) {
-          Brick brick = new Brick(col, row, brickHeight, brickLength, 'red');
+          Brick brick = new Brick(row, col, brickHeight, brickLength, 'red');
           _gameField[row][col] = brick;
           bricks.add(brick);
         } else if (jsonField[row][col].compareTo('yellowbrick') == 0) {
-          Brick brick = new Brick(col, row, brickHeight, brickLength, 'yellow');
+          Brick brick = new Brick(row, col, brickHeight, brickLength, 'yellow');
           _gameField[row][col] = brick;
         } else if (jsonField[row][col].compareTo('greenbrick') == 0) {
-          Brick brick = new Brick(col, row, brickHeight, brickLength, 'green');
+          Brick brick = new Brick(row, col, brickHeight, brickLength, 'green');
           _gameField[row][col] = brick;
           bricks.add(brick);
         }
         /*else if(jsonField[row][col].compareTo('item') == 0) {
         }*/
         else if (jsonField[row][col].compareTo('ball') == 0) {
-          Ball ball = new Ball(col, row, ballHeight, ballLength, ballSpeed);
+          Ball ball = new Ball(row, col, ballHeight, ballLength, ballSpeed);
           _gameField[row][col] = ball;
           balls.add(ball);
         } else if (jsonField[row][col].compareTo('player') == 0) {
-          this._player = new Player(col, row, playerHeight, playerLength, playerSpeed);
+          this._player = new Player(row, col, playerHeight, playerLength, playerSpeed);
           _gameField[row][col] = this._player;
 
         }

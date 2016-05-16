@@ -100,7 +100,7 @@ abstract class MoveableObject extends GameObject {
     try {
       buffer = gameField[xPosition][yPosition];
     } on RangeError {
-      return;
+      print("RangeError");
     }
 
     gameField[xPosition][yPosition] = null;
