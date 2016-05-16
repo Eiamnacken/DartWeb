@@ -61,7 +61,7 @@ class View {
           else if (field[row][col] is Ball)
             td.classes.add('ball');
           else if (field[row][col] is Player) td.classes.add('player');
-        }
+        }else td.classes.clear();
       }
     }
   }

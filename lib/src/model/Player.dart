@@ -30,7 +30,7 @@ class Player extends MoveableObject {
       if (response[false] != null) {
         response[false].collision(gameField, this);
       }
-      switchObjects(gameField, x);
+      switchObjects(gameField, xPosition+x,yPosition);
       xPosition += x;
       controller.updateView(gameField);
     }

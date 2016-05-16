@@ -29,6 +29,8 @@ abstract class GameObject {
   /// Wird aufgerufen wenn eine Kollision mit diesem Objekt entsteht
   ///
   void collision(List<List<GameObject>> gameField, GameObject collisionObject);
+
+
 }
 
 ///
@@ -67,10 +69,10 @@ abstract class MoveableObject extends GameObject {
     GameObject buffer;
     //Für die grenzen des Spielfeldes
     if (xPosition + x == gameField.length || xPosition + x == 0) {
-      return {true: null};
+      return {true: buffer};
     }
     if (yPosition + y == gameField[0].length || yPosition + y == 0) {
-      return {true: null};
+      return {true: buffer};
     }
     try {
       buffer = gameField[xPosition + x][yPosition + y];

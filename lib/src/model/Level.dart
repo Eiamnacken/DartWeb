@@ -82,35 +82,35 @@ class Level {
 
     // level field from the json file (only contains strings like 'redbrick' or 'player')
     List<List<String>> jsonField = jsonLevel['levelField'];
-    _gameField = new Iterable.generate(_height, (row) {
-      return new Iterable.generate(_length, (col) => null).toList();
+    _gameField = new Iterable.generate(_length, (col) {
+      return new Iterable.generate(_height, (row) => null).toList();
     }).toList();
 
     for (int row = 0; row < jsonField.length; row++) {
       for (int col = 0; col < jsonField[row].length; col++) {
         if (jsonField[row][col].compareTo('empty') == 0) {
-          _gameField[row][col] = null;
+          _gameField[col][row] = null;
         } else if (jsonField[row][col].compareTo('redbrick') == 0) {
-          Brick brick = new Brick(row, col, brickHeight, brickLength, 'red');
-          _gameField[row][col] = brick;
+          Brick brick = new Brick(col, row, brickHeight, brickLength, 'red');
+          _gameField[col][row] = brick;
           bricks.add(brick);
         } else if (jsonField[row][col].compareTo('yellowbrick') == 0) {
-          Brick brick = new Brick(row, col, brickHeight, brickLength, 'yellow');
-          _gameField[row][col] = brick;
+          Brick brick = new Brick(col, row, brickHeight, brickLength, 'yellow');
+          _gameField[col][row] = brick;
         } else if (jsonField[row][col].compareTo('greenbrick') == 0) {
-          Brick brick = new Brick(row, col, brickHeight, brickLength, 'green');
-          _gameField[row][col] = brick;
+          Brick brick = new Brick(col, row, brickHeight, brickLength, 'green');
+          _gameField[col][row] = brick;
           bricks.add(brick);
         }
         /*else if(jsonField[row][col].compareTo('item') == 0) {
         }*/
         else if (jsonField[row][col].compareTo('ball') == 0) {
-          Ball ball = new Ball(row, col, ballHeight, ballLength, ballSpeed);
-          _gameField[row][col] = ball;
+          Ball ball = new Ball(col, row, ballHeight, ballLength, ballSpeed);
+          _gameField[col][row] = ball;
           balls.add(ball);
         } else if (jsonField[row][col].compareTo('player') == 0) {
-          this._player = new Player(row, col, playerHeight, playerLength, playerSpeed);
-          _gameField[row][col] = this._player;
+          _player = new Player(col, row, playerHeight, playerLength, playerSpeed);
+          _gameField[col][row] = player;
 
         }
       }
@@ -118,9 +118,8 @@ class Level {
 
   }
 
-  Player get player => this._player;
-
+  Player get player => _player;
 
   List<List<GameObject>> get gameField => _gameField;
-  set gameField (List<List<GameObject>> games)=> _gameField=games;
+  set gameField(List<List<GameObject>> gameField) => _gameField=gameField;
 }

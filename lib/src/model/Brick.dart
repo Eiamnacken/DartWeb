@@ -41,7 +41,7 @@ class Brick extends GameObject {
   /// Wenn der [Brick] vorher auf [red] stand wird ein `false` zurück gegeben
   /// ansonsten `true`
   ///
-  bool decHealth(int damage, List<List<GameObject>> gameField) {
+  void decHealth(int damage, List<List<GameObject>> gameField) {
     health = getHealth(damage, health);
     if (health == Health.grey) {
       gameField[xPosition][yPosition] = null;
