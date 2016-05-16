@@ -70,4 +70,28 @@ class Brick extends GameObject {
     } else
       return;
   }
+
+  String toString() {
+    String buffer="";
+    switch(health){
+      case Health.brown:
+      buffer="brownBrick";
+        break;
+      case Health.green:
+        buffer="greenBrick";
+        break;
+      case Health.grey:
+        buffer="greyBrick";
+        break;
+      case Health.red:
+        buffer="redBrick";
+        break;
+      case Health.yellow:
+        buffer="yellowBrick";
+        break;
+    }
+    return buffer;
+  }
+
+
 }

@@ -42,4 +42,10 @@ class Player extends MoveableObject {
   void collision(List<List<GameObject>> gameField, GameObject collisionObject) {
     return;
   }
+
+  String toString() {
+    return "player";
+  }
+
+
 }

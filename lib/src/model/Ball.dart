@@ -112,4 +112,10 @@ class Ball extends MoveableObject {
       move(direction, gameField, controller);
     }
   }
+
+  String toString() {
+    return "ball";
+  }
+
+
 }
