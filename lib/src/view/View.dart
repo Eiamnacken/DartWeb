@@ -1,8 +1,6 @@
 part of brickGame;
 
 class View {
-
-
   final warningoverlay = querySelector("#warningoverlay");
 
   final title = querySelector("#title");
@@ -15,7 +13,6 @@ class View {
 
   final overlay = querySelector("#overlay");
 
-
   HtmlElement get startButton => querySelector("#start");
 
   HtmlElement get rightButton => querySelector("#rightbutton");
@@ -24,9 +21,8 @@ class View {
 
   List<List<HtmlElement>> gameFields;
 
-
   void generateField(Game model) {
-    final field = model.gameFields[model.countLevel].getGameField();
+    final field = model.gameFields[model.countLevel].gameField;
 
     String table = "";
     for (int row = 0; row < field.length; row++) {
@@ -40,7 +36,6 @@ class View {
     }
     game.innerHtml = table;
 
-
     gameFields = new List<List<HtmlElement>>(field.length);
     for (int row = 0; row < field.length; row++) {
       gameFields[row] = [];
@@ -50,33 +45,30 @@ class View {
     }
   }
 
-
-  void update(Game model, { List<Map> scores: const [] }) {
-
+  void update(Game model, {List<Map> scores: const []}) {
     gameover.innerHtml = model.gameOver() ? "Game Over" : "";
 
     // Updates the field
-    final field = model.gameFields[model.countLevel].getGameField();
+    final field = model.gameFields[model.countLevel].gameField;
+    print(field);
     for (int row = 0; row < field.length; row++) {
       for (int col = 0; col < field[row].length; col++) {
         final td = gameFields[row][col];
         if (td != null) {
           td.classes.clear();
-          if (field[row][col] == #brick) td.classes.add('brick');
-          else if (field[row][col] == #ball) td.classes.add('ball');
-          else if (field[row][col] == #player) td.classes.add('player');
+          if (field[row][col] is Brick)
+            td.classes.add('brick');
+          else if (field[row][col] is Ball)
+            td.classes.add('ball');
+          else if (field[row][col] is Player) td.classes.add('player');
         }
       }
     }
   }
 
-
   closeForm() => overlay.innerHtml = "";
-
 
   void warning(String message) {
     document.querySelector('#warningoverlay').innerHtml = message;
   }
-
 }
-

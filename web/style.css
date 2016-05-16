@@ -110,13 +110,20 @@ body {
 
 .player {
   background-color: brown !important;
-  border-radius: 10px;
+  width: 10px;
 }
 
 .ball {
   background-color: red !important;
-  border-radius: 10px;
+  width: 10px;
 }
+
+.brick{
+  background-color: blue !important;
+  width: 10px;
+}
+
+
 
 /*
 green, yellow, red, grey
