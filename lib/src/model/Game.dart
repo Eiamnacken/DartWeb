@@ -53,13 +53,16 @@ class Game {
   ///
   void moveBall(GameController controller) {
     print("Move");
-    gameFields[countLevel].balls.forEach((ball) {
-      ball.move(
-          ball.direction, gameFields[countLevel].gameField, controller);
-      if (ball.yPosition <= 0) {
-        gameFields[countLevel].balls.remove(ball);
-      }
-    });
+    List balls = gameFields[countLevel].balls;
+    if(balls.isNotEmpty) {
+      balls.forEach((ball) {
+        ball.move(
+            ball.direction, gameFields[countLevel].gameField, controller);
+        if (ball.yPosition <= 0 ) {
+          gameFields[countLevel].balls.remove(ball);
+        }
+      });
+    }
   }
 
   ///
@@ -84,9 +87,9 @@ class Game {
   void movePLayer(Direction direction, GameController controller) {
     Player player = _getPlayer();
 
-    for (int i = player.moveSpeed; i > 0; i--) {
+    //for (int i = player.moveSpeed; i > 0; i--) {
       player.move(direction, gameFields[countLevel].gameField, controller);
-    }
+    //}
   }
 
   Player _getPlayer() {
