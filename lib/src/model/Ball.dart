@@ -1,8 +1,4 @@
-import 'GameObject.dart';
-import 'Enums.dart';
-import 'package:DartWeb/src/controller/GameController.dart';
-import 'package:DartWeb/src/model/Brick.dart';
-import 'package:DartWeb/src/model/Player.dart';
+part of brickGame;
 
 ///
 /// Objekt das sich von selbst durch den Spielraum bewegt
@@ -27,6 +23,7 @@ class Ball extends MoveableObject {
 
   Direction get direction=> _direction;
 
+  int get damage=> _damage;
   ///
   /// Ändert die geschwindigkeit die der [Ball] pro zeiteinheit zurück legt
   ///
@@ -37,87 +34,76 @@ class Ball extends MoveableObject {
   ///
   /// Wird nur von Objekten aufgerufen die bei ihrer eigenen bewegung mit dem [Ball kolidieren
   ///
-  void collision(Direction direction, List<List<GameObject>> gameField,GameController controller) {
-    switch(_direction){
-      case Direction.leftDown:
-        _changeDirection(Direction.leftUp);
-        break;
-      case Direction.rightDown:
-        _changeDirection(Direction.rightUp);
-        break;
-      default:
-        break;
-    }
+  void collision(List<List<GameObject>> gameField,GameObject collisionObject) {
+    _changeDirection(this._direction,collisionObject);
 
   }
   ///
   /// Wird nur von [move] und [collision] angesprochen
   ///
   /// Ändert die richtung in die der Ball fliegt
+  /// [collisionObject] anhand dieses Objektes wird entschieden wie sich der [Ball] nach der kollision verhält
   ///
-  void _changeDirection(Direction direction){
-    _direction=direction;
+  ///
+  void _changeDirection(Direction direction,GameObject collisionObject){
+//    if(collisionObject is Player){
+//
+//    }else{
+      switch(direction){
+        case Direction.up:
+          break;
+        case Direction.down:
+          break;
+        case Direction.left:
+          break;
+        case Direction.right:
+          break;
+        case Direction.rightDown:
+          this._direction=Direction.rightUp;
+          break;
+        case Direction.rightUp:
+          if(collisionObject==null) this._direction=Direction.leftUp;
+          else this._direction=Direction.rightDown;
+          break;
+        case Direction.leftDown:
+          this._direction=Direction.leftUp;
+          break;
+        case Direction.leftUp:
+          if(collisionObject==null){
+            this._direction=Direction.rightUp;
+          }else this._direction=Direction.leftDown;
+          break;
+      }
+//    }
+
   }
 
 
-  //TODO Was passiert wenn der Ball den Spieler trifft vorallem überdenke nochmal move
-  @override
-  bool collisionAhead(Direction direction, List<List<GameObject>> gameField, int x, [GameController controller,int y]) {
-    GameObject buffer = gameField[xPosition+x][yPosition+y];
-    if(buffer is Brick){
-      buffer.decHealth(_damage,gameField);
-      _changeDirection(direction);
-      return true;
-    }else if(yPosition+y<=gameField[xPosition].length){
-      return false;
-    }else if(buffer is Player){
-      collision(direction,gameField,controller);
-      return true;
-    }else return false;
-  }
+
 
 
 
   @override
   void move(Direction direction, List<List<GameObject>> gameField, GameController controller) {
-    int x=0;
-    int y=0;
-    switch(direction){
-      case Direction.leftUp:
-        x=-1;
-        y=1;
-        break;
-      case Direction.leftDown:
-        x=-1;
-        y=-1;
-        break;
-      case Direction.rightDown:
-        x=1;
-        y=-1;
-        break;
-      case Direction.rightUp:
-        x=1;
-        y=1;
-        break;
-      case Direction.up:
-        x=0;
-        y=1;
-        break;
-      case Direction.down:
-        x=0;
-        y=-1;
-        break;
-      default:
-        break;
+    Map coordinates = getValuesForDirection(direction);
+    final int xCoordinate = xPosition+coordinates["X"];
+    final int yCoordinate = yPosition+coordinates["Y"];
+    GameObject buffer;
+    if(xCoordinate<gameField.length&&yCoordinate<gameField[xCoordinate].length) {
+      buffer = gameField[xPosition + coordinates["X"]][yPosition +
+          coordinates["Y"]];
     }
-    if(!collisionAhead(direction,gameField,x,controller,y)){
-      xPosition+=x;
-      yPosition+=y;
+    Map response = collisionAhead(direction,gameField,coordinates["Y"],coordinates["X"]);
+    //Kollison voraus ? wenn nicht einfach bewegen ansonsten werden die entsprechenden Schritte eingeleitet z.B. Kollision des Objekts aufgerufen
+    if(!response.keys.first){
+      switchObjects(gameField,coordinates["X"],coordinates["Y"]);
+      xPosition+=coordinates["X"];
+      yPosition+=coordinates["Y"];
       controller.updateView();
-    }else if(yPosition>gameField[0].length){
-      move(_direction,gameField,controller);
     }else{
-      gameField[xPosition][yPosition]=  null;
+      _changeDirection(direction,response[true]);
+      if(response[true]!=null) response[true].collision(gameField,this);
+      move(direction,gameField,controller);
     }
   }
 }

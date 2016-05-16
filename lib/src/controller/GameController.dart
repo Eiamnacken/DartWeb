@@ -1,7 +1,4 @@
-import 'dart:async';
-import 'package:DartWeb/src/model/GameObject.dart';
-import 'package:DartWeb/src/view/View.dart';
-import 'package:DartWeb/src/model/Model.dart';
+part of brickGame;
 
 
 ///
@@ -36,15 +33,48 @@ const gameKeyPort=9000;
 ///
 class GameController{
 
-  Game model;
-  View view;
-  ///
-  /// Triggert die bewegung des [Ball] und ruft dessen [Ball] move methode auf
-  ///
+  final Game game = new Game();
+
+  final View view = new View();
+
   Timer _ballTrigger;
 
+  GameController(){
+
+    view.startButton.onClick.listen((_){
+      if(_ballTrigger!=null) _ballTrigger.cancel();
+      _ballTrigger = new Timer.periodic(ballSpeed,(_)=> game.moveBall(this));
+    });
+    ButtonElement right = view.leftButton;
+    right.onClick.listen((_){
+      if(game.gameOver()) return;
+      game.movePLayer(Direction.right,this);
+    });
+
+    ButtonElement left = view.rightButton;
+    left.onClick.listen((_){
+      if(game.gameOver()) return;
+      game.movePLayer(Direction.left,this);
+    });
+    window.onKeyDown.listen((event){
+      if(game.gameOver()) return;
+      if(event.keyCode==KeyCode.LEFT){
+        game.movePLayer(Direction.left,this);
+      }else if(event.keyCode==KeyCode.RIGHT){
+        game.movePLayer(Direction.right,this);
+      }
+    });
+
+    view.generateField(game);
+  }
+
+
+
+
+
+
   void updateView(){
-    view.generateField(model);
+    view.generateField(game);
   }
 
 

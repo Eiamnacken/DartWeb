@@ -1,3 +1,4 @@
+part of brickGame;
 
 
 ///
@@ -40,25 +41,69 @@ class Game {
   ///
   List<Level> gameFields;
 
-  ///
-  /// Bewegt einen Ball in eine Richtung
-  /// [direction] In welche Richtung soll sich der [Ball] bewegen
-  /// [ball]      Welcher [Ball] soll sich bewegen
-  ///
-  void moveBall(Direction direction, Ball ball) {}
+  Game(){
+    countLevel=0;
+    gameFields=new List();
+    _readConfig();
+  }
 
   ///
-  /// Bewegt ein Item in eine Richtung
-  /// [direction] in welche richtung soll es sich bewegen
-  /// [item]      Welches [Item] soll sich bewegen
+  /// Bewegt alle Bälle um einen Schritt
+  /// [direction] In welche Richtung soll sich der [Ball] bewegen
   ///
-  void moveItem(Direction direction, Item item) {}
+  void moveBall(GameController controller) {
+    gameFields[countLevel].balls.forEach((ball){
+        ball.move(ball.direction,gameFields[countLevel].getGameField(),controller);
+      if(ball.yPosition<=0){
+        gameFields[countLevel].balls.remove(ball);
+      }
+    });
+
+  }
+
+  ///
+  /// Bewegt alle Items um einen Schritt
+  /// [direction] in welche richtung soll es sich bewegen
+  ///
+  ///
+  void moveItem(GameController controller) {
+    gameFields[countLevel].items.forEach((item){
+    item.move(Direction.down,gameFields[countLevel].getGameField(),controller);
+    if(item.yPosition<=0){
+      gameFields[countLevel].items.remove(item);
+    }
+    });
+  }
 
   ///
   /// Bewegt den [Player] in die richtung von [x]
   /// [direction]   Die richtung in die der Spieler sich bewegt
   ///
-  void movePLayer(Direction direction) {}
+  void movePLayer(Direction direction,GameController controller) {
+    Player player = _getPlayer();
+    for(int i=player.moveSpeed;i>0;i--){
+      player.move(direction,gameFields[countLevel].getGameField(),controller);
+    }
+
+  }
+
+  Player _getPlayer(){
+    gameFields[countLevel].player;
+  }
+
+  bool gameOver(){
+    if(gameFields[countLevel].balls.length==0){
+      return true;
+    }
+    return false;
+  }
+
+  bool won(){
+    if(gameFields[countLevel].bricks.length==0&&gameFields[countLevel].balls>0){
+      return true;
+    }
+    return false;
+  }
 
   ///
   /// Bereitet das nächste level vor in [Level]
@@ -67,7 +112,55 @@ class Game {
   ///
   /// Ließt die Json Config um die darin enthaltenen Level anzulgegen
   ///
-  void _readConfig() {}
+  void _readConfig() {
+    /// liest .json aus einem Ordner in einen String
+    ///
+    String jsonDataAsString = '''
+    { "playerHeight":1,
+      "playerLength":1,
+      "brickHeight":1,
+      "brickLength":1,
+      "ballHeight":1,
+      "ballLength":1,
+      "ballSpeed":250,
+      "playerSpeed":750,
+      "itemSpeed":250,
+      "countPosItems":0,
+      "countNegItems":0,
+      "levelLength":10,
+      "levelHeight":24,
+      "levelField":[["empty", "empty", "greenbrick", "yellowbrick", "redbrick", "redbrick", "yellowbrick", "greenbrick", "empty", "empty"],
+                    ["empty", "empty", "greenbrick", "yellowbrick", "redbrick", "yellowbrick", "greenbrick", "greenbrick", "empty", "empty"],
+                    ["empty", "empty", "greenbrick", "yellowbrick", "redbrick", "yellowbrick", "greenbrick", "empty", "empty", "empty"],
+                    ["empty", "empty", "greenbrick", "yellowbrick", "redbrick", "yellowbrick", "greenbrick", "empty", "empty", "empty"],
+                    ["empty", "empty", "greenbrick", "yellowbrick", "redbrick", "yellowbrick", "greenbrick", "empty", "empty", "empty"],
+                    ["empty", "empty", "greenbrick", "yellowbrick", "redbrick", "yellowbrick", "greenbrick", "empty", "empty", "empty"],
+                    ["empty", "redbrick", "redbrick", "redbrick", "redbrick", "redbrick", "redbrick", "redbrick", "redbrick", "empty"],
+                    ["empty", "empty", "greenbrick", "greenbrick", "greenbrick", "greenbrick", "greenbrick", "greenbrick", "empty", "empty"],
+                    ["empty", "empty", "greenbrick", "yellowbrick", "redbrick", "yellowbrick", "greenbrick", "empty", "empty", "empty"],
+                    ["empty", "empty", "empty", "empty", "redbrick", "yellowbrick", "greenbrick", "empty", "empty", "empty"],
+                    ["empty", "empty", "greenbrick", "yellowbrick", "redbrick", "yellowbrick", "greenbrick", "empty", "empty", "empty"],
+                    ["empty", "empty", "greenbrick", "yellowbrick", "redbrick", "yellowbrick", "greenbrick", "empty", "empty", "empty"],
+                    ["empty", "empty", "greenbrick", "yellowbrick", "redbrick", "yellowbrick", "greenbrick", "empty", "empty", "empty"],
+                    ["empty", "greenbrick", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+                    ["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+                    ["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+                    ["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+                    ["redbrick", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "redbrick"],
+                    ["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+                    ["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+                    ["empty", "empty", "empty", "empty", "ball", "empty", "empty", "empty", "empty", "empty"],
+                    ["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+                    ["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+                    ["empty", "empty", "empty", "empty", "player", "empty", "empty", "empty", "empty", "empty"]]
+    }
+    ''';
+
+    Level level = new Level();
+
+    level.readLevel(jsonDataAsString);
+    gameFields.add(level);
+  }
 
   ///
   /// Löscht ein [MoveableObject] aus dem Spiel

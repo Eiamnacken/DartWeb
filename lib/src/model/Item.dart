@@ -1,9 +1,4 @@
-import 'package:DartWeb/model/GameObject.dart';
-import 'package:DartWeb/model/Enums.dart';
-import 'package:DartWeb/model/Player.dart';
-import 'package:DartWeb/src/model/GameObject.dart';
-import 'package:DartWeb/src/model/Enums.dart';
-import 'package:DartWeb/src/controller/GameController.dart';
+part of brickGame;
 
 ///
 /// [Item] sind die Positiven oder Negativen effekte die der Player im laufe des
