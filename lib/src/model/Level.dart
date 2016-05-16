@@ -1,6 +1,4 @@
-import 'package:DartWeb/model/GameObject.dart';
-import 'package:DartWeb/model/Brick.dart';
-import 'package:DartWeb/model/Item.dart';
+
 import 'package:DartWeb/src/model/GameObject.dart';
 import 'package:DartWeb/src/model/Model.dart';
 

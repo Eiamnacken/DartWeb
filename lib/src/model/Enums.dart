@@ -104,3 +104,19 @@ Health getHealth(int damage,Health health){
     return Health.grey;
   }else return values[index];
 }
+
+Health generateHealth(String health){
+  Health buffer;
+  if(health=="green"){
+    buffer=Health.green;
+  }else if(health=="grey"){
+    buffer=Health.grey;
+  }else if(health=="yellow"){
+    buffer=Health.yellow;
+  }else if(health=="red"){
+    buffer=Health.red;
+  }else if(health=="brown"){
+    buffer=Health.brown;
+  }
+  return buffer;
+}
