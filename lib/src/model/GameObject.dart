@@ -1,7 +1,5 @@
 
-import 'package:DartWeb/src/model/Enums.dart';
-import 'package:DartWeb/src/controller/GameController.dart';
-import 'package:DartWeb/src/model/Model.dart';
+part of brickGame;
 
 abstract class GameObject{
   ///

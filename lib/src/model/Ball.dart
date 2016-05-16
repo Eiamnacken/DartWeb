@@ -1,8 +1,4 @@
-import 'GameObject.dart';
-import 'Enums.dart';
-import 'package:DartWeb/src/controller/GameController.dart';
-import 'package:DartWeb/src/model/Brick.dart';
-import 'package:DartWeb/src/model/Player.dart';
+part of brickGame;
 
 ///
 /// Objekt das sich von selbst durch den Spielraum bewegt

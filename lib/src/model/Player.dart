@@ -1,7 +1,4 @@
-import 'package:DartWeb/src/model/Enums.dart';
-import 'package:DartWeb/src/model/GameObject.dart';
-import 'package:DartWeb/src/controller/GameController.dart';
-///
+part of brickGame;
 /// Wird durch den Spieler Kontrolliert. Ein rechteck am unteren Rand des
 /// des Spieles das den Ball reflektiert
 ///

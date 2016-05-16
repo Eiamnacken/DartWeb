@@ -1,8 +1,4 @@
-import 'package:DartWeb/src/model/Enums.dart';
-import 'package:DartWeb/src/model/Level.dart';
-import 'package:DartWeb/src/model/GameObject.dart';
-import 'package:DartWeb/src/model/Model.dart';
-import 'package:DartWeb/src/controller/GameController.dart';
+part of brickGame;
 
 
 ///
@@ -45,7 +41,10 @@ class Game {
   ///
   List<Level> gameFields;
 
-  List<MoveableObject> moveableObjects;
+  Game(){
+    countLevel=0;
+    _readConfig();
+  }
 
   ///
   /// Bewegt alle Bälle um einen Schritt
@@ -91,6 +90,20 @@ class Game {
     gameFields[countLevel].player;
   }
 
+  bool gameOver(){
+    if(gameFields[countLevel].balls.length==0){
+      return true;
+    }
+    return false;
+  }
+
+  bool won(){
+    if(gameFields[countLevel].bricks.length==0&&gameFields[countLevel].balls>0){
+      return true;
+    }
+    return false;
+  }
+
   ///
   /// Bereitet das nächste level vor in [Level]
   ///
@@ -98,7 +111,55 @@ class Game {
   ///
   /// Ließt die Json Config um die darin enthaltenen Level anzulgegen
   ///
-  void _readConfig() {}
+  void _readConfig() {
+    /// liest .json aus einem Ordner in einen String
+    ///
+    String jsonDataAsString = '''
+    { "playerHeight":1,
+      "playerLength":1,
+      "brickHeight":1,
+      "brickLength":1,
+      "ballHeight":1,
+      "ballLength":1,
+      "ballSpeed":250,
+      "playerSpeed":750,
+      "itemSpeed":250,
+      "countPosItems":0,
+      "countNegItems":0,
+      "levelLength":10,
+      "levelHeight":24,
+      "levelField":[["empty", "empty", "greenbrick", "yellowbrick", "redbrick", "redbrick", "yellowbrick", "greenbrick", "empty", "empty"],
+                    ["empty", "empty", "greenbrick", "yellowbrick", "redbrick", "yellowbrick", "greenbrick", "greenbrick", "empty", "empty"],
+                    ["empty", "empty", "greenbrick", "yellowbrick", "redbrick", "yellowbrick", "greenbrick", "empty", "empty", "empty"],
+                    ["empty", "empty", "greenbrick", "yellowbrick", "redbrick", "yellowbrick", "greenbrick", "empty", "empty", "empty"],
+                    ["empty", "empty", "greenbrick", "yellowbrick", "redbrick", "yellowbrick", "greenbrick", "empty", "empty", "empty"],
+                    ["empty", "empty", "greenbrick", "yellowbrick", "redbrick", "yellowbrick", "greenbrick", "empty", "empty", "empty"],
+                    ["empty", "redbrick", "redbrick", "redbrick", "redbrick", "redbrick", "redbrick", "redbrick", "redbrick", "empty"],
+                    ["empty", "empty", "greenbrick", "greenbrick", "greenbrick", "greenbrick", "greenbrick", "greenbrick", "empty", "empty"],
+                    ["empty", "empty", "greenbrick", "yellowbrick", "redbrick", "yellowbrick", "greenbrick", "empty", "empty", "empty"],
+                    ["empty", "empty", "empty", "empty", "redbrick", "yellowbrick", "greenbrick", "empty", "empty", "empty"],
+                    ["empty", "empty", "greenbrick", "yellowbrick", "redbrick", "yellowbrick", "greenbrick", "empty", "empty", "empty"],
+                    ["empty", "empty", "greenbrick", "yellowbrick", "redbrick", "yellowbrick", "greenbrick", "empty", "empty", "empty"],
+                    ["empty", "empty", "greenbrick", "yellowbrick", "redbrick", "yellowbrick", "greenbrick", "empty", "empty", "empty"],
+                    ["empty", "greenbrick", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+                    ["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+                    ["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+                    ["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+                    ["redbrick", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "redbrick"],
+                    ["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+                    ["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+                    ["empty", "empty", "empty", "empty", "ball", "empty", "empty", "empty", "empty", "empty"],
+                    ["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+                    ["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+                    ["empty", "empty", "empty", "empty", "player", "empty", "empty", "empty", "empty", "empty"]]
+    }
+    ''';
+
+    Level level = new Level();
+
+    level.readLevel(jsonDataAsString);
+    gameFields.add(level);
+  }
 
   ///
   /// Löscht ein [MoveableObject] aus dem Spiel

@@ -1,3 +1,5 @@
+part of brickGame;
+
 ///
 /// Gibt eine bewegungsrichtung an
 ///

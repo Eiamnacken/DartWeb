@@ -1,8 +1,4 @@
-
-import 'package:DartWeb/src/model/GameObject.dart';
-import 'package:DartWeb/src/model/Enums.dart';
-import 'package:DartWeb/src/model/Item.dart';
-import 'package:DartWeb/src/model/Ball.dart';
+part of brickGame;
 
 ///
 /// Sind kleine rechtecke die auf dem Spielfeld platziert werden
@@ -35,7 +31,9 @@ class Brick extends GameObject{
   ///
   Health health;
 
-  Brick(int xPosition, int yPosition, int width, int length) : super(xPosition, yPosition, width, length);
+  Brick(int xPosition, int yPosition, int width, int length,String health): super(xPosition, yPosition, width, length){
+   this.health=generateHealth(health);
+  }
 
   ///
   /// Verringert die [health] um eine Stufe
