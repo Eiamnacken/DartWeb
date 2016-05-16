@@ -4,7 +4,7 @@ part of brickGame;
 /// Sind kleine rechtecke die auf dem Spielfeld platziert werden
 /// Es ist Ziel des Spieles diese zu zerstören
 ///
-class Brick extends GameObject{
+class Brick extends GameObject {
   ///
   /// Gibt an ob dieser [Brick] ein Item enthält welches nach dem [destroy] freigelassen
   /// wird
@@ -31,8 +31,9 @@ class Brick extends GameObject{
   ///
   Health health;
 
-  Brick(int xPosition, int yPosition, int width, int length,String health): super(xPosition, yPosition, width, length){
-   this.health=generateHealth(health);
+  Brick(int xPosition, int yPosition, int width, int length, String health)
+      : super(xPosition, yPosition, width, length) {
+    this.health = generateHealth(health);
   }
 
   ///
@@ -40,12 +41,11 @@ class Brick extends GameObject{
   /// Wenn der [Brick] vorher auf [red] stand wird ein `false` zurück gegeben
   /// ansonsten `true`
   ///
-  bool decHealth(int damage,List<List<GameObject>> gameField) {
-    health=getHealth(damage,health);
-    if(health==Health.grey){
-      gameField[xPosition][yPosition]=null;
+  void decHealth(int damage, List<List<GameObject>> gameField) {
+    health = getHealth(damage, health);
+    if (health == Health.grey) {
+      gameField[xPosition][yPosition] = null;
     }
-
   }
 
   ///
@@ -65,8 +65,9 @@ class Brick extends GameObject{
 
   @override
   void collision(List<List<GameObject>> gameField, GameObject collisionObject) {
-    if(collisionObject is Ball){
-      decHealth(collisionObject.damage,gameField);
-    }else return;
+    if (collisionObject is Ball) {
+      decHealth(collisionObject.damage, gameField);
+    } else
+      return;
   }
 }

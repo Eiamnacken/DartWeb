@@ -7,23 +7,26 @@ part of brickGame;
 /// generiert die in [_readLevel] übergeben werden vom Constructor
 ///
 class Level {
-
   ///
   /// Breite des Spielfelds
   ///
   int _height;
+
   ///
   /// Länge des Spielfelds
   ///
   int _length;
+
   ///
   /// Anzahl der positiven [Item] die dieses Level enthält
   ///
   int _countPositiveItems;
+
   ///
   /// Anzahl der negativen [Item] die dieses Level enthält
   ///
   int _countNegativeItems;
+
   ///
   /// Enthält das gesamte Spielfeld als 2d Liste
   ///
@@ -33,7 +36,7 @@ class Level {
   ///
   List<List<GameObject>> _gameField;
 
-  Player player;
+  Player _player;
 
   List<Ball> balls;
 
@@ -41,16 +44,25 @@ class Level {
 
   List<Brick> bricks;
 
-  Level(){
-    balls= new List();
-    items=new List();
-    bricks=new List();
+  Level() {
+    balls = new List();
+    items = new List();
+    bricks = new List();
   }
+
   ///
   /// Generiert das Level aus der übergebenen [config]
   ///
-  void readLevel(String config){
-    int playerHeight, playerLength, brickHeight, brickLength, ballHeight, ballLength, ballSpeed, playerSpeed, itemSpeed;
+  void readLevel(String config) {
+    int playerHeight,
+        playerLength,
+        brickHeight,
+        brickLength,
+        ballHeight,
+        ballLength,
+        ballSpeed,
+        playerSpeed,
+        itemSpeed;
 
     Map jsonLevel = JSON.decode(config);
 
@@ -70,46 +82,44 @@ class Level {
 
     // level field from the json file (only contains strings like 'redbrick' or 'player')
     List<List<String>> jsonField = jsonLevel['levelField'];
-    _gameField = new Iterable.generate(_height, (row) {
-      return new Iterable.generate(_length, (col) => null).toList();
+    _gameField = new Iterable.generate(_length, (col) {
+      return new Iterable.generate(_height, (row) => null).toList();
     }).toList();
 
-    for(int row = 0; row < jsonField.length; row++) {
-      for(int col = 0; col < jsonField[row].length; col++) {
-        if(jsonField[row][col].compareTo('empty') == 0) {
-          _gameField[row][col] = null;
-        }
-        else if(jsonField[row][col].compareTo('redbrick') == 0) {
+    for (int row = 0; row < jsonField.length; row++) {
+      for (int col = 0; col < jsonField[row].length; col++) {
+        if (jsonField[row][col].compareTo('empty') == 0) {
+          _gameField[col][row] = null;
+        } else if (jsonField[row][col].compareTo('redbrick') == 0) {
           Brick brick = new Brick(col, row, brickHeight, brickLength, 'red');
-          _gameField[row][col] = brick;
+          _gameField[col][row] = brick;
           bricks.add(brick);
-        }
-        else if(jsonField[row][col].compareTo('yellowbrick') == 0) {
+        } else if (jsonField[row][col].compareTo('yellowbrick') == 0) {
           Brick brick = new Brick(col, row, brickHeight, brickLength, 'yellow');
-          _gameField[row][col] = brick;
-        }
-        else if(jsonField[row][col].compareTo('greenbrick') == 0) {
+          _gameField[col][row] = brick;
+        } else if (jsonField[row][col].compareTo('greenbrick') == 0) {
           Brick brick = new Brick(col, row, brickHeight, brickLength, 'green');
-          _gameField[row][col] = brick;
+          _gameField[col][row] = brick;
           bricks.add(brick);
         }
         /*else if(jsonField[row][col].compareTo('item') == 0) {
         }*/
-        else if(jsonField[row][col].compareTo('ball') == 0) {
+        else if (jsonField[row][col].compareTo('ball') == 0) {
           Ball ball = new Ball(col, row, ballHeight, ballLength, ballSpeed);
-          _gameField[row][col] = ball;
+          _gameField[col][row] = ball;
           balls.add(ball);
-        }
-        else if(jsonField[row][col].compareTo('player') == 0) {
-          player = new Player(col, row, playerHeight, playerLength, playerSpeed);
-          _gameField[row][col] = player;
+        } else if (jsonField[row][col].compareTo('player') == 0) {
+          _player = new Player(col, row, playerHeight, playerLength, playerSpeed);
+          _gameField[col][row] = player;
+
         }
       }
     }
+
   }
 
-  List<List<GameObject>> getGameField(){
-    return _gameField;
-  }
+  Player get player => _player;
 
+  List<List<GameObject>> get gameField => _gameField;
+  set gameField(List<List<GameObject>> gameField) => _gameField=gameField;
 }
