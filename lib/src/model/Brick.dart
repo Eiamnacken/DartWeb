@@ -2,6 +2,7 @@
 import 'package:DartWeb/src/model/GameObject.dart';
 import 'package:DartWeb/src/model/Enums.dart';
 import 'package:DartWeb/src/model/Item.dart';
+import 'package:DartWeb/src/model/Ball.dart';
 
 ///
 /// Sind kleine rechtecke die auf dem Spielfeld platziert werden
@@ -42,7 +43,11 @@ class Brick extends GameObject{
   /// ansonsten `true`
   ///
   bool decHealth(int damage,List<List<GameObject>> gameField) {
-    //TODO: Implement Method
+    health=getHealth(damage,health);
+    if(health==Health.grey){
+      gameField[xPosition][yPosition]=null;
+    }
+
   }
 
   ///
@@ -50,13 +55,20 @@ class Brick extends GameObject{
   /// Gibt ein [Item] zurück wenn es eines enthält ansonsten null
   ///
   Item destroy() {
-    //TODO: Implement Method
+    return _release();
   }
 
   ///
   /// Legt ein neues [Item] an und gibt diese zurück
   ///
   Item _release() {
-    //TODO: Implement Method
+    return null;
+  }
+
+  @override
+  void collision(List<List<GameObject>> gameField, GameObject collisionObject) {
+    if(collisionObject is Ball){
+      decHealth(collisionObject.damage,gameField);
+    }else return;
   }
 }

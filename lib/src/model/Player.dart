@@ -1,6 +1,5 @@
 import 'package:DartWeb/src/model/Enums.dart';
 import 'package:DartWeb/src/model/GameObject.dart';
-import 'package:DartWeb/src/model/Ball.dart';
 import 'package:DartWeb/src/controller/GameController.dart';
 ///
 /// Wird durch den Spieler Kontrolliert. Ein rechteck am unteren Rand des
@@ -25,50 +24,28 @@ class Player extends MoveableObject {
     moveSpeed=speed;
   }
 
-  @override
-  bool collisionAhead(Direction direction, List<List<GameObject>> gameField,int x,[GameController controller,int y]) {
-    MoveableObject nextObject = gameField[xPosition+x][yPosition];
-    if(nextObject is Ball){
-      nextObject.collision(direction,gameField,controller);
-    }if(_hitWall(gameField,x)){
-      return true;
-    }
-    return false;
-  }
-
-  ///
-  /// Wertet aus ob der Player mit einem zug nach links oder rechts die Wand trifft
-  ///
-  bool _hitWall(List<List<GameObject>> gameField,int x){
-    if(xPosition+x==gameField.length||xPosition+x==0){
-      return true;
-    }
-    return false;
-  }
 
   @override
   void move(Direction direction, List<List<GameObject>> gameField,GameController controller) {
-    int x=0;
-    int i = moveSpeed;
-    switch(direction){
-      case Direction.left:
-        x=-1;
-        break;
-      case Direction.right:
-        x=1;
-        break;
-      default:
-    }
-      while(!collisionAhead(direction,gameField,x,controller)&&i>0){
-        switchObjects(gameField,xPosition+x,yPosition);
-        xPosition+=x;
-        i--;
-        controller.updateView();
+    int x = getValuesForDirection(direction)["X"];
+    Map response=collisionAhead(direction,gameField,0,x);
+    if(!response.keys.first){
+      if(response[false]!=null){
+        response[false].collision(gameField,this);
       }
+      switchObjects(gameField,x);
+      xPosition+=x;
+      controller.updateView();
+    }
   }
 
 
 
 
 
+
+  @override
+  void collision(Direction direction, List<List<GameObject>> gameField, GameController controller, GameObject collisionObject) {
+    return;
+  }
 }

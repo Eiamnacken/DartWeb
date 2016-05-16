@@ -1,6 +1,8 @@
 import 'package:DartWeb/model/GameObject.dart';
 import 'package:DartWeb/model/Brick.dart';
 import 'package:DartWeb/model/Item.dart';
+import 'package:DartWeb/src/model/GameObject.dart';
+import 'package:DartWeb/src/model/Model.dart';
 
 ///
 /// Ein [Level] ist ein Level im Spiel
@@ -34,6 +36,12 @@ class Level {
   /// oder [Player]
   ///
   List<List<GameObject>> _gameField;
+
+  Player player;
+
+  List<Ball> balls;
+
+  List<Item> items;
   ///
   /// Generiert das Level aus der übergebenen [config]
   ///
@@ -53,6 +61,10 @@ class Level {
   ///
   Item removeBrick(Brick brick){
     //TODO: Implement Method
+  }
+
+  List<List<GameObject>> getGameField(){
+    return _gameField;
   }
 
 }

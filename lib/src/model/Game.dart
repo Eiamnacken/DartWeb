@@ -1,3 +1,8 @@
+import 'package:DartWeb/src/model/Enums.dart';
+import 'package:DartWeb/src/model/Level.dart';
+import 'package:DartWeb/src/model/GameObject.dart';
+import 'package:DartWeb/src/model/Model.dart';
+import 'package:DartWeb/src/controller/GameController.dart';
 
 
 ///
@@ -40,25 +45,51 @@ class Game {
   ///
   List<Level> gameFields;
 
-  ///
-  /// Bewegt einen Ball in eine Richtung
-  /// [direction] In welche Richtung soll sich der [Ball] bewegen
-  /// [ball]      Welcher [Ball] soll sich bewegen
-  ///
-  void moveBall(Direction direction, Ball ball) {}
+  List<MoveableObject> moveableObjects;
 
   ///
-  /// Bewegt ein Item in eine Richtung
-  /// [direction] in welche richtung soll es sich bewegen
-  /// [item]      Welches [Item] soll sich bewegen
+  /// Bewegt alle Bälle um einen Schritt
+  /// [direction] In welche Richtung soll sich der [Ball] bewegen
   ///
-  void moveItem(Direction direction, Item item) {}
+  void moveBall(GameController controller) {
+    gameFields[countLevel].balls.forEach((ball){
+        ball.move(ball.direction,gameFields[countLevel].getGameField(),controller);
+      if(ball.yPosition<=0){
+        gameFields[countLevel].balls.remove(ball);
+      }
+    });
+
+  }
+
+  ///
+  /// Bewegt alle Items um einen Schritt
+  /// [direction] in welche richtung soll es sich bewegen
+  ///
+  ///
+  void moveItem(GameController controller) {
+    gameFields[countLevel].items.forEach((item){
+    item.move(Direction.down,gameFields[countLevel].getGameField(),controller);
+    if(item.yPosition<=0){
+      gameFields[countLevel].items.remove(item);
+    }
+    });
+  }
 
   ///
   /// Bewegt den [Player] in die richtung von [x]
   /// [direction]   Die richtung in die der Spieler sich bewegt
   ///
-  void movePLayer(Direction direction) {}
+  void movePLayer(Direction direction,GameController controller) {
+    Player player = _getPlayer();
+    for(int i=player.moveSpeed;i>0;i--){
+      player.move(direction,gameFields[countLevel].getGameField(),controller);
+    }
+
+  }
+
+  Player _getPlayer(){
+    gameFields[countLevel].player;
+  }
 
   ///
   /// Bereitet das nächste level vor in [Level]

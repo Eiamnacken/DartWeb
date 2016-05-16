@@ -1,6 +1,7 @@
 
 import 'package:DartWeb/src/model/Enums.dart';
 import 'package:DartWeb/src/controller/GameController.dart';
+import 'package:DartWeb/src/model/Model.dart';
 
 abstract class GameObject{
   ///
@@ -27,6 +28,10 @@ abstract class GameObject{
 
   GameObject(this.xPosition, this.yPosition, this.width, this.length);
 
+  ///
+  /// Wird aufgerufen wenn eine Kollision mit diesem Objekt entsteht
+  ///
+  void collision(List<List<GameObject>> gameField,GameObject collisionObject);
 
 }
 
@@ -51,7 +56,26 @@ abstract class MoveableObject extends GameObject{
   ///
   /// Gibt an ob beim nächsten Schritt in diese Richtung eine kollision stattfinden wird
   ///
-  bool collisionAhead(Direction direction,List<List<GameObject>> gameField,int x,[GameController controller,int y]);
+  /// Wenn der [Player] auf den [Ball] trifft gibt es einen `{false:Ball}` zurück
+  /// Ist das ende des Levels erreicht gibt es ein `{true:null}` zurück
+  ///
+  ///
+  Map<bool,GameObject> collisionAhead(Direction direction,List<List<GameObject>> gameField,[int y=0,int x=0]){
+    GameObject buffer;
+    //Für die grenzen des Spielfeldes
+    if(xPosition+x==gameField.length||xPosition+x==0){
+      return {true:null};
+    }if(yPosition+y==gameField[0].length||yPosition+y==0){
+      return {true:null};
+    }
+    buffer = gameField[xPosition+x][yPosition+y];
+    if(buffer==null){
+      return {false:null};
+    }if(this is Player&&buffer is Ball){
+      return {false:buffer};
+    }
+    return {true:buffer};
+  }
 
   ///
   /// Tauscht den platz zwei [GameObject] im [gameField]
@@ -61,7 +85,7 @@ abstract class MoveableObject extends GameObject{
   /// [y] Dito
   ///
   ///
-  void switchObjects(List<List<GameObject>> gameField, x,y){
+  void switchObjects(List<List<GameObject>> gameField,[int x=0,int y=0]){
     MoveableObject buffer = gameField[xPosition][yPosition];
     gameField[xPosition][yPosition]= null;
     gameField[x][y]=buffer;

@@ -1,7 +1,52 @@
 ///
 /// Gibt eine bewegungsrichtung an
 ///
-enum Direction { leftUp, leftDown, rightUp, rightDown, up, down,left,right }
+enum Direction {
+  leftUp, leftDown, rightUp, rightDown, up, down,left,right
+}
+
+///
+/// Liefert die x und y werte für eine übergebene [Direction] als map
+///
+/// Mit ["X"] bekommt man den x wert int int
+/// Mit ["Y"] bekommt man den y wert in int
+///
+Map<String,int> getValuesForDirection(Direction direction){
+  int x=0;
+  int y=0;
+  switch(direction){
+    case Direction.down:
+      y=-1;
+      break;
+    case Direction.up:
+      y=1;
+      break;
+    case Direction.rightDown:
+      x=1;
+      y=-1;
+      break;
+    case Direction.rightUp:
+      x=1;
+      y=1;
+      break;
+    case Direction.leftDown:
+      x=-1;
+      y=-1;
+      break;
+    case Direction.leftUp:
+      x=-1;
+      y=1;
+      break;
+    case Direction.left:
+      x=-1;
+      break;
+    case Direction.right:
+      x=1;
+      break;
+  }
+  return {"X":x,"Y":y};
+}
+
 
 
 ///
@@ -42,6 +87,20 @@ enum Effect {
 
 ///
 /// Leben eines [Brick] [green] bedeutet noch 3 treffer [yellow] 2 und [red] 1
-/// [grey] sind unzerstörbare [Brick]
+/// [grey] sind zerstörte [Brick]
+/// [brown] sind unzerstörbare [Brick]
 ///
-enum Health { green, yellow, red, grey }
+enum Health { grey,red,yellow,green,brown }
+
+///
+/// Umrechnung welchen [Health] ein objekt nach einem treffer bekommt
+/// [damage] Schaden an dem Objekt
+/// [health] Momentane lebenspunkte des Objekts
+///
+Health getHealth(int damage,Health health){
+  List values = Health.values;
+  int index = health.index-damage;
+  if(index<=0){
+    return Health.grey;
+  }else return values[index];
+}
