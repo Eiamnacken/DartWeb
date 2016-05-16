@@ -46,6 +46,7 @@ class Brick extends GameObject {
     if (health == Health.grey) {
       gameField[xPosition][yPosition] = null;
     }
+    print(health);
   }
 
   ///
@@ -66,6 +67,7 @@ class Brick extends GameObject {
   @override
   void collision(List<List<GameObject>> gameField, GameObject collisionObject) {
     if (collisionObject is Ball) {
+      print("col");
       decHealth(collisionObject.damage, gameField);
     } else
       return;
