@@ -1,7 +1,7 @@
 part of DartWeb;
 /**
- *  Implementation of the client GameKey REST API in Dart
- *  by Markus Krebs
+ *  Implementation of the client connection to the GameKey Server
+ *
  */
 
 /*

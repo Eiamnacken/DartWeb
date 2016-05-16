@@ -1,17 +1,18 @@
+//part of DartWeb;
 import 'dart:io';
 import 'dart:async';
+import 'package:DartWeb/src/gamekeyserver/User.dart';
 
 /**
- *  Implementation of GameKey server REST API in Dart
- *  by Markus Krebs
+ *  Implementation of GameKey Server REST API in Dart
+ *
  */
 
 //Just for testing till class gamekeyserver
 import 'dart:convert' show UTF8, JSON;
 
-
 main(){
-  gamekeyserver apfel = new gamekeyserver("localhost",4000);
+  GameKeyServer apfel = new GameKeyServer("127.0.0.1",4000);
 
   pause(const Duration(milliseconds: 500));
 
@@ -21,52 +22,65 @@ main(){
 Future pause(Duration d) => new Future.delayed(d);
 
 client() async{
-  Uri client = new Uri.http("localhost:4000","/");
+
+  //Uri client = new Uri.http("localhost:4000","/");
   Map jsonData = {
-    'name':     'Africa',
+    "1":["anana","titten","titten01","50"],
   };
+
 
   var request = await new HttpClient().post(
       "127.0.0.1", 4000, '/test.txt');
   request.headers.contentType = ContentType.JSON;
   request.write(JSON.encode(jsonData));
-  HttpClientResponse response = await request.close();
-  await for (var contents in response.transform(UTF8.decoder)) {
-    print(contents);
-  }
+  request.close();
+
 }
 
 /*
   This server handles the GameKey Service
  */
-class gamekeyserver {
+class GameKeyServer {
 
-  HttpServer _server;
+  //holding the server
+  HttpServer server;
 
-  //TODO Create a class User
-  Map<User> _allUser;
+  //Holding all registered user
+  Map allUser;
+
+  //Holding the uri of the server
+  Uri _uri;
 
   /*
-    Returns a map with all User
+    Returns
    */
-  Map get allUser => this._allUser;
+  Uri get getUri => this._uri;
+
+  /*
+    Returns a map with all registered User
+   */
+  Map get getallUser => this.allUser;
 
   /*
     Constructor
+    - read all registered user from textfile
+    - set up the server and waiting for clients
    */
-  gamekeyserver(String host, int port){
-    try {
-      readConfig();
-      pause(const Duration(milliseconds: 400));
+  GameKeyServer(String host, int port){
+    this._uri = new Uri.http("$host:$port", "/");
 
-      initServer(host, port);
-      pause(const Duration(milliseconds: 400));
+    readConfig();
+    print("Config loaded ...");
+    pause(const Duration(milliseconds: 400));
 
-      letItRun();
-      print(_allUser.values);
-    }catch(e){
-      print (e);
-    }
+    initServer(host, port);
+    print("Server running on ");
+    print(getUri);
+    pause(const Duration(milliseconds: 700));
+
+    print("List of all User :");
+    print(getallUser);
+
   }
 
   /*
@@ -74,10 +88,9 @@ class gamekeyserver {
    */
   readConfig(){
     try {
-      var memory = new File("memoryofalluser.txt"); //
-      var data = memory.readAsStringSync();
-      this._allUser = JSON.decode(data);
-      print("Config loaded ...");
+      //TODO brings to work that it handle a list of user
+      var memory = new File("memoryofalluser.txt").readAsStringSync(); //
+      allUser=JSON.decode(memory);
     } catch(e){
       print("Config could not read. " + e.toString());
       exit(1);
@@ -90,24 +103,33 @@ class gamekeyserver {
    */
   initServer(String host, int port) async{
     try{
-      this._server = await HttpServer.bind(host,port);
-      print("Server running on ${server.address}:${server.port}");
-    } catch (e) {
-      print("Server could not start. " + e.toString());
+      //bind the server on given host and port
+      this.server = await HttpServer.bind(host,port);
+      //the server waits for incoming messages to handle
+      await for (var Httpreq in server) {
+        var cT = Httpreq.headers.contentType;
+        handleMessage(Httpreq, cT);
+      }
+    } catch (exception, stackTrace) {
+      print("Server could not start. ");
+      print(exception);
+      print(stackTrace);
+      exit(1);
     }
   }
 
   /*
-    The gamekey server waits for incoming messages to handle it
+    Update the memoryofalluser file with the new registered user
    */
-  letItRun() async{
+  bool updateConfig() {
     try {
-      await for (var Httpreq in _server) {
-        var cT = Httpreq.headers.contenType;
-        handleMessage(Httpreq, cT);
-      }
-    } catch (e){
-      print("Something went with the incoming messages wrong. " + e.toString());
+      var memory = new File("memoryofalluser.txt");
+      memory.writeAsStringSync(JSON.encode(getallUser));
+      return true;
+    } catch (exception, stackTrace) {
+      print("Could not update the config.");
+      print(exception);
+      print(stackTrace);
     }
   }
 
@@ -115,27 +137,57 @@ class gamekeyserver {
     This method will handle the incoming messages from the client
    */
   handleMessage(HttpRequest msg, ContentType ct) async{
+
+    //which request is it ? ...
     if (msg.method == 'POST' && ct != null && ct.mimeType == 'application/json') {
+
       try {
         var jsonString = await msg.transform(UTF8.decoder).join();
-
-        // Write to a file, get the file name from the URI.
-        var filename = msg.uri.pathSegments.last;
-        await new File(filename).writeAsString(jsonString, mode: FileMode.WRITE);
         Map jsonData = JSON.decode(jsonString);
+        allUser.addAll(jsonData);
+        //updateConfig();
         msg.response..statusCode = HttpStatus.OK
-          ..write('Wrote data for ${jsonData['name']}.')
+          ..write("Wrote data for ${jsonData['user']}.")
           ..close();
       } catch (e) {
         msg.response..statusCode = HttpStatus.INTERNAL_SERVER_ERROR
           ..close();
       }
+
     } else {
       msg.response..statusCode = HttpStatus.METHOD_NOT_ALLOWED
-        //..write("Unsupported request: ${msg.method}.")
+        ..write("Unsupported request: ${msg.method}.")
         ..close();
-      //_server.close();
+      closeTheServer();
     }
+  }
+
+  //TODO
+  /*
+    Remove a registered user
+   */
+  removeUser(Object o){
+    allUser.remove(o);
+  }
+
+  //TODO
+  /*
+    Generate a gameid and add the user to the map
+   */
+  addUser(Object o){
+
+  }
+
+  int generateGameID(String name, String password,String secret){
+    return 0;
+  }
+
+  /*
+    Save all registered user to textfile and close the program
+   */
+  closeTheServer(){
+    updateConfig();
+    exit(1);
   }
 
 }
