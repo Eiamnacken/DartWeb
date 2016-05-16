@@ -43,6 +43,7 @@ class Game {
 
   Game(){
     countLevel=0;
+    gameFields=new List();
     _readConfig();
   }
 

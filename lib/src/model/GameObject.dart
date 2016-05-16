@@ -66,7 +66,12 @@ abstract class MoveableObject extends GameObject{
     }if(yPosition+y==gameField[0].length||yPosition+y==0){
       return {true:null};
     }
-    buffer = gameField[xPosition+x][yPosition+y];
+    try{
+      buffer = gameField[xPosition+x][yPosition+y];
+    }on RangeError{
+      buffer =null;
+    }
+
     if(buffer==null){
       return {false:null};
     }if(this is Player&&buffer is Ball){
@@ -84,7 +89,13 @@ abstract class MoveableObject extends GameObject{
   ///
   ///
   void switchObjects(List<List<GameObject>> gameField,[int x=0,int y=0]){
-    MoveableObject buffer = gameField[xPosition][yPosition];
+    MoveableObject buffer;
+    try{
+      buffer = gameField[xPosition][yPosition];
+    }on RangeError{
+      return;
+    }
+
     gameField[xPosition][yPosition]= null;
     gameField[x][y]=buffer;
   }

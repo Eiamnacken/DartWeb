@@ -86,7 +86,13 @@ class Ball extends MoveableObject {
   @override
   void move(Direction direction, List<List<GameObject>> gameField, GameController controller) {
     Map coordinates = getValuesForDirection(direction);
-    GameObject buffer = gameField[xPosition+coordinates["X"]][yPosition+coordinates["Y"]];
+    final int xCoordinate = xPosition+coordinates["X"];
+    final int yCoordinate = yPosition+coordinates["Y"];
+    GameObject buffer;
+    if(xCoordinate<gameField.length&&yCoordinate<gameField[xCoordinate].length) {
+      buffer = gameField[xPosition + coordinates["X"]][yPosition +
+          coordinates["Y"]];
+    }
     Map response = collisionAhead(direction,gameField,coordinates["Y"],coordinates["X"]);
     //Kollison voraus ? wenn nicht einfach bewegen ansonsten werden die entsprechenden Schritte eingeleitet z.B. Kollision des Objekts aufgerufen
     if(!response.keys.first){
@@ -96,7 +102,7 @@ class Ball extends MoveableObject {
       controller.updateView();
     }else{
       _changeDirection(direction,response[true]);
-      if(response[true]!=null) response[true].collision(direction,gameField,controller,this);
+      if(response[true]!=null) response[true].collision(gameField,this);
       move(direction,gameField,controller);
     }
   }

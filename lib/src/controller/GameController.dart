@@ -64,6 +64,8 @@ class GameController{
         game.movePLayer(Direction.right,this);
       }
     });
+
+    view.generateField(game);
   }
 
 

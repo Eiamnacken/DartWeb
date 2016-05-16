@@ -40,6 +40,12 @@ class Level {
   List<Item> items;
 
   List<Brick> bricks;
+
+  Level(){
+    balls= new List();
+    items=new List();
+    bricks=new List();
+  }
   ///
   /// Generiert das Level aus der übergebenen [config]
   ///
