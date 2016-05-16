@@ -1,7 +1,6 @@
-
 part of brickGame;
 
-abstract class GameObject{
+abstract class GameObject {
   ///
   /// X position des [MoveableObject] auf dem Spielfeld
   /// Zeigt immer den Mittelpunkt des [MoveableObject] an
@@ -29,27 +28,31 @@ abstract class GameObject{
   ///
   /// Wird aufgerufen wenn eine Kollision mit diesem Objekt entsteht
   ///
-  void collision(List<List<GameObject>> gameField,GameObject collisionObject);
-
+  void collision(List<List<GameObject>> gameField, GameObject collisionObject);
 }
 
 ///
 /// Objekte die sich im [Level] bewegen können
 ///
-abstract class MoveableObject extends GameObject{
+abstract class MoveableObject extends GameObject {
   ///
   /// Wie viel abstand legt ein [MoveableObject] pro zeiteinheit/tastendruck zurück
   ///
-  int moveSpeed;
+  int _moveSpeed;
 
-  MoveableObject(int xPosition, int yPosition, int width, int length,this.moveSpeed): super(xPosition, yPosition, width, length);
+  int get moveSpeed => _moveSpeed;
+
+  MoveableObject(
+      int xPosition, int yPosition, int width, int length, this._moveSpeed)
+      : super(xPosition, yPosition, width, length);
 
   ///
   /// Bewegt ein [MoveableObject] in eine Richtung
   /// [direction] gibt an in welche richtung sich das Objekt bewegt
   /// [gameField] gibt die nötigen Informationen für die [collision]
   ///
-  void move(Direction direction,List<List<GameObject>> gameField,GameController controller);
+  void move(Direction direction, List<List<GameObject>> gameField,
+      GameController controller);
 
   ///
   /// Gibt an ob beim nächsten Schritt in diese Richtung eine kollision stattfinden wird
@@ -58,26 +61,30 @@ abstract class MoveableObject extends GameObject{
   /// Ist das ende des Levels erreicht gibt es ein `{true:null}` zurück
   ///
   ///
-  Map<bool,GameObject> collisionAhead(Direction direction,List<List<GameObject>> gameField,[int y=0,int x=0]){
+  Map<bool, GameObject> collisionAhead(
+      Direction direction, List<List<GameObject>> gameField,
+      [int y = 0, int x = 0]) {
     GameObject buffer;
     //Für die grenzen des Spielfeldes
-    if(xPosition+x==gameField.length||xPosition+x==0){
-      return {true:null};
-    }if(yPosition+y==gameField[0].length||yPosition+y==0){
-      return {true:null};
+    if (xPosition + x == gameField.length || xPosition + x == 0) {
+      return {true: null};
     }
-    try{
-      buffer = gameField[xPosition+x][yPosition+y];
-    }on RangeError{
-      buffer =null;
+    if (yPosition + y == gameField[0].length || yPosition + y == 0) {
+      return {true: null};
+    }
+    try {
+      buffer = gameField[xPosition + x][yPosition + y];
+    } on RangeError {
+      buffer = null;
     }
 
-    if(buffer==null){
-      return {false:null};
-    }if(this is Player&&buffer is Ball){
-      return {false:buffer};
+    if (buffer == null) {
+      return {false: null};
     }
-    return {true:buffer};
+    if (this is Player && buffer is Ball) {
+      return {false: buffer};
+    }
+    return {true: buffer};
   }
 
   ///
@@ -88,21 +95,15 @@ abstract class MoveableObject extends GameObject{
   /// [y] Dito
   ///
   ///
-  void switchObjects(List<List<GameObject>> gameField,[int x=0,int y=0]){
+  void switchObjects(List<List<GameObject>> gameField, [int x = 0, int y = 0]) {
     MoveableObject buffer;
-    try{
+    try {
       buffer = gameField[xPosition][yPosition];
-    }on RangeError{
+    } on RangeError {
       return;
     }
 
-    gameField[xPosition][yPosition]= null;
-    gameField[x][y]=buffer;
+    gameField[xPosition][yPosition] = null;
+    gameField[x][y] = buffer;
   }
-
-
-
-
 }
-
-
