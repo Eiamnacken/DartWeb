@@ -22,20 +22,20 @@ Map<String, int> getValuesForDirection(Direction direction) {
       y = 1;
       break;
     case Direction.rightDown:
-      x = -1;
+      x = 1;
       y = -1;
       break;
     case Direction.rightUp:
-      x = -1;
+      x = 1;
       y = 1;
       break;
     case Direction.leftDown:
-      x = 1;
-      y = 1;
+      x = -1;
+      y = -1;
       break;
     case Direction.leftUp:
-      x = 1;
-      y = -1;
+      x = -1;
+      y = 1;
       break;
     case Direction.left:
       x = -1;
@@ -44,7 +44,7 @@ Map<String, int> getValuesForDirection(Direction direction) {
       x = 1;
       break;
   }
-  return {"X": x, "Y": y};
+  return {"X": x, "Y": y*-1};
 }
 
 ///

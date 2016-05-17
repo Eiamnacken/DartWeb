@@ -14,7 +14,7 @@ class Ball extends MoveableObject {
 
   Ball(int xPosition, int yPosition, int width, int length, int moveSpeed)
       : super(xPosition, yPosition, width, length, moveSpeed){
-    _direction=Direction.rightDown;
+    _direction=Direction.rightUp;
     _damage=1;
   }
 
@@ -68,21 +68,24 @@ class Ball extends MoveableObject {
       case Direction.right:
         break;
       case Direction.rightDown:
-        this._direction = Direction.rightUp;
+        if(collisionObject != null){
+          _direction=Direction.rightUp;
+        }else _direction=Direction.leftDown;
         break;
       case Direction.rightUp:
-        if(yPosition+step["Y"]<=0) {
+        if(yPosition>=height) {
           _direction = Direction.rightDown;
         }else _direction=Direction.leftUp;
         break;
       case Direction.leftDown:
-        this._direction = Direction.leftUp;
+        if(collisionObject != null) {
+          _direction = Direction.rightDown;
+        }else _direction = Direction.leftUp;
         break;
       case Direction.leftUp:
-        if (collisionObject == null) {
-          this._direction = Direction.rightUp;
-        } else
-          this._direction = Direction.leftDown;
+        if(yPosition>=height) {
+          _direction=Direction.leftDown;
+        }else _direction=Direction.rightUp;
         break;
     }
 //    }
@@ -116,7 +119,7 @@ class Ball extends MoveableObject {
         response[true].collision(gameField, this);
       }
       print(_direction);
-      move(direction, gameField, controller);
+      move(_direction, gameField, controller);
     }
   }
 
