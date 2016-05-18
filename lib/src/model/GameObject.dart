@@ -68,10 +68,10 @@ abstract class MoveableObject extends GameObject {
       [int y = 0, int x = 0]) {
     GameObject buffer;
     //Für die grenzen des Spielfeldes
-    if (xPosition + x == gameField.length || xPosition + x == 0) {
+    if (xPosition + x >= gameField.length || xPosition + x <= 0) {
       return {true: buffer};
     }
-    if (yPosition + y == gameField[0].length || yPosition + y == 0) {
+    if (yPosition + y >= gameField[xPosition].length || yPosition + y <= 0) {
       return {true: buffer};
     }
     try {

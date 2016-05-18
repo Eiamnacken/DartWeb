@@ -46,6 +46,7 @@ class Brick extends GameObject {
     if (health == Health.grey) {
       gameField[xPosition][yPosition] = null;
     }
+    print(health);
   }
 
   ///
@@ -66,8 +67,33 @@ class Brick extends GameObject {
   @override
   void collision(List<List<GameObject>> gameField, GameObject collisionObject) {
     if (collisionObject is Ball) {
+      print("col");
       decHealth(collisionObject.damage, gameField);
     } else
       return;
   }
+
+  String toString() {
+    String buffer="";
+    switch(health){
+      case Health.brown:
+      buffer="brownBrick";
+        break;
+      case Health.green:
+        buffer="greenBrick";
+        break;
+      case Health.grey:
+        buffer="greyBrick";
+        break;
+      case Health.red:
+        buffer="redBrick";
+        break;
+      case Health.yellow:
+        buffer="yellowBrick";
+        break;
+    }
+    return buffer;
+  }
+
+
 }

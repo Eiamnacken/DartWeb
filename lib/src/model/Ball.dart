@@ -14,7 +14,8 @@ class Ball extends MoveableObject {
 
   Ball(int xPosition, int yPosition, int width, int length, int moveSpeed)
       : super(xPosition, yPosition, width, length, moveSpeed){
-    _direction=Direction.rightDown;
+    _direction=Direction.rightUp;
+    _damage=1;
   }
 
   ///
@@ -40,7 +41,7 @@ class Ball extends MoveableObject {
   ///
   void collision(List<List<GameObject>> gameField, GameObject collisionObject) {
     print("collision");
-    _changeDirection(this._direction, collisionObject);
+    _changeDirection(this._direction, collisionObject,gameField,{"X":0,"Y":0});
   }
 
   ///
@@ -50,10 +51,13 @@ class Ball extends MoveableObject {
   /// [collisionObject] anhand dieses Objektes wird entschieden wie sich der [Ball] nach der kollision verhält
   ///
   ///
-  void _changeDirection(Direction direction, GameObject collisionObject) {
+  void _changeDirection(Direction direction, GameObject collisionObject,List<List<GameObject>> gameField,Map<String,int> step) {
 //    if(collisionObject is Player){
 //
 //    }else{
+  //TODO Player beeinflusst flug richtung so kann es auch einen ball geben der direkt nach oben fliegt
+    int width = gameField.length-1;
+    int height = gameField[width].length-1;
     switch (direction) {
       case Direction.up:
         break;
@@ -64,22 +68,24 @@ class Ball extends MoveableObject {
       case Direction.right:
         break;
       case Direction.rightDown:
-        this._direction = Direction.rightUp;
+        if(collisionObject != null){
+          _direction=Direction.rightUp;
+        }else _direction=Direction.leftDown;
         break;
       case Direction.rightUp:
-        if (collisionObject == null)
-          this._direction = Direction.leftUp;
-        else
-          this._direction = Direction.rightDown;
+        if(yPosition>=height) {
+          _direction = Direction.rightDown;
+        }else _direction=Direction.leftUp;
         break;
       case Direction.leftDown:
-        this._direction = Direction.leftUp;
+        if(collisionObject != null) {
+          _direction = Direction.rightDown;
+        }else _direction = Direction.leftUp;
         break;
       case Direction.leftUp:
-        if (collisionObject == null) {
-          this._direction = Direction.rightUp;
-        } else
-          this._direction = Direction.leftDown;
+        if(yPosition>=height) {
+          _direction=Direction.leftDown;
+        }else _direction=Direction.rightUp;
         break;
     }
 //    }
@@ -104,12 +110,22 @@ class Ball extends MoveableObject {
       switchObjects(gameField, xCoordinate, yCoordinate);
       xPosition += coordinates["X"];
       yPosition += coordinates["Y"];
-      print("Update");
       controller.updateView(gameField);
     } else {
-      _changeDirection(direction, response[true]);
-      if (response[true] != null) response[true].collision(gameField, this);
-      move(direction, gameField, controller);
+      print(_direction);
+      _changeDirection(direction, response[true],gameField,coordinates);
+      if (response[true] != null){
+        print(damage);
+        response[true].collision(gameField, this);
+      }
+      print(_direction);
+      move(_direction, gameField, controller);
     }
   }
+
+  String toString() {
+    return "ball";
+  }
+
+
 }

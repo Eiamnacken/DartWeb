@@ -44,7 +44,7 @@ Map<String, int> getValuesForDirection(Direction direction) {
       x = 1;
       break;
   }
-  return {"X": x, "Y": y};
+  return {"X": x, "Y": y*-1};
 }
 
 ///
