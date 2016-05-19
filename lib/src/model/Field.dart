@@ -1,5 +1,4 @@
-import 'dart:isolate';
-import 'package:DartWeb/BrickGame.dart';
+part of brickGame;
 
 
 
