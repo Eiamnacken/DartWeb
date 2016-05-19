@@ -9,5 +9,6 @@ author:
 - Markus Krebs
 homepage: https://github.com/Eiamnacken/DartWeb
 dependencies:
+  test: "^0.12.13+3"
 enviroment:
   sdk: ">=1.1.5"
