@@ -29,13 +29,14 @@ void handleIsolates(SendPort initialReplyTo){
 */
 //Just for testing till class gamekeyserver
 main() async{
-  /*GameKeyServer apfel = new GameKeyServer("127.0.0.1",4000);
+  //GameKeyServer apfel = new GameKeyServer("127.0.0.1",4000);
 
   pause(const Duration(milliseconds: 500));
 
-  client();*/
+  //client();
   GameKey test = new GameKey("212.201.22.161", 50001, "60", "test");
-  Future<Map> registereduser = test.registerUser("anaaaaaa","dasdsadsadsadasdas");
+  //GameKey test = new GameKey("127.0.0.1", 4000, "60", "test");
+  Future<Map> registereduser = test.registerUser("aanaaaaaa","dasdsadsadsadasdas");
   registereduser.then((content) {
     print(content);
   });
@@ -178,8 +179,8 @@ class GameKeyServer {
       this.server = await HttpServer.bind(host,port);
       //the server waits for incoming messages to handle
       await for (var Httpreq in server) {
-        HttpResponse response = Httpreq.response;
-        enableCors(response);
+        //HttpResponse response = Httpreq.response;
+        //enableCors(response);
         handleMessages(Httpreq);
 
         /*
@@ -251,20 +252,35 @@ class GameKeyServer {
     //which request is it ? ...
 
     //Request for add an user
-    if (msg.method == 'POST'  && msg.uri.toString() == '/user' &&
-        msg.headers.contentType != null && msg.headers.contentType.mimeType == 'application/x-www-form-urlencoded') {
+    if (msg.method == 'POST'  && msg.uri.toString() == '/user'){
       try {
-        Map jsonData = JSON.decode(await msg.transform(UTF8.decoder).join());
-        if (addUser(jsonData)) {
-          msg.response
-            ..statusCode = HttpStatus.OK
-            ..write(getallUser)
-            ..close();
+        //Map jsonData = JSON.decode(await msg.transform(UTF8.decoder).join());
+        var incmsg = await msg.transform(UTF8.decoder).join();
+        var nanemandpassword = incmsg.split("&");
+        var name = nanemandpassword.first.replaceAll("name=","");
+        var password = nanemandpassword.last.replaceAll("pwd=","");
+        Map jsonData = {
+          "name":"$name",
+          "pwd":"$password"
+        };
+        if (name.isNotEmpty && password.isNotEmpty) {
+          if (addUser(jsonData)) {
+            enableCors(msg.response);
+            msg.response
+              ..statusCode = HttpStatus.OK
+              ..write(JSON.encode(jsonData))
+              ..close();
+          } else {
+            msg.response
+              ..statusCode = HttpStatus.CONFLICT
+              ..write("Some User mind exist with that name and password")
+              ..close();
+          }
         } else {
           msg.response
-            ..statusCode = HttpStatus.CONFLICT
-            ..write("Some User mind exist with that name and password")
-            ..close();
+              ..statusCode = HttpStatus.CONFLICT
+              ..write("Name and password must be set.")
+              ..close();
         }
       } catch (e) {
         msg.response
@@ -295,12 +311,12 @@ class GameKeyServer {
     Generate a gameid and userid and add the user to the map
    */
   bool addUser(Map o){
-    if(!allUser.containsKey(o['name'])&&!allUser.containsValue(o['password'])){
+    if (!allUser.containsKey(o['name']) && !allUser.containsValue(o['pwd'])) {
       allUser.addAll(o);
       updateConfig();
       return true;
     } else {
-      return false;
+       return false;
     }
   }
 

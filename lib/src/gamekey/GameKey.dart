@@ -43,7 +43,7 @@ class GameKey{
     Returns null on failure
    */
   Future<Map> registerUser(String name, String password) async{
-    Map newUser = {
+    final Map newUser = {
       "name":"$name",
       "pwd":"$password",
     };
@@ -51,10 +51,11 @@ class GameKey{
       var client = await new HttpClient().post(uri.host, uri.port, "/user");
       client.write(parameter(newUser));
       HttpClientResponse response = await client.close();
-      final body = JSON.decode( await response.transform(UTF8.decoder).join("\n"));
+      final body = await response.transform(UTF8.decoder).join("\n");
       if (response.statusCode == 200) return body;
-    } catch (error, stacktrace) {
-      print ("GameKey.registerUser() caused following error: '$error'");
+      return body;
+    } catch (error) {
+      print ("GameKey.registerUser() caused an error: '$error'");
       return null;
     }
   }

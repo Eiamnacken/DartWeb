@@ -1,1 +1,1 @@
-{"highscore":{"highscoregameid":"id","userid":"id","userpassword":"password","gamesecret":"secret","highscore":"highscore"}}
+{"highscore":{"highscoregameid":"id","userid":"id","userpassword":"password","gamesecret":"secret","highscore":"highscore"},"test}
