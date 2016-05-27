@@ -22,14 +22,14 @@ class View {
   List<List<HtmlElement>> gameFields;
 
   void generateField(Game model) {
-    final field = model.gameFields[model.countLevel].gameField;
+    final List<List<GameObject>> field = model.gameFields[model.countLevel].gameField;
 
     String table = "";
-    for (int row = 0; row < field.length; row++) {
+    for (int row = 0; row < field[0].length; row++) {
       table += "<tr>";
-      for (int col = 0; col < field[row].length; col++) {
-        final assignment = field[row][col];
-        final pos = "field_${row}_${col}";
+      for (int col = 0; col < field.length; col++) {
+        final assignment = field[col][row].toString();
+        final pos = "field_${col}_${row}";
         table += "<td id='$pos' class='$assignment'></td>";
       }
       table += "</tr>";
@@ -50,14 +50,14 @@ class View {
 
     // Updates the field
     final field = model.gameFields[model.countLevel].gameField;
-    print(field);
+
     for (int row = 0; row < field.length; row++) {
       for (int col = 0; col < field[row].length; col++) {
         final td = gameFields[row][col];
         if (td != null) {
           td.classes.clear();
           if (field[row][col] is Brick)
-            td.classes.add('brick');
+            td.classes.add(field[row][col].toString());
           else if (field[row][col] is Ball)
             td.classes.add('ball');
           else if (field[row][col] is Player) td.classes.add('player');

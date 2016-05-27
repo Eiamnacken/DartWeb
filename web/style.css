@@ -118,8 +118,25 @@ body {
   width: 10px;
 }
 
-.brick{
-  background-color: blue !important;
+.greenBrick{
+  background-color: green !important;
+  width: 10px;
+}
+
+.brownBrick{
+  background-color: brown !important;
+  width: 10px;
+}
+.redBrick{
+  background-color: red !important;
+  width: 10px;
+}
+.yellowBrick{
+  background-color: yellow !important;
+  width: 10px;
+}
+.greyBrick{
+  background-color: gray !important;
   width: 10px;
 }
 

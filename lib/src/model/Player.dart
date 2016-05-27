@@ -30,8 +30,10 @@ class Player extends MoveableObject {
       if (response[false] != null) {
         response[false].collision(gameField, this);
       }
-      switchObjects(gameField, x);
-      xPosition += x;
+      print(xPosition);
+      switchObjects(gameField, xPosition+x,yPosition);
+      xPosition =xPosition+ x;
+      print(xPosition);
       controller.updateView(gameField);
     }
   }
@@ -40,4 +42,10 @@ class Player extends MoveableObject {
   void collision(List<List<GameObject>> gameField, GameObject collisionObject) {
     return;
   }
+
+  String toString() {
+    return "player";
+  }
+
+
 }

@@ -5,6 +5,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 import 'dart:convert';
+import 'dart:isolate';
+import 'package:test/test.dart';
 
 part 'src/controller/GameController.dart';
 
@@ -17,5 +19,6 @@ part 'src/model/Item.dart';
 part 'src/model/Level.dart';
 part 'src/model/Player.dart';
 part 'src/model/Model.dart';
+part 'src/model/Field.dart';
 
 part 'src/view/View.dart';

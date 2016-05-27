@@ -45,17 +45,17 @@ class GameController {
       _ballTrigger = new Timer.periodic(ballSpeed, (_) => game.moveBall(this));
     });
     ButtonElement right = view.leftButton;
-    right.onClick.listen((_) {
+    right.onKeyUp.listen((_) {
       if (game.gameOver()) return;
       game.movePLayer(Direction.right, this);
     });
 
     ButtonElement left = view.rightButton;
-    left.onClick.listen((_) {
+    left.onKeyUp.listen((_) {
       if (game.gameOver()) return;
       game.movePLayer(Direction.left, this);
     });
-    window.onKeyDown.listen((event) {
+    window.onKeyUp.listen((event) {
       if (game.gameOver()) return;
       if (event.keyCode == KeyCode.LEFT) {
         game.movePLayer(Direction.left, this);

@@ -29,6 +29,8 @@ abstract class GameObject {
   /// Wird aufgerufen wenn eine Kollision mit diesem Objekt entsteht
   ///
   void collision(List<List<GameObject>> gameField, GameObject collisionObject);
+
+
 }
 
 ///
@@ -66,11 +68,11 @@ abstract class MoveableObject extends GameObject {
       [int y = 0, int x = 0]) {
     GameObject buffer;
     //Für die grenzen des Spielfeldes
-    if (xPosition + x == gameField.length || xPosition + x == 0) {
-      return {true: null};
+    if (xPosition + x >= gameField.length || xPosition + x <= 0) {
+      return {true: buffer};
     }
-    if (yPosition + y == gameField[0].length || yPosition + y == 0) {
-      return {true: null};
+    if (yPosition + y >= gameField[xPosition].length || yPosition + y <= 0) {
+      return {true: buffer};
     }
     try {
       buffer = gameField[xPosition + x][yPosition + y];
@@ -100,7 +102,7 @@ abstract class MoveableObject extends GameObject {
     try {
       buffer = gameField[xPosition][yPosition];
     } on RangeError {
-      return;
+      print("RangeError");
     }
 
     gameField[xPosition][yPosition] = null;

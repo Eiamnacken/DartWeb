@@ -1,1 +1,0 @@
-{"gameid":["name","password","secret","highscore"],"1":["anana","titten","titten01","50"]}
