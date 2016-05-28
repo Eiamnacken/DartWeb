@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'dart:async';
-import 'dart:convert' show UTF8, JSON;
+import 'dart:convert';
 
 /**
  *  Implementation of the client connection to the GameKey Server
@@ -52,20 +52,31 @@ class GameKey{
       client.write(parameter(newUser));
       HttpClientResponse response = await client.close();
       final body = await response.transform(UTF8.decoder).join("\n");
-      if (response.statusCode == 200) return body;
-      return body;
+      return response.statusCode == 200 ? JSON.decode(body) : body;
     } catch (error) {
-      print ("GameKey.registerUser() caused an error: '$error'");
+      print("GameKey.registerUser() caused an error: '$error'");
       return null;
     }
   }
 
   /*
-    Returns a map with all information about a user
+    Returns a map with all information about the given user on succes
     Returns null on failure
    */
-  Future<Map> getUser(String id, String password) async{
-    return null;
+  Future<Map> getUser(String name, String password) async{
+    final link = uri.resolve("/user/$name").resolveUri(new Uri(queryParameters:{'id':"$name",'pwd' : "$password",'byname':"true"}));
+    try {
+      final client = await new HttpClient().getUrl(link);
+      HttpClientResponse response = await client.close();
+      var body = await response.transform(UTF8.decoder).join("\n");
+      //body = body.replaceAll(new RegExp('\c_'),"");
+      body = body.replaceAll("\r","");
+      body = body.replaceAll("\n","");
+      return response.statusCode == 200 ? JSON.decode(body) : null;
+    } catch (error) {
+      print("GameKey.getUser() caused an error: '$error'");
+      return null;
+    }
   }
 
   /*
@@ -84,16 +95,34 @@ class GameKey{
     Returns null on failure
    */
   Future<String> getUserId(String name) async{
-    return null;
+    try {
+      final listusers = await listUsers();
+      if (listusers == null) return null;
+      final user = listusers.firstWhere((user) => user['name'] == name, orElse : null );
+      return user == null ? null :user['id'];
+    } catch (error) {
+      print("GameKey.getUserId() caused an error: '$error'");
+      return null;
+    }
   }
 
   /*
-    Returns a JSON list with all registered
-    users with the gamekey service
+    Returns a JSON list with all registered users with the GameKey service
     Returns null on failure
    */
   Future<List<Map>> listUsers() async{
-    return null;
+    try {
+      final client = await new HttpClient().get(uri.host, uri.port, "/users");
+      HttpClientResponse response = await client.close();
+      var body = await response.transform(UTF8.decoder).join("\n");
+      //body = body.replaceAll(new RegExp('\c_'),"");
+      body = body.replaceAll("\r","");
+      body = body.replaceAll("\n","");
+      return response.statusCode == 200 ? JSON.decode(body) : null;
+    } catch (error) {
+      print("GameKey.listUsers() caused an error: '$error'");
+      return null;
+    }
   }
 
   /*

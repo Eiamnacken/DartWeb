@@ -36,8 +36,31 @@ main() async{
   //client();
   GameKey test = new GameKey("212.201.22.161", 50001, "60", "test");
   //GameKey test = new GameKey("127.0.0.1", 4000, "60", "test");
-  Future<Map> registereduser = test.registerUser("aanaaaaaa","dasdsadsadsadasdas");
+
+  Future<Map> registereduser = test.registerUser("aan","dasdsads");
+  pause(const Duration(milliseconds: 500));
   registereduser.then((content) {
+    print(content);
+  });
+
+  pause(const Duration(milliseconds: 500));
+
+  Future<Map> getUser = test.getUser("aan", "dasdsads");
+  getUser.then((content) {
+    print(content);
+  });
+
+  pause(const Duration(milliseconds: 500));
+
+  Future<List> getUsers = test.listUsers();
+  getUsers.then((content) {
+    print(content);
+  });
+
+  pause(const Duration(milliseconds: 500));
+
+  Future<String> getUserId = test.getUserId("aan");
+  getUserId.then((content) {
     print(content);
   });
 }
