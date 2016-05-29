@@ -34,7 +34,7 @@ main() async{
   pause(const Duration(milliseconds: 500));
 
   //client();
-  GameKey test = new GameKey("212.201.22.161", 50001, "60", "test");
+  GameKey test = new GameKey("212.201.22.161", 50001);
   //GameKey test = new GameKey("127.0.0.1", 4000, "60", "test");
 
   Future<Map> registereduser = test.registerUser("aan","dasdsads");
@@ -54,6 +54,13 @@ main() async{
 
   Future<List> getUsers = test.listUsers();
   getUsers.then((content) {
+    print(content);
+  });
+
+  pause(const Duration(milliseconds: 500));
+
+  Future<List> getGames = test.listGames();
+  getGames.then((content) {
     print(content);
   });
 
@@ -158,7 +165,7 @@ class GameKeyServer {
    */
   readConfig(){
     try {
-      //TODO brings to work that it handle a list of user
+      //TODO brings to work that it handle a list of user, games and highscores
       var memoryuser = new File("memoryofallusers.txt").readAsStringSync();
       var memorygames = new File("memoryofallgames.txt").readAsStringSync();
       var memoryhighscores = new File("memoryofallhighscores.txt").readAsStringSync();
@@ -296,7 +303,7 @@ class GameKeyServer {
           } else {
             msg.response
               ..statusCode = HttpStatus.CONFLICT
-              ..write("Some User mind exist with that name and password")
+              ..write("Some User mind exist with that name and password. ")
               ..close();
           }
         } else {
@@ -339,7 +346,7 @@ class GameKeyServer {
       updateConfig();
       return true;
     } else {
-       return false;
+      return false;
     }
   }
 
