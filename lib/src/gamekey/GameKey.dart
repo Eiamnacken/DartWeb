@@ -17,15 +17,28 @@ class GameKey{
 
   //Id of the Game
   //need to set after registration with kratzkes server
-  String _gameid = "";
+  String _gameid = "92d5e770-ff13-46dd-9d4c-09fb300bc240";
 
   //Secret of the game, need to authenticate the current game with the GameKey service
-  String _secret = "brickGame4Life";
+  String _secret = "DontWorryAboutaThing";
+
+  //Name of the Game
+  String _nameofGame = "BrickGame";
 
  /*
     Uri of GameKey REST API
   */
   Uri get uri => this._uri;
+
+  /*
+    Game ID of the current Game
+   */
+  String get getGameId => this._gameid;
+
+  /*
+    Game secret of the current Game
+   */
+  String get getSecret => this._secret;
 
   /*
     Helper method to generate parameter body for REST requests
@@ -51,7 +64,7 @@ class GameKey{
       final client = await new HttpClient().post(uri.host, uri.port, "/game");
       client.write(parameter(newGame));
       HttpClientResponse response = await client.close();
-      final body = response.transform(UTF8.decoder).join("\n");
+      final body = await response.transform(UTF8.decoder).join("\n");
       return response.statusCode == 200 ? JSON.decode(body) : body;
     } catch (error) {
       print("GameKey.registerGame() caused an error: '$error'");
@@ -168,15 +181,41 @@ class GameKey{
 
   /*
     Returns a JSON list with all stored states for this game
+    Returns null if no game states exist for this game
    */
   Future<List<Map>> getStates() async{
-    return null;
+    final link = uri.resolve("/gamestate/$getGameId").resolveUri(new Uri(queryParameters:{'secret':"$getSecret"}));
+    try {
+      final client = await new HttpClient().getUrl(link);
+      HttpClientResponse response = await client.close();
+      var body = await response.transform(UTF8.decoder).join("\n");
+      //body = body.replaceAll(new RegExp('\c_'),"");
+      //body = body.replaceAll("\r","");
+      //body = body.replaceAll("\n","");
+      //the empty body.length is 4
+      //it doesn't work with body.isEmpty or body.length != null etc
+      if (body.length>4) return JSON.decode(body);
+      return null;
+    } catch (error) {
+      print("GameKey.getStates() caused an error: '$error'");
+      return null;
+    }
   }
 
   /*
     Returns a JSON list with the saved states of this user
    */
-  Future<List<Map>> storeState(String id, Map state) async{
-    return null;
+  Future<bool> storeState(String id, Map state) async{
+    final link = uri.resolve("/gamestate/$getGameId/$id").resolveUri(new Uri(queryParameters:{'secret':"$getSecret",
+      'state':"${JSON.encode(state)}"}));
+    try {
+      final client = await new HttpClient().postUrl(link);
+      HttpClientResponse response = await client.close();
+      var body = await response.transform(UTF8.decoder).join("\n");
+      return response.statusCode == 200 ? true : false;
+    } catch (error) {
+      print("GameKey.storeState() caught an error: '$error'");
+      return false;
+    }
   }
 }

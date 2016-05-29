@@ -35,8 +35,13 @@ main() async{
 
   //client();
   GameKey test = new GameKey("212.201.22.161", 50001);
-  //GameKey test = new GameKey("127.0.0.1", 4000, "60", "test");
+  //GameKey test = new GameKey("127.0.0.1", 4000);
 
+  Future<Map> registergame = test.registerGame("DontWorryAboutaThing","BrickGame");
+  registergame.then((content) {
+    print(content);
+  });
+/*
   Future<Map> registereduser = test.registerUser("aan","dasdsads");
   pause(const Duration(milliseconds: 500));
   registereduser.then((content) {
@@ -63,11 +68,28 @@ main() async{
   getGames.then((content) {
     print(content);
   });
-
+*/
   pause(const Duration(milliseconds: 500));
 
   Future<String> getUserId = test.getUserId("aan");
   getUserId.then((content) {
+    print(content);
+  });
+
+  pause(const Duration(milliseconds: 500));
+
+  Future<List> getstates = test.getStates();
+  getstates.then((content) {
+    print(content);
+  });
+
+  pause(const Duration(milliseconds: 500));
+
+  final state = {
+    'state':"50"
+  };
+  Future<bool> storestate = test.storeState("87d24038-0277-4b61-a413-09613f0b44da",state);
+  storestate.then((content) {
     print(content);
   });
 }
@@ -162,6 +184,8 @@ class GameKeyServer {
 
   /*
     Read all registered users, games and highscores from textfile
+    -These textfiles have to exist in the root file of the project although
+      they have to be in JSON format
    */
   readConfig(){
     try {
@@ -201,7 +225,7 @@ class GameKeyServer {
 
   /*
     Method to initialize the server on the given host and port
-    After that the server will listen on that host and port
+    After initialization the server will listen on the same host and port for incoming requests
    */
   initServer(String host, int port) async{
     try{
@@ -209,8 +233,6 @@ class GameKeyServer {
       this.server = await HttpServer.bind(host,port);
       //the server waits for incoming messages to handle
       await for (var Httpreq in server) {
-        //HttpResponse response = Httpreq.response;
-        //enableCors(response);
         handleMessages(Httpreq);
 
         /*
@@ -279,6 +301,8 @@ class GameKeyServer {
     //- Returns a string of what kind of messages came in
    */
   handleMessages(HttpRequest msg) async {
+    enableCors(msg.response);
+
     //which request is it ? ...
 
     //Request for add an user
@@ -295,7 +319,6 @@ class GameKeyServer {
         };
         if (name.isNotEmpty && password.isNotEmpty) {
           if (addUser(jsonData)) {
-            enableCors(msg.response);
             msg.response
               ..statusCode = HttpStatus.OK
               ..write(JSON.encode(jsonData))
@@ -303,7 +326,7 @@ class GameKeyServer {
           } else {
             msg.response
               ..statusCode = HttpStatus.CONFLICT
-              ..write("Some User mind exist with that name and password. ")
+              ..write("Some User mind exist with that name and password.")
               ..close();
           }
         } else {
@@ -324,8 +347,6 @@ class GameKeyServer {
         ..close();
     }
   }
-
-
 
   //TODO
   /*
@@ -366,7 +387,11 @@ class GameKeyServer {
     Save all updates to textfile and close the program
    */
   closeTheServer() async{
-    if (updateConfig()) exit(1);
+    if (updateConfig()) {
+      await server.close();
+      print("Server succesfull shutting down ...");
+      exit(0);
+    }
     else {
       print("Error at closing the server.");
       exit(1);
