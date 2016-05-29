@@ -29,14 +29,68 @@ void handleIsolates(SendPort initialReplyTo){
 */
 //Just for testing till class gamekeyserver
 main() async{
-  /*GameKeyServer apfel = new GameKeyServer("127.0.0.1",4000);
+  //GameKeyServer apfel = new GameKeyServer("127.0.0.1",4000);
 
   pause(const Duration(milliseconds: 500));
 
-  client();*/
-  GameKey test = new GameKey("212.201.22.161", 50001, "60", "test");
-  Future<Map> registereduser = test.registerUser("anaaaaaa","dasdsadsadsadasdas");
+  //client();
+
+  GameKey test = new GameKey("212.201.22.161", 50001);
+  //GameKey test = new GameKey("127.0.0.1", 4000);
+
+  Future<Map> registergame = test.registerGame("DontWorryAboutaThing","BrickGame");
+  registergame.then((content) {
+    print(content);
+  });
+
+  Future<Map> registereduser = test.registerUser("aan","dasdsads");
+  pause(const Duration(milliseconds: 500));
   registereduser.then((content) {
+    print(content);
+  });
+
+  pause(const Duration(milliseconds: 500));
+  Future<Map> getUser = test.getUser("aan", "dasdsads");
+  getUser.then((content) {
+    print(content);
+  });
+
+  pause(const Duration(milliseconds: 500));
+  Future<List> getUsers = test.listUsers();
+  getUsers.then((content) {
+    print(content);
+  });
+
+  pause(const Duration(milliseconds: 500));
+  Future<List> getGames = test.listGames();
+  getGames.then((content) {
+    print(content);
+  });
+
+  pause(const Duration(milliseconds: 500));
+  Future<String> getUserId = test.getUserId("aan");
+  getUserId.then((content) {
+    print(content);
+  });
+
+  pause(const Duration(milliseconds: 500));
+  Future<List> getstates = test.getStates();
+  getstates.then((content) {
+    print(content);
+  });
+
+  pause(const Duration(milliseconds: 500));
+  final state = {
+    'state':"50"
+  };
+  Future<bool> storestate = test.storeState("87d24038-0277-4b61-a413-09613f0b44da",state);
+  storestate.then((content) {
+    print(content);
+  });
+
+  pause(const Duration(milliseconds: 500));
+  Future<bool> authenticate = test.authenticate();
+  authenticate.then((content) {
     print(content);
   });
 }
@@ -44,9 +98,6 @@ main() async{
 Future pause(Duration d) => new Future.delayed(d);
 
 client() async{
-
-  Uri client = new Uri.http("localhost:4000","/");
-  client.resolve("/user");
   Map jsonData = {
     "name":"ananana",
     "password":"titten58",
@@ -131,18 +182,20 @@ class GameKeyServer {
 
   /*
     Read all registered users, games and highscores from textfile
+    -These textfiles have to exist in the root file of the project although
+      they have to be in JSON format
    */
   readConfig(){
     try {
-      //TODO brings to work that it handle a list of user
+      //TODO brings to work that it handle a list of user, games and highscores
       var memoryuser = new File("memoryofallusers.txt").readAsStringSync();
       var memorygames = new File("memoryofallgames.txt").readAsStringSync();
       var memoryhighscores = new File("memoryofallhighscores.txt").readAsStringSync();
       allUser = JSON.decode(memoryuser);
       allGames = JSON.decode(memorygames);
       allHighscores = JSON.decode(memoryhighscores);
-    } catch(e){
-      print("Config could not read. " + e.toString());
+    } catch(error){
+      print("Config could not read. " + error);
       exit(1);
     }
   }
@@ -160,17 +213,16 @@ class GameKeyServer {
       memorygames.writeAsStringSync(JSON.encode(getallGames));
       memoryhighscores.writeAsStringSync(JSON.encode(getallHighscores));
       return true;
-    } catch (exception, stackTrace) {
+    } catch (exception) {
       print("Could not update the config.");
       print(exception);
-      print(stackTrace);
       return false;
     }
   }
 
   /*
     Method to initialize the server on the given host and port
-    After that the server will listen on that host and port
+    After initialization the server will listen on the same host and port for incoming requests
    */
   initServer(String host, int port) async{
     try{
@@ -178,8 +230,6 @@ class GameKeyServer {
       this.server = await HttpServer.bind(host,port);
       //the server waits for incoming messages to handle
       await for (var Httpreq in server) {
-        HttpResponse response = Httpreq.response;
-        enableCors(response);
         handleMessages(Httpreq);
 
         /*
@@ -248,23 +298,39 @@ class GameKeyServer {
     //- Returns a string of what kind of messages came in
    */
   handleMessages(HttpRequest msg) async {
+    enableCors(msg.response);
+
     //which request is it ? ...
 
     //Request for add an user
-    if (msg.method == 'POST'  && msg.uri.toString() == '/user' &&
-        msg.headers.contentType != null && msg.headers.contentType.mimeType == 'application/x-www-form-urlencoded') {
+    if (msg.method == 'POST'  && msg.uri.toString() == '/user'){
       try {
-        Map jsonData = JSON.decode(await msg.transform(UTF8.decoder).join());
-        if (addUser(jsonData)) {
-          msg.response
-            ..statusCode = HttpStatus.OK
-            ..write(getallUser)
-            ..close();
+        //Map jsonData = JSON.decode(await msg.transform(UTF8.decoder).join());
+        var incmsg = await msg.transform(UTF8.decoder).join();
+        var nanemandpassword = incmsg.split("&");
+        var name = nanemandpassword.first.replaceAll("name=","");
+        var password = nanemandpassword.last.replaceAll("pwd=","");
+        Map jsonData = {
+          "name":"$name",
+          "pwd":"$password"
+        };
+        if (name.isNotEmpty && password.isNotEmpty) {
+          if (addUser(jsonData)) {
+            msg.response
+              ..statusCode = HttpStatus.OK
+              ..write(JSON.encode(jsonData))
+              ..close();
+          } else {
+            msg.response
+              ..statusCode = HttpStatus.CONFLICT
+              ..write("Some User mind exist with that name and password.")
+              ..close();
+          }
         } else {
           msg.response
-            ..statusCode = HttpStatus.CONFLICT
-            ..write("Some User mind exist with that name and password")
-            ..close();
+              ..statusCode = HttpStatus.CONFLICT
+              ..write("Name and password must be set.")
+              ..close();
         }
       } catch (e) {
         msg.response
@@ -278,8 +344,6 @@ class GameKeyServer {
         ..close();
     }
   }
-
-
 
   //TODO
   /*
@@ -295,7 +359,7 @@ class GameKeyServer {
     Generate a gameid and userid and add the user to the map
    */
   bool addUser(Map o){
-    if(!allUser.containsKey(o['name'])&&!allUser.containsValue(o['password'])){
+    if (!allUser.containsKey(o['name']) && !allUser.containsValue(o['pwd'])) {
       allUser.addAll(o);
       updateConfig();
       return true;
@@ -320,7 +384,11 @@ class GameKeyServer {
     Save all updates to textfile and close the program
    */
   closeTheServer() async{
-    if (updateConfig()) exit(1);
+    if (updateConfig()) {
+      await server.close();
+      print("Server succesfull shutting down ...");
+      exit(0);
+    }
     else {
       print("Error at closing the server.");
       exit(1);
