@@ -34,6 +34,7 @@ main() async{
   pause(const Duration(milliseconds: 500));
 
   //client();
+
   GameKey test = new GameKey("212.201.22.161", 50001);
   //GameKey test = new GameKey("127.0.0.1", 4000);
 
@@ -41,7 +42,7 @@ main() async{
   registergame.then((content) {
     print(content);
   });
-/*
+
   Future<Map> registereduser = test.registerUser("aan","dasdsads");
   pause(const Duration(milliseconds: 500));
   registereduser.then((content) {
@@ -49,42 +50,36 @@ main() async{
   });
 
   pause(const Duration(milliseconds: 500));
-
   Future<Map> getUser = test.getUser("aan", "dasdsads");
   getUser.then((content) {
     print(content);
   });
 
   pause(const Duration(milliseconds: 500));
-
   Future<List> getUsers = test.listUsers();
   getUsers.then((content) {
     print(content);
   });
 
   pause(const Duration(milliseconds: 500));
-
   Future<List> getGames = test.listGames();
   getGames.then((content) {
     print(content);
   });
-*/
-  pause(const Duration(milliseconds: 500));
 
+  pause(const Duration(milliseconds: 500));
   Future<String> getUserId = test.getUserId("aan");
   getUserId.then((content) {
     print(content);
   });
 
   pause(const Duration(milliseconds: 500));
-
   Future<List> getstates = test.getStates();
   getstates.then((content) {
     print(content);
   });
 
   pause(const Duration(milliseconds: 500));
-
   final state = {
     'state':"50"
   };
@@ -92,14 +87,17 @@ main() async{
   storestate.then((content) {
     print(content);
   });
+
+  pause(const Duration(milliseconds: 500));
+  Future<bool> authenticate = test.authenticate();
+  authenticate.then((content) {
+    print(content);
+  });
 }
 
 Future pause(Duration d) => new Future.delayed(d);
 
 client() async{
-
-  Uri client = new Uri.http("localhost:4000","/");
-  client.resolve("/user");
   Map jsonData = {
     "name":"ananana",
     "password":"titten58",
@@ -196,8 +194,8 @@ class GameKeyServer {
       allUser = JSON.decode(memoryuser);
       allGames = JSON.decode(memorygames);
       allHighscores = JSON.decode(memoryhighscores);
-    } catch(e){
-      print("Config could not read. " + e.toString());
+    } catch(error){
+      print("Config could not read. " + error);
       exit(1);
     }
   }
@@ -215,10 +213,9 @@ class GameKeyServer {
       memorygames.writeAsStringSync(JSON.encode(getallGames));
       memoryhighscores.writeAsStringSync(JSON.encode(getallHighscores));
       return true;
-    } catch (exception, stackTrace) {
+    } catch (exception) {
       print("Could not update the config.");
       print(exception);
-      print(stackTrace);
       return false;
     }
   }

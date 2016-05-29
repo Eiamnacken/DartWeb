@@ -115,14 +115,20 @@ class GameKey{
   }
 
   /*
-    This method can be used to authenticate the current user
+    This method can be used to authenticate the current game
     and to check weather the gamekey service
     is available or not
    */
   Future<bool> authenticate() async{
-    Future<bool> avbl;
-
-    return null;
+    final link = uri.resolve("/gamestate/$getGameId").resolveUri(new Uri(queryParameters:{'secret':"$getSecret"}));
+    try {
+      final client = await new HttpClient().getUrl(link);
+      HttpClientResponse response = await client.close();
+      return response.statusCode == 200 ? true : false;
+    } catch (error) {
+      print("GameKey.authenticate() caused an error: '$error");
+      return false;
+    }
   }
 
   /*
