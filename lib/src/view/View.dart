@@ -22,15 +22,18 @@ class View {
   List<List<HtmlElement>> gameFields;
 
   void generateField(Game model) {
-    final List<List<GameObject>> field = model.gameFields[model.countLevel].gameField;
+    final List<List<GameObject>> field = model.gameFields[model.countLevel]
+        .gameField;
 
     String table = "";
+
     for (int row = 0; row < field[0].length; row++) {
       table += "<tr>";
       for (int col = 0; col < field.length; col++) {
         final assignment = field[col][row].toString();
         final pos = "field_${col}_${row}";
-        table += "<td id='$pos' class='$assignment'></td>";
+        table +=
+        "<td id='$pos' class='$assignment'  ></td>";
       }
       table += "</tr>";
     }
@@ -41,6 +44,8 @@ class View {
       gameFields[row] = [];
       for (int col = 0; col < field[row].length; col++) {
         gameFields[row].add(game.querySelector("#field_${row}_${col}"));
+        _setWidthAndLength(gameFields[row][col],field[row][col]);
+
       }
     }
   }
@@ -53,22 +58,33 @@ class View {
 
     for (int row = 0; row < field.length; row++) {
       for (int col = 0; col < field[row].length; col++) {
-        final td = gameFields[row][col];
-        if (td != null) {
-          td.classes.clear();
-          if (field[row][col] is Brick)
-            td.classes.add(field[row][col].toString());
-          else if (field[row][col] is Ball)
-            td.classes.add('ball');
-          else if (field[row][col] is Player) td.classes.add('player');
-        }
+        var td = gameFields[row][col];
+        td.classes.clear();
+        GameObject object = field[row][col];
+        td.classes.add(object.toString());
+        td = _setWidthAndLength(td,object);
+
       }
     }
+  }
+
+  HtmlElement _setWidthAndLength(HtmlElement element,GameObject gameObject){
+    if(element==null) return null;
+    var width = (gameObject.width/3);
+    print(width);
+    element.style..setProperty("width","${width}px")
+    ..setProperty("height","${gameObject.height}px")
+    ..setProperty("padding-right","${width}px")
+    ..setProperty("padding-left","${width}px");
+    if(gameObject is Player) print(gameObject.width);
+
   }
 
   closeForm() => overlay.innerHtml = "";
 
   void warning(String message) {
-    document.querySelector('#warningoverlay').innerHtml = message;
+    document
+        .querySelector('#warningoverlay')
+        .innerHtml = message;
   }
 }

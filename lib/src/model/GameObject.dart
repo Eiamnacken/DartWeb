@@ -21,9 +21,16 @@ abstract class GameObject {
   ///
   /// Die Länge des [MoveableObject]
   ///
-  int length;
+  int height;
 
-  GameObject(this.xPosition, this.yPosition, this.width, this.length);
+  ///
+  /// Itembuffer enthält die momentanen [Item] die sich auf diesem Feld befinden
+  ///
+  List<Item> itemsBuffer;
+
+  GameObject(this.xPosition, this.yPosition, this.width, this.height){
+   itemsBuffer=new List();
+  }
 
   ///
   /// Wird aufgerufen wenn eine Kollision mit diesem Objekt entsteht
@@ -105,7 +112,7 @@ abstract class MoveableObject extends GameObject {
       print("RangeError");
     }
 
-    gameField[xPosition][yPosition] = null;
+    gameField[xPosition][yPosition] = gameField[x][y];
     gameField[x][y] = buffer;
   }
 }

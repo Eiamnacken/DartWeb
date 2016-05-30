@@ -1,59 +1,82 @@
-html {
+
+
+@mixin base-game-object(){
+  border: none !important;
+  border-spacing: 0px;
+}
+
+@mixin base-field($color){
+  background: $color !important;
+  @include base-game-object;
+
+}
+
+html{
   font-family: 'Helvetica', 'Arial', sans-serif;
   font-size: 20px;
   margin: 0px;
   padding: 0px;
-  color: rgba(255, 255, 255, 0.6); }
+  color: rgba(255, 255, 255, 0.6);
+}
+
 
 #warningoverlay:empty, #overlay:empty {
-  display: none; }
+  display: none;
+}
 
 #warningoverlay {
   color: white;
   text-align: center;
   font-size: 12px;
   background-color: firebrick;
-  padding: 20px; }
+  padding: 20px;
+}
 
 #overlay {
   position: absolute;
   top: 0px;
   left: 0px;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0,0,0,0.50);
   height: 100%;
-  text-align: center; }
+  text-align: center;
+}
 
 .container {
   width: 100%;
   height: 100%;
   margin: 0px auto 0px auto;
   text-align: center;
-  padding: 0px 0px 100px 0px; }
+  padding: 0px 0px 100px 0px;
+}
 
 h1 {
   font-size: 2rem;
   padding: 25px;
   background-color: olive;
-  margin-bottom: 50px; }
+  margin-bottom: 50px;
+}
 
 a {
   text-decoration: none;
   font-style: italic;
   color: white;
-  font-weight: normal; }
+  font-weight: normal;
+}
 
 /* Game controls */
-#welcome, #message, #controls, #button {
-  margin: 50px 0px 60px 0px; }
 
-#message #gameover:empty {
-  visibilty: hidden; }
+#welcome, #message, #controls, #button {
+  margin: 50px 0px 60px 0px;
+}
+
+#message #gameover:empty { visibilty: hidden; }
 
 #message #gameover {
   font-size: 5rem;
   color: black;
-  text-align: center; }
+  text-align: center
+}
 
 #level, #start {
   padding: 7px 20px 7px 20px;
@@ -63,7 +86,8 @@ a {
   color: black;
   background: rgba(255, 255, 255, 0.5);
   border: 3px solid black;
-  border-radius: 10px; }
+  border-radius: 10px;
+}
 
 #leftbutton, #rightbutton {
   padding: 7px 20px 7px 20px;
@@ -73,61 +97,71 @@ a {
   color: black;
   background: rgba(255, 255, 255, 0.5);
   border: 3px solid black;
-  border-radius: 10px; }
+  border-radius: 10px;
+}
 
 /* Gamefield */
 body {
-  background-color: olive; }
+  background-color: olive;
+}
 
 #game {
   margin: 50px auto 50px auto;
   background-color: black;
+  //background-image: url('img/brickwall.jpg');
   background-size: cover;
-  background-repeat: no-repeat; }
+  background-repeat: no-repeat;
+
+}
 
 #game td {
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  background: rgba(255, 255, 255, 0.3); }
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255, 0.3);
+}
 
-.player {
-  background: #3e5d9e !important;
-  border: none !important;
-  border-spacing: 0px;
-  position: absolute; }
+ .player {
+  @include base-field(#3e5d9e);
+  position: absolute;
+}
+
+
 
 .ball {
   background-color: red !important;
-  border-radius: 50%; }
+  border-radius: 50%;
 
-.greenBrick {
-  background: green !important;
-  border: none !important;
-  border-spacing: 0px; }
 
-.brownBrick {
-  background: brown !important;
-  border: none !important;
-  border-spacing: 0px; }
+}
 
-.redBrick {
-  background: red !important;
-  border: none !important;
-  border-spacing: 0px; }
+.greenBrick{
+  @include base-field(green);
 
-.yellowBrick {
-  background: yellow !important;
-  border: none !important;
-  border-spacing: 0px; }
+}
 
-.greyBrick {
-  background: gray !important;
-  border: none !important;
-  border-spacing: 0px; }
+.brownBrick{
+  @include base-field(brown);
 
-.field {
-  background: inherit !important;
-  border: none !important;
-  border-spacing: 0px; }
+}
+.redBrick{
+  @include base-field(red);
+
+}
+.yellowBrick{
+  @include base-field(yellow);
+
+}
+.greyBrick{
+  @include base-field(gray);
+
+}
+
+.field{
+  @include base-field(inherit);
+}
+
+
+
+
 
 /*
 green, yellow, red, grey
@@ -137,4 +171,3 @@ green, yellow, red, grey
 }
 */
 
-/*# sourceMappingURL=style.css.map */

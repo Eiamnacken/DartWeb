@@ -31,8 +31,8 @@ class Brick extends GameObject {
   ///
   Health health;
 
-  Brick(int xPosition, int yPosition, int width, int length, String health)
-      : super(xPosition, yPosition, width, length) {
+  Brick(int xPosition, int yPosition, int width, int height, String health)
+      : super(xPosition, yPosition, width, height) {
     this.health = generateHealth(health);
   }
 
@@ -44,7 +44,7 @@ class Brick extends GameObject {
   void decHealth(int damage, List<List<GameObject>> gameField) {
     health = getHealth(damage, health);
     if (health == Health.grey) {
-      gameField[xPosition][yPosition] = null;
+      gameField[xPosition][yPosition] = new Field(xPosition,yPosition,10,10);
     }
     print(health);
   }

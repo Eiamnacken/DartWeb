@@ -89,7 +89,7 @@ class Level {
     for (int row = 0; row < jsonField.length; row++) {
       for (int col = 0; col < jsonField[row].length; col++) {
         if (jsonField[row][col].compareTo('empty') == 0) {
-          _gameField[col][row] = null;
+          _gameField[col][row] = new Field(col,row,brickLength,brickHeight);
         } else if (jsonField[row][col].compareTo('redbrick') == 0) {
           Brick brick = new Brick(col, row, brickHeight, brickLength, 'red');
           _gameField[col][row] = brick;
@@ -109,12 +109,16 @@ class Level {
           _gameField[col][row] = ball;
           balls.add(ball);
         } else if (jsonField[row][col].compareTo('player') == 0) {
-          _player = new Player(col, row, playerHeight, playerLength, playerSpeed);
+          _player = new Player(col, row, playerLength, playerHeight, playerSpeed);
           _gameField[col][row] = player;
 
         }
       }
     }
+
+  }
+
+  void _createCss(){
 
   }
 
