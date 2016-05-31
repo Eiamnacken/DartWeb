@@ -11,6 +11,12 @@ class View {
 
   final game = querySelector("#game");
 
+  final points = querySelector("#points");
+
+  final highscore = querySelector("#highscore");
+
+  final welcome = querySelector("#welcome");
+
   final overlay = querySelector("#overlay");
 
   HtmlElement get startButton => querySelector("#start");
@@ -52,6 +58,11 @@ class View {
 
   void update(Game model, {List<Map> scores: const []}) {
     gameover.innerHtml = model.gameOver() ? "Game Over" : "";
+
+    welcome.style.display = model.gameOver() ? "block" : "none";
+    level.innerHtml="Level: ${model.countLevel}";
+    highscore.innerHtml = model.gameOver() ? generateHighscore(scores) : "";
+    points.innerHtml = "Points: ${model.points}";
 
     // Updates the field
     final field = model.gameFields[model.countLevel].gameField;
@@ -95,4 +106,50 @@ class View {
         .querySelector('#warningoverlay')
         .innerHtml = message;
   }
+
+  String generateHighscore(List<Map> scores, { int score: 0 }) {
+    final list = scores.map((entry) => "<li>${entry['name']}: ${entry['score']}</li>").join("");
+    final points = "You got $score points";
+    return "<div id='scorelist'>${ score == 0 ? "" : points }${ list.isEmpty? "" : "<ul>$list</ul>"}</div>";
+  }
+
+  void showHighscore(Game model, List<Map> scores) {
+
+    if (overlay.innerHtml != "") return;
+//Platzhalter final score = model.brickCounter;
+    final score = 0;
+
+    overlay.innerHtml =
+    "<div id='highscore'>"
+        "   <h1>Highscore</h1>"
+        "</div>"
+        "<div id='highscorewarning'></div>";
+
+    if (scores.isEmpty || score > scores.last['score'] || scores.length < 10) {
+      overlay.appendHtml(
+          this.generateHighscore(scores, score: score) +
+              "<form id='highscoreform'>"
+                  "<input type='text' id='user' placeholder='user'>"
+                  "<input type='password' id='password' placeholder='password'>"
+                  "<button type='button' id='save'>Save</button>"
+                  "<button type='button' id='close' class='discard'>Close</button>"
+                  "</form>"
+      );
+    } else {
+      overlay.appendHtml(this.generateHighscore(scores, score: score));
+      overlay.appendHtml("<button type='button' id='close' class='discard'>Close</button>");
+    }
+
+  }
+
+  /**
+   * Gets the user input from the highscore form.
+   */
+  String get user => (document.querySelector('#user') as InputElement).value;
+
+  /**
+   * Gets the password input from the highscore form.
+   */
+  String get password => (document.querySelector('#password') as InputElement).value;
+
 }

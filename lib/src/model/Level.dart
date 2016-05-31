@@ -53,7 +53,7 @@ class Level {
   ///
   /// Generiert das Level aus der übergebenen [config]
   ///
-  void readLevel(Map jsonLevel) {
+  void readLevel(String config) {
     int playerHeight,
         playerLength,
         brickHeight,
@@ -65,7 +65,7 @@ class Level {
         itemSpeed;
 
 
-
+    Map jsonLevel = JSON.decode(config);
     _height = int.parse(jsonLevel['levelHeight'].toString());
     _length = int.parse(jsonLevel['levelLength'].toString());
     _countPositiveItems = int.parse(jsonLevel['countPosItems'].toString());

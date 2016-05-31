@@ -39,7 +39,6 @@ html{
   width: 100%;
   background-color: rgba(0,0,0,0.50);
   height: 100%;
-  text-align: center;
 }
 
 .container {
@@ -75,10 +74,76 @@ a {
 #message #gameover {
   font-size: 5rem;
   color: black;
-  text-align: center
+  text-align: center; }
+
+
+/* highscore */
+
+#highscoreform {
+  margin: 40px;
+  background: rgba(255, 255, 255, 0.5);
 }
 
-#level, #start {
+#highscoreform input {
+  color: white;
+  border: 1px solid white;
+  background: rgba(255, 255, 255, 0.5);
+  appearance: none;
+  box-shadow: none;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 10px;
+}
+
+#highscorewarning {
+  background: lightpink;
+  color: darkred;
+  padding: 50px;
+}
+
+#highscorewarning:empty {
+  display: none;
+}
+
+#scorelist:empty {
+  display: none;
+}
+
+#scorelist {
+  padding: 20px;
+  color: white;
+  margin: 20px;
+  width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid white;
+  border-radius: 10px;
+  background: rgba(1,1,1,0.1);
+}
+
+#scorelist ul {
+  list-style-type: none;
+  list-style-position: outside;
+  margin: 0px;
+}
+
+#scorelist li {
+  font-size: 1.1em;
+  margin: 0px 5px 5px 5px;
+  padding: 5px;
+  color: white;
+  display: block;
+  border-radius: 20px;
+}
+
+
+input::-webkit-input-placeholder { color: lightgray; font-style: italic; }
+input::-moz-placeholder { color: lightgray; font-style: italic; }
+
+
+/* --- */
+
+#level,#points, #welcome #start {
   padding: 7px 20px 7px 20px;
   font-style: normal;
   font-size: 2rem;
@@ -87,6 +152,7 @@ a {
   background: rgba(255, 255, 255, 0.5);
   border: 3px solid black;
   border-radius: 10px;
+  cursor: hand;
 }
 
 #leftbutton, #rightbutton {
@@ -98,7 +164,12 @@ a {
   background: rgba(255, 255, 255, 0.5);
   border: 3px solid black;
   border-radius: 10px;
+  cursor: hand;
+  :hover{
+    cursor: hand;
+  }
 }
+
 
 /* Gamefield */
 body {
@@ -119,7 +190,7 @@ body {
   background: rgba(255,255,255, 0.3);
 }
 
- .player {
+.player {
   @include base-field(#3e5d9e);
   position: absolute;
 }
@@ -129,6 +200,7 @@ body {
 .ball {
   background-color: red !important;
   border-radius: 50%;
+  position: absolute;
 
 
 }

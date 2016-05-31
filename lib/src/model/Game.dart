@@ -36,6 +36,8 @@ class Game {
   ///
   int countLevel;
 
+  int points=0;
+
   ///
   /// Die level
   ///
@@ -117,7 +119,14 @@ class Game {
   ///
   /// Bereitet das nächste level vor in [Level]
   ///
-  void newLevel() {}
+  void newLevel() {
+    countLevel++;
+  }
+
+  void increasePoints(Health health){
+    if(health==Health.brown) return;
+    points += Health.values.indexOf(health)*10;
+  }
 
   ///
   /// Ließt die Json Config um die darin enthaltenen Level anzulgegen

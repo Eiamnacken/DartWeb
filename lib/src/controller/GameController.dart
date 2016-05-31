@@ -37,6 +37,8 @@ class GameController {
 
   final View view = new View();
 
+
+
   Timer _ballTrigger;
 
   GameController() {

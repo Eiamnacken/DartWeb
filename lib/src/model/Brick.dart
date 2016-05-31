@@ -44,7 +44,7 @@ class Brick extends GameObject {
   void decHealth(int damage, List<List<GameObject>> gameField) {
     health = getHealth(damage, health);
     if (health == Health.grey) {
-      gameField[xPosition][yPosition] = new Field(xPosition,yPosition,10,10);
+      gameField[xPosition][yPosition] = new Field(xPosition,yPosition,width,height);
     }
 
   }
