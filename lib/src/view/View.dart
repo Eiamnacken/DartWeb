@@ -69,14 +69,22 @@ class View {
   }
 
   HtmlElement _setWidthAndLength(HtmlElement element,GameObject gameObject){
-    if(element==null) return null;
-    var width = (gameObject.width/3);
-    print(width);
-    element.style..setProperty("width","${width}px")
-    ..setProperty("height","${gameObject.height}px")
-    ..setProperty("padding-right","${width}px")
-    ..setProperty("padding-left","${width}px");
-    if(gameObject is Player) print(gameObject.width);
+    if(element==null|| gameObject==null) return null;
+    var width = gameObject.width;
+    if(gameObject is Player){
+      width = (gameObject.width/3);
+      element.style..setProperty("padding-right","${width}px")
+        ..setProperty("padding-left","${width}px")
+        ..setProperty("width","${width}px")
+        ..setProperty("height","${gameObject.height}px");
+    }else{
+      element.style..setProperty("width","${width}px")
+        ..setProperty("height","${gameObject.height}px")
+            ..setProperty("padding-right","0px")
+        ..setProperty("padding-left","0px");
+    }
+
+
 
   }
 

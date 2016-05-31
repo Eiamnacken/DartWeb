@@ -10,12 +10,11 @@ class Ball extends MoveableObject {
   ///
   int _damage;
 
-  Direction _direction;
 
-  Ball(int xPosition, int yPosition, int width, int length, int moveSpeed)
-      : super(xPosition, yPosition, width, length, moveSpeed){
-    _direction=Direction.rightUp;
-    _damage=1;
+  Ball(int xPosition, int yPosition, int width, int length, int moveSpeed,
+      [Direction direction = Direction.down])
+      : super(xPosition, yPosition, width, length, moveSpeed, direction) {
+    _damage = 1;
   }
 
   ///
@@ -40,8 +39,24 @@ class Ball extends MoveableObject {
   /// Wird nur von Objekten aufgerufen die bei ihrer eigenen bewegung mit dem [Ball kolidieren
   ///
   void collision(List<List<GameObject>> gameField, GameObject collisionObject) {
-    print("collision");
-    _changeDirection(this._direction, collisionObject,gameField,{"X":0,"Y":0});
+    if (collisionObject is Player) {
+      _getCollsionWithPlayer(collisionObject);
+    } else if (collisionObject == null) {
+      if (direction == Direction.up) {
+        _direction = Direction.down;
+      } else if (_direction == Direction.leftUp) {
+        if (xPosition == 0) _direction = Direction.rightUp;
+        if (yPosition == 0) _direction = Direction.leftDown;
+      } else if (_direction == Direction.rightUp) {
+        if (xPosition == gameField.length - 1) _direction = Direction.leftUp;
+        if (yPosition == 0) _direction = Direction.rightDown;
+      } else if (_direction == Direction.leftDown) {
+        _direction = Direction.rightDown;
+      } else if (_direction == Direction.rightDown) {
+        _direction = Direction.leftDown;
+      }
+    } else
+      _direction = collisionObject.getCollison(this);
   }
 
   ///
@@ -51,74 +66,48 @@ class Ball extends MoveableObject {
   /// [collisionObject] anhand dieses Objektes wird entschieden wie sich der [Ball] nach der kollision verhält
   ///
   ///
-  void _changeDirection(Direction direction, GameObject collisionObject,List<List<GameObject>> gameField,Map<String,int> step) {
-//    if(collisionObject is Player){
-//
-//    }else{
-  //TODO Player beeinflusst flug richtung so kann es auch einen ball geben der direkt nach oben fliegt
-    int width = gameField.length-1;
-    int height = gameField[width].length-1;
-    switch (direction) {
-      case Direction.up:
-        break;
-      case Direction.down:
-        break;
-      case Direction.left:
-        break;
-      case Direction.right:
-        break;
-      case Direction.rightDown:
-        if(collisionObject != null){
-          _direction=Direction.rightUp;
-        }else _direction=Direction.leftDown;
-        break;
-      case Direction.rightUp:
-        if(yPosition>=height) {
-          _direction = Direction.rightDown;
-        }else _direction=Direction.leftUp;
-        break;
-      case Direction.leftDown:
-        if(collisionObject != null) {
-          _direction = Direction.rightDown;
-        }else _direction = Direction.leftUp;
-        break;
-      case Direction.leftUp:
-        if(yPosition>=height) {
-          _direction=Direction.leftDown;
-        }else _direction=Direction.rightUp;
-        break;
-    }
-//    }
+  void _changeDirection(Direction direction, GameObject collisionObject,
+      List<List<GameObject>> gameField, Map<String, int> step) {
+    collision(gameField, collisionObject);
+  }
+
+  void _getCollsionWithPlayer(MoveableObject object) {
+    int playerPieces = (object.width / 3).round();
+    int playerMiddle = (object.xPosition * this.width + 1);
+    int ballPosition = this.xPosition * this.width;
+    if (ballPosition >= playerMiddle &&
+        ballPosition <= playerMiddle + playerPieces) {
+      _direction = Direction.up;
+    } else if (ballPosition >= playerMiddle - playerPieces &&
+        ballPosition <= playerMiddle) {
+      _direction = Direction.leftUp;
+    } else _direction = Direction.rightUp;
   }
 
   @override
   void move(Direction direction, List<List<GameObject>> gameField,
       GameController controller) {
+    if (yPosition == gameField[0].length - 1) {
+      gameField[xPosition][yPosition] =
+      new Field(xPosition, yPosition, width, height);
+      controller.updateView(gameField);
+    }
     Map coordinates = getValuesForDirection(direction);
     final int xCoordinate = xPosition + coordinates["X"];
     final int yCoordinate = yPosition + coordinates["Y"];
-    GameObject buffer;
-    if (xCoordinate < gameField.length &&
-        yCoordinate < gameField[xCoordinate].length) {
-      buffer =
-          gameField[xPosition + coordinates["X"]][yPosition + coordinates["Y"]];
-    }
+
     Map response = collisionAhead(
         direction, gameField, coordinates["Y"], coordinates["X"]);
     //Kollison voraus ? wenn nicht einfach bewegen ansonsten werden die entsprechenden Schritte eingeleitet z.B. Kollision des Objekts aufgerufen
     if (!response.keys.first) {
-      switchObjects(gameField, xCoordinate, yCoordinate);
-      xPosition += coordinates["X"];
-      yPosition += coordinates["Y"];
+      switchObjects(gameField, this, response.values.first);
       controller.updateView(gameField);
     } else {
-      print(_direction);
-      _changeDirection(direction, response[true],gameField,coordinates);
-      if (response[true] != null){
-        print(damage);
+      _changeDirection(direction, response[true], gameField, coordinates);
+      if (response[true] != null) {
         response[true].collision(gameField, this);
       }
-      print(_direction);
+
       move(_direction, gameField, controller);
     }
   }

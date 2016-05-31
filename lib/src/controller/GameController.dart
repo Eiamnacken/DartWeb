@@ -3,7 +3,7 @@ part of brickGame;
 ///
 /// Gibt an wie oft sich der [Ball] in einem Zeitraum bewegt hier alle 250 millisekunden
 ///
-const ballSpeed = const Duration(milliseconds: 250);
+const ballSpeed = const Duration(milliseconds: 100);
 
 ///
 /// Wie oft bewegt sich ein [Item]
@@ -44,14 +44,14 @@ class GameController {
       if (_ballTrigger != null) _ballTrigger.cancel();
       _ballTrigger = new Timer.periodic(ballSpeed, (_) => game.moveBall(this));
     });
-    ButtonElement right = view.leftButton;
-    right.onKeyUp.listen((_) {
+
+    view.rightButton.onClick.listen((_) {
       if (game.gameOver()) return;
-      game.movePLayer(Direction.right, this);
+       game.movePLayer(Direction.right, this);
     });
 
-    ButtonElement left = view.rightButton;
-    left.onKeyUp.listen((_) {
+
+    view.leftButton.onClick.listen((_) {
       if (game.gameOver()) return;
       game.movePLayer(Direction.left, this);
     });

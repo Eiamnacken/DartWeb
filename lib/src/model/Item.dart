@@ -37,12 +37,7 @@ class Item extends MoveableObject {
     //TODO: Implement Method
   }
 
-  @override
-  bool collisionAhead(
-      Direction direction, List<List<GameObject>> gameField, int x,
-      [int y]) {
-    // TODO: implement collisionAhead
-  }
+
 
   @override
   void move(Direction direction, List<List<GameObject>> gameField,

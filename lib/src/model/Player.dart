@@ -4,8 +4,14 @@ part of brickGame;
 /// des Spieles das den Ball reflektiert
 ///
 class Player extends MoveableObject {
+
+
+  Direction lastMove;
+
+
   Player(int xPosition, int yPosition, int width, int length, int moveSpeed)
-      : super(xPosition, yPosition, width, length, moveSpeed);
+      : super(xPosition, yPosition, width, length, moveSpeed,null);
+
 
   ///
   /// Ändert die Länge des [Player]
@@ -30,10 +36,10 @@ class Player extends MoveableObject {
       if (response[false] != null) {
         response[false].collision(gameField, this);
       }
-      print(xPosition);
-      switchObjects(gameField, xPosition+x,yPosition);
-      xPosition =xPosition+ x;
-      print(xPosition);
+
+      switchObjects(gameField,this,response.values.first);
+
+
       controller.updateView(gameField);
     }
   }
