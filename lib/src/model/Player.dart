@@ -10,7 +10,7 @@ class Player extends MoveableObject {
 
 
   Player(int xPosition, int yPosition, int width, int length, int moveSpeed)
-      : super(xPosition, yPosition, width, length, moveSpeed,null);
+      : super(xPosition, yPosition, width, length, moveSpeed, null);
 
 
   ///
@@ -30,21 +30,21 @@ class Player extends MoveableObject {
   @override
   void move(Direction direction, List<List<GameObject>> gameField,
       GameController controller) {
-    final int gameLength = (gameField[xPosition].length-1)*gameField[xPosition][yPosition-1].width;
-    final playerLength = xPosition*gameField[xPosition][yPosition-1].width;
-    if(gameLength-(playerLength+(playerLength/3).round())>=(playerLength/3).round()) {
-      int x = getValuesForDirection(direction)["X"];
-      Map response = collisionAhead(direction, gameField, 0, x);
-      if (!response.keys.first) {
-        if (response[false] != null) {
-          response[false].collision(gameField, this);
-        }
-
-        switchObjects(gameField, this, response.values.first);
-
-
-        controller.updateView(gameField);
+    final int gameLength = (gameField.length) *
+        gameField[xPosition][yPosition - 1].width;
+    final playerLength = (1 + xPosition) *
+        gameField[xPosition][yPosition - 1].width;
+    if (direction == Direction.right) {
+      if (gameLength - (playerLength) < (playerLength / 3).floor()) return;
+    }
+    int x = getValuesForDirection(direction)["X"];
+    Map response = collisionAhead(direction, gameField, 0, x);
+    if (!response.keys.first) {
+      if (response[false] != null) {
+        response[false].collision(gameField, this);
       }
+      switchObjects(gameField, this, response.values.first);
+      controller.updateView(gameField);
     }
   }
 

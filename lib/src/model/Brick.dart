@@ -11,20 +11,9 @@ class Brick extends GameObject {
   ///
   bool _containsItem;
 
-  ///
-  /// Größe der [Brick]
-  ///
-  int _size;
 
-  ///
-  /// Position auf der x-Achse zeigt auf den Mittelpunkt
-  ///
-  int _xPosition;
 
-  ///
-  /// Position auf der y-Achse zeigt auf den Mittelpunkt
-  ///
-  int _yPosition;
+
 
   ///
   /// Leben eines [Brick]

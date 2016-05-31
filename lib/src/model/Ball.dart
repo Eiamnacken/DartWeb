@@ -93,8 +93,7 @@ class Ball extends MoveableObject {
       controller.updateView(gameField);
     }
     Map coordinates = getValuesForDirection(direction);
-    final int xCoordinate = xPosition + coordinates["X"];
-    final int yCoordinate = yPosition + coordinates["Y"];
+
 
     Map response = collisionAhead(
         direction, gameField, coordinates["Y"], coordinates["X"]);

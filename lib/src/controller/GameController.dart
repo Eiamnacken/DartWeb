@@ -44,7 +44,7 @@ class GameController {
   GameController() {
     view.startButton.onClick.listen((_) {
       if (_ballTrigger != null) _ballTrigger.cancel();
-      game = new Game();
+      if(game.won()||game.gameOver()) game = new Game();
       _ballTrigger = new Timer.periodic(ballSpeed, (_) => game.moveBall(this));
       view.generateField(game);
     });
