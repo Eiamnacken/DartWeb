@@ -61,10 +61,10 @@ class Game {
             ball.direction, gameFields[countLevel].gameField, controller);
         if (ball.yPosition == _getPlayer().yPosition) {
           gameFields[countLevel].balls.removeLast();
-          gameFields[countLevel].gameField[ball.xPosition][ball.yPosition] =
-          null;
           controller.updateView(gameFields[countLevel].gameField);
         }
+        if(won()) newLevel();
+
       });
     }
   }
@@ -124,9 +124,12 @@ class Game {
   }
 
   void increasePoints(Health health){
+    if(health==Health.grey) gameFields[countLevel].bricks.removeLast();
     if(health==Health.brown) return;
     points += Health.values.indexOf(health)*10;
   }
+
+
 
   ///
   /// Ließt die Json Config um die darin enthaltenen Level anzulgegen
@@ -299,12 +302,47 @@ class Game {
     }
     ''';
 
+    String winner = '''
+    { "playerHeight":10,
+      "playerLength":30,
+      "brickHeight":10,
+      "brickLength":10,
+      "ballHeight":10,
+      "ballLength":10,
+      "ballSpeed":250,
+      "playerSpeed":1,
+      "itemSpeed":250,
+      "countPosItems":0,
+      "countNegItems":0,
+      "levelLength":9,
+      "levelHeight":16,
+      "levelField":[["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+					["empty", "empty", "empty", "empty", "redbrick", "empty", "empty", "empty", "empty"],
+					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+					["empty", "empty", "empty", "empty", "ball", "empty", "empty", "empty", "empty"],
+					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+					["empty", "empty", "empty", "empty", "player", "empty", "empty", "empty", "empty"]]
+    }
+    ''';
+
     List<String> levelsAsJson = new List<String>();
+    levelsAsJson.add(winner);
     levelsAsJson.add(level0);
     levelsAsJson.add(level1);
     levelsAsJson.add(level2);
     levelsAsJson.add(level3);
     levelsAsJson.add(level4);
+
 
     for(int i = 0; i < levelsAsJson.length; i++) {
       Level level = new Level();
@@ -321,5 +359,8 @@ class Game {
   ///
   /// Setzt alle werte auf den Standard zurück
   ///
-  void _resetState() {}
+  void _resetState() {
+    countLevel=0;
+    points=0;
+  }
 }

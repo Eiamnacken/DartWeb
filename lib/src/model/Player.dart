@@ -30,17 +30,21 @@ class Player extends MoveableObject {
   @override
   void move(Direction direction, List<List<GameObject>> gameField,
       GameController controller) {
-    int x = getValuesForDirection(direction)["X"];
-    Map response = collisionAhead(direction, gameField, 0, x);
-    if (!response.keys.first) {
-      if (response[false] != null) {
-        response[false].collision(gameField, this);
+    final int gameLength = (gameField[xPosition].length-1)*gameField[xPosition][yPosition-1].width;
+    final playerLength = xPosition*gameField[xPosition][yPosition-1].width;
+    if(gameLength-(playerLength+(playerLength/3).round())>=(playerLength/3).round()) {
+      int x = getValuesForDirection(direction)["X"];
+      Map response = collisionAhead(direction, gameField, 0, x);
+      if (!response.keys.first) {
+        if (response[false] != null) {
+          response[false].collision(gameField, this);
+        }
+
+        switchObjects(gameField, this, response.values.first);
+
+
+        controller.updateView(gameField);
       }
-
-      switchObjects(gameField,this,response.values.first);
-
-
-      controller.updateView(gameField);
     }
   }
 

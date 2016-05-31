@@ -33,7 +33,7 @@ const gameKeyPort = 9000;
 /// Der [Player] wird gesteuert über Listener im GameView.
 ///
 class GameController {
-  final Game game = new Game();
+  Game game = new Game();
 
   final View view = new View();
 
@@ -44,7 +44,9 @@ class GameController {
   GameController() {
     view.startButton.onClick.listen((_) {
       if (_ballTrigger != null) _ballTrigger.cancel();
+      game = new Game();
       _ballTrigger = new Timer.periodic(ballSpeed, (_) => game.moveBall(this));
+      view.generateField(game);
     });
 
     view.rightButton.onClick.listen((_) {

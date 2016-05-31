@@ -106,8 +106,11 @@ class Ball extends MoveableObject {
       _changeDirection(direction, response[true], gameField, coordinates);
       if (response[true] != null) {
         response[true].collision(gameField, this);
-        Brick brickBuffer = response[true];
-        controller.game.increasePoints(brickBuffer.health);
+        if(response[true] is Brick){
+          Brick brickBuffer = response[true];
+          controller.game.increasePoints(brickBuffer.health);
+        }
+
       }
 
       move(_direction, gameField, controller);
