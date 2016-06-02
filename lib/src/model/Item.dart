@@ -1,6 +1,4 @@
-import 'package:DartWeb/model/GameObject.dart';
-import 'package:DartWeb/model/Enums.dart';
-import 'package:DartWeb/model/Player.dart';
+part of brickGame;
 
 ///
 /// [Item] sind die Positiven oder Negativen effekte die der Player im laufe des
@@ -17,6 +15,9 @@ class Item extends MoveableObject {
   ///
   Effect effect;
 
+  Item(int xPosition, int yPosition, int width, int length, int moveSpeed)
+      : super(xPosition, yPosition, width, length, moveSpeed);
+
   ///
   /// Gibt an ob es ein Positiv Effekt ist
   ///
@@ -28,10 +29,19 @@ class Item extends MoveableObject {
   void collision(Direction direction, List<List<GameObject>> gameField) {
     // TODO: implement collision
   }
+
   ///
   /// Wendet die eigenschaften dieses Items auf den Player an
   ///
-  void _activateItem(Player player){
+  void _activateItem(Player player) {
     //TODO: Implement Method
+  }
+
+
+
+  @override
+  void move(Direction direction, List<List<GameObject>> gameField,
+      GameController controller) {
+    // TODO: implement move
   }
 }

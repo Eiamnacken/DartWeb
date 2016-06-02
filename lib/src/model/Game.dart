@@ -1,4 +1,4 @@
-
+part of brickGame;
 
 ///
 /// Enthält alle objekte die sich momentan im Spiel befinden und stellt
@@ -30,44 +30,124 @@ class Game {
   /// festgelegt
   ///
   int _incDamageBall;
+
   ///
   /// In welchem [Level] befinden wir uns
   ///
   int countLevel;
+
+  int points=0;
 
   ///
   /// Die level
   ///
   List<Level> gameFields;
 
-  ///
-  /// Bewegt einen Ball in eine Richtung
-  /// [direction] In welche Richtung soll sich der [Ball] bewegen
-  /// [ball]      Welcher [Ball] soll sich bewegen
-  ///
-  void moveBall(Direction direction, Ball ball) {}
+  Game() {
+    gameFields = new List();
+    countLevel = 0;
+    _readConfig();
+  }
 
   ///
-  /// Bewegt ein Item in eine Richtung
-  /// [direction] in welche richtung soll es sich bewegen
-  /// [item]      Welches [Item] soll sich bewegen
+  /// Bewegt alle Bälle um einen Schritt
+  /// [direction] In welche Richtung soll sich der [Ball] bewegen
   ///
-  void moveItem(Direction direction, Item item) {}
+  void moveBall(GameController controller) {
+    List balls = gameFields[countLevel].balls;
+    if (balls.isNotEmpty) {
+      balls.forEach((ball) {
+        ball.move(
+            ball.direction, gameFields[countLevel].gameField, controller);
+        if (ball.yPosition == _getPlayer().yPosition) {
+          gameFields[countLevel].balls.removeLast();
+          controller.updateView(gameFields[countLevel].gameField);
+        }
+        if(won()) newLevel();
+
+      });
+    }
+  }
+
+  ///
+  /// Bewegt alle Items um einen Schritt
+  /// [direction] in welche richtung soll es sich bewegen
+  ///
+  ///
+  void moveItem(GameController controller) {
+    gameFields[countLevel].items.forEach((item) {
+      item.move(
+          Direction.down, gameFields[countLevel].gameField, controller);
+      if (item.yPosition <= 0) {
+        gameFields[countLevel].items.remove(item);
+      }
+    });
+  }
 
   ///
   /// Bewegt den [Player] in die richtung von [x]
   /// [direction]   Die richtung in die der Spieler sich bewegt
   ///
-  void movePLayer(Direction direction) {}
+  void movePLayer(Direction direction, GameController controller) {
+    Player player = _getPlayer();
+    if (!gameOver()) {
+      for (int i = player.moveSpeed; i > 0; i--) {
+        player.move(direction, gameFields[countLevel].gameField, controller);
+      }
+    }
+  }
+
+  Player _getPlayer() {
+    return gameFields[countLevel].player;
+  }
+
+  bool gameOver() {
+    if (gameFields[countLevel].balls.length == 0) {
+      return true;
+    }
+    return false;
+  }
+
+  bool won() {
+    if (gameFields[countLevel].bricks.length == 0 &&
+        gameFields[countLevel].balls.length > 0) {
+      return true;
+    }
+    return false;
+  }
 
   ///
   /// Bereitet das nächste level vor in [Level]
   ///
-  void newLevel() {}
+  void newLevel() {
+    if(countLevel != gameFields.length - 1) {
+      countLevel++;
+    }
+
+  }
+
+  void increasePoints(Health health){
+    if(health==Health.grey) gameFields[countLevel].bricks.removeLast();
+    if(health==Health.brown) return;
+    points += 10;
+  }
+
+
+
   ///
   /// Ließt die Json Config um die darin enthaltenen Level anzulgegen
   ///
-  void _readConfig() {}
+  Future<bool> _readConfig() async {
+    /// liest .json aus einem Ordner in einen String
+    for(int i = 0; i < 5; i++) {
+      final answer = await HttpRequest.getString('level${i}.json');
+
+      String jsonLevel = answer;
+      Level level = new Level();
+      level.readLevel(jsonLevel);
+      gameFields.add(level);
+    }
+  }
 
   ///
   /// Löscht ein [MoveableObject] aus dem Spiel
@@ -77,5 +157,8 @@ class Game {
   ///
   /// Setzt alle werte auf den Standard zurück
   ///
-  void _resetState() {}
+  void _resetState() {
+    countLevel=0;
+    points=0;
+  }
 }
