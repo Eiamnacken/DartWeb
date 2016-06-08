@@ -16,7 +16,6 @@ class GameKey{
   Uri _uri;
 
   //Id of the Game
-  //need to set after registration with kratzkes server
   String _gameid = "92d5e770-ff13-46dd-9d4c-09fb300bc240";
 
   //Secret of the game, need to authenticate the current game with the GameKey service
