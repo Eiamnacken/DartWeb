@@ -120,13 +120,16 @@ class Game {
   /// Bereitet das nächste level vor in [Level]
   ///
   void newLevel() {
-    countLevel++;
+    if(countLevel != gameFields.length - 1) {
+      countLevel++;
+    }
+
   }
 
   void increasePoints(Health health){
     if(health==Health.grey) gameFields[countLevel].bricks.removeLast();
     if(health==Health.brown) return;
-    points += Health.values.indexOf(health)*10;
+    points += 10;
   }
 
 
@@ -134,219 +137,14 @@ class Game {
   ///
   /// Ließt die Json Config um die darin enthaltenen Level anzulgegen
   ///
-  void _readConfig() {
+  Future<bool> _readConfig() async {
     /// liest .json aus einem Ordner in einen String
-    ///
-    String level0 = '''
-    { "playerHeight":10,
-      "playerLength":30,
-      "brickHeight":10,
-      "brickLength":10,
-      "ballHeight":10,
-      "ballLength":10,
-      "ballSpeed":250,
-      "playerSpeed":1,
-      "itemSpeed":250,
-      "countPosItems":0,
-      "countNegItems":0,
-      "levelLength":9,
-      "levelHeight":16,
-      "levelField":[["empty", "empty", "empty", "greenbrick", "greenbrick", "greenbrick", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "greenbrick", "greenbrick", "greenbrick", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "greenbrick", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "greenbrick", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "ball", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "player", "empty", "empty", "empty", "empty"]]
-    }
-    ''';
+    for(int i = 0; i < 5; i++) {
+      final answer = await HttpRequest.getString('level${i}.json');
 
-    String level1 = '''
-    { "playerHeight":10,
-      "playerLength":25,
-      "brickHeight":10,
-      "brickLength":10,
-      "ballHeight":10,
-      "ballLength":10,
-      "ballSpeed":250,
-      "playerSpeed":750,
-      "itemSpeed":250,
-      "countPosItems":0,
-      "countNegItems":0,
-      "levelLength":9,
-      "levelHeight":16,
-      "levelField":[["empty", "greenbrick", "greenbrick", "yellowbrick", "redbrick", "yellowbrick", "greenbrick", "greenbrick", "empty"],
-					["empty", "empty", "greenbrick", "greenbrick", "yellowbrick", "greenbrick", "greenbrick", "empty", "empty"],
-					["empty", "empty", "empty", "greenbrick", "greenbrick", "greenbrick", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "greenbrick", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "ball", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "player", "empty", "empty", "empty", "empty"]]
-    }
-    ''';
-
-    String level2 = '''
-    { "playerHeight":10,
-      "playerLength":25,
-      "brickHeight":10,
-      "brickLength":10,
-      "ballHeight":10,
-      "ballLength":10,
-      "ballSpeed":250,
-      "playerSpeed":750,
-      "itemSpeed":250,
-      "countPosItems":0,
-      "countNegItems":0,
-      "levelLength":9,
-      "levelHeight":16,
-      "levelField":[["empty", "empty", "empty", "yellowbrick", "yellowbrick", "yellowbrick", "empty", "empty", "empty"],
-					["empty", "empty", "yellowbrick", "redbrick", "empty", "redbrick", "yellowbrick", "empty", "empty"],
-					["empty", "yellowbrick", "redbrick", "empty", "empty", "empty", "redbrick", "yellowbrick", "empty"],
-					["yellowbrick", "redbrick", "empty", "empty", "empty", "empty", "empty", "redbrick", "yellowbrick"],
-					["yellowbrick", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "yellowbrick"],
-					["yellowbrick", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "yellowbrick"],
-					["yellowbrick", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "yellowbrick"],
-					["yellowbrick", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "yellowbrick"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "ball", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "player", "empty", "empty", "empty", "empty"]]
-    }
-    ''';
-
-    String level3 = '''
-    { "playerHeight":10,
-      "playerLength":25,
-      "brickHeight":10,
-      "brickLength":10,
-      "ballHeight":10,
-      "ballLength":10,
-      "ballSpeed":250,
-      "playerSpeed":750,
-      "itemSpeed":250,
-      "countPosItems":0,
-      "countNegItems":0,
-      "levelLength":9,
-      "levelHeight":16,
-      "levelField":[["redbrick", "greenbrick", "redbrick", "greenbrick", "redbrick", "greenbrick", "redbrick", "greenbrick", "redbrick"],
-					["yellowbrick", "yellowbrick", "yellowbrick", "yellowbrick", "yellowbrick", "yellowbrick", "yellowbrick", "yellowbrick", "yellowbrick"],
-					["redbrick", "redbrick", "redbrick", "empty", "empty", "empty", "redbrick", "redbrick", "redbrick"],
-					["greenbrick", "greenbrick", "empty", "empty", "empty", "empty", "empty", "greenbrick", "greenbrick"],
-					["greenbrick", "greenbrick", "empty", "empty", "empty", "empty", "empty", "greenbrick", "greenbrick"],
-					["greenbrick", "greenbrick", "empty", "empty", "empty", "empty", "empty", "greenbrick", "greenbrick"],
-					["redbrick", "redbrick", "redbrick", "empty", "empty", "empty", "redbrick", "redbrick", "redbrick"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "ball", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "player", "empty", "empty", "empty", "empty"]]
-    }
-    ''';
-
-    String level4 = '''
-    { "playerHeight":10,
-      "playerLength":25,
-      "brickHeight":10,
-      "brickLength":10,
-      "ballHeight":10,
-      "ballLength":10,
-      "ballSpeed":250,
-      "playerSpeed":750,
-      "itemSpeed":250,
-      "countPosItems":0,
-      "countNegItems":0,
-      "levelLength":9,
-      "levelHeight":16,
-      "levelField":[["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "redbrick"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "redbrick", "yellowbrick"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "redbrick", "yellowbrick", "greenbrick"],
-					["empty", "empty", "empty", "empty", "empty", "redbrick", "yellowbrick", "greenbrick", "empty"],
-					["empty", "empty", "empty", "empty", "redbrick", "yellowbrick", "greenbrick", "empty", "empty"],
-					["empty", "empty", "empty", "redbrick", "yellowbrick", "greenbrick", "empty", "empty", "empty"],
-					["empty", "empty", "redbrick", "yellowbrick", "greenbrick", "empty", "empty", "empty", "empty"],
-					["empty", "redbrick", "yellowbrick", "greenbrick", "empty", "empty", "empty", "empty", "empty"],
-					["redbrick", "yellowbrick", "greenbrick", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["yellowbrick", "greenbrick", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["greenbrick", "empty", "empty", "empty", "ball", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "player", "empty", "empty", "empty", "empty"]]
-    }
-    ''';
-
-    String winner = '''
-    { "playerHeight":10,
-      "playerLength":30,
-      "brickHeight":10,
-      "brickLength":10,
-      "ballHeight":10,
-      "ballLength":10,
-      "ballSpeed":250,
-      "playerSpeed":1,
-      "itemSpeed":250,
-      "countPosItems":0,
-      "countNegItems":0,
-      "levelLength":9,
-      "levelHeight":16,
-      "levelField":[["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "redbrick", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "ball", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-					["empty", "empty", "empty", "empty", "player", "empty", "empty", "empty", "empty"]]
-    }
-    ''';
-
-    List<String> levelsAsJson = new List<String>();
-    levelsAsJson.add(winner);
-    levelsAsJson.add(level0);
-    levelsAsJson.add(level1);
-    levelsAsJson.add(level2);
-    levelsAsJson.add(level3);
-    levelsAsJson.add(level4);
-
-
-    for(int i = 0; i < levelsAsJson.length; i++) {
+      String jsonLevel = answer;
       Level level = new Level();
-      level.readLevel(levelsAsJson[i]);
+      level.readLevel(jsonLevel);
       gameFields.add(level);
     }
   }

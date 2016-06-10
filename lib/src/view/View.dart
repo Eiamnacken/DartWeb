@@ -60,7 +60,7 @@ class View {
     gameover.innerHtml = model.gameOver() ? "Game Over" : "";
 
     welcome.style.display = model.gameOver() ? "block" : "none";
-    level.innerHtml="Level: ${model.countLevel}";
+    level.innerHtml="Level: ${model.countLevel + 1}";
     highscore.innerHtml = model.gameOver() ? generateHighscore(scores) : "";
     points.innerHtml = "Points: ${model.points}";
 

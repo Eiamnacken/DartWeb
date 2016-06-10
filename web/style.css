@@ -50,7 +50,7 @@ a {
   visibilty: hidden; }
 
 #message #gameover {
-  font-size: 5rem;
+  font-size: 3rem;
   color: black;
   text-align: center; }
 
@@ -144,6 +144,8 @@ body {
 #game {
   margin: 50px auto 50px auto;
   background-color: black;
+  ///background-image: url('img/brickwall.jpg');
+
   background-size: cover;
   background-repeat: no-repeat; }
 
@@ -158,7 +160,7 @@ body {
   position: absolute; }
 
 .ball {
-  background-color: red !important;
+  background-color: #fcfaff !important;
   border-radius: 50%;
   position: absolute; }
 
