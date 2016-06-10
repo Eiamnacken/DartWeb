@@ -2,26 +2,31 @@ part of brickGame;
 
 abstract class GameObject {
   ///
-  /// X position des [MoveableObject] auf dem Spielfeld
-  /// Zeigt immer den Mittelpunkt des [MoveableObject] an
+  /// X position des [GameObject] auf dem Spielfeld
+  /// Zeigt immer den Mittelpunkt des [GameObject] an
   ///
   int xPosition;
 
   ///
-  /// Y position des [MoveableObject] auf dem Spielfeld
-  /// Zeigt immer den Mittelpunkt des [MoveableObject] an
+  /// Y position des [GameObject] auf dem Spielfeld
+  /// Zeigt immer den Mittelpunkt des [GameObject] an
   ///
   int yPosition;
 
   ///
-  /// Die Breite des [MoveableObject]
+  /// Die Breite des [GameObject]
   ///
   int width;
 
   ///
-  /// Die Länge des [MoveableObject]
+  /// Die Länge des [GameObject]
   ///
   int height;
+
+  ///
+  /// Gibt an ob dieses [GameObject] noch auf der Karte ist
+  ///
+  bool destroyed=false;
 
   ///
   /// Itembuffer enthält die momentanen [Item] die sich auf diesem Feld befinden
@@ -70,7 +75,11 @@ abstract class MoveableObject extends GameObject {
   ///
   int _moveSpeed;
 
+
+
   int get moveSpeed => _moveSpeed;
+
+
 
   ///
   ///
@@ -91,22 +100,37 @@ abstract class MoveableObject extends GameObject {
   void move(Direction direction, List<List<GameObject>> gameField,
       GameController controller);
 
+  ///Gibt an ob es beim nächsten schritt eine Kollision gibt
   ///
-  /// Gibt an ob beim nächsten Schritt in diese Richtung eine kollision stattfinden wird
   ///
-  /// Wenn der [Player] auf den [Ball] trifft gibt es einen `{false:Ball}` zurück
-  /// Ist das ende des Levels erreicht gibt es ein `{true:null}` zurück
-  ///
+  /// Es wird immer angegeben ob es eine Kollision gab. Wenn ja ist der erste wert
+  /// der `true` und der zweite wert der Map gibt ein [GameObject] zurück. Falls
+  /// es keine Kollsion gab, ist der erste Wert `false` und das [GameObject] ein
+  /// [Field.
+  /// Wenn dieses Objekt dabei ist mit der Wand zu kollidieren, gibt es ebenfalls
+  /// ersten Wert ein `true` allerdings als zweiten Wert ein `null`. Dieses `null`
+  /// soll damit signalisieren, das wir mit einem nicht wirklichen [GameObject]
+  /// kolliedieren
   ///
   Map<bool, GameObject> collisionAhead(Direction direction,
       List<List<GameObject>> gameField,
       [int y = 0, int x = 0]) {
     GameObject buffer;
 
+
+
     int xVert=0;
     int yVert=0;
     var response;
-    //Auch quer schauen ob es kolisionen gibt
+    //Kollison für das Item
+    if(this is Item){
+      if(gameField[xPosition][yPosition+y]==Player){
+        response = {true: gameField[xPosition][yPosition+y]};
+        //Kollison mit spieler müssen nicht weiter schauen
+        return response;
+      }else return {false:gameField[xPosition][yPosition+y]};
+    }
+    //Auch quer schauen ob es kollisionen gibt
     if(direction==Direction.rightDown){
       response = getValuesForDirection(Direction.right);
     }else if(direction==Direction.leftDown){
@@ -138,7 +162,7 @@ abstract class MoveableObject extends GameObject {
       }
 
 
-      //Aif dem weg zum player ?
+      //Auf dem weg zum player ?
       if (buffer is Field && (_direction == Direction.down|| _direction==Direction.rightDown||_direction==Direction.leftDown)) {
         if (buffer.yPosition == gameField[0].length - 1) {
           int wallDifference = (xPosition+1) * width;
@@ -206,6 +230,8 @@ abstract class MoveableObject extends GameObject {
     object2.xPosition = x;
     object2.yPosition = y;
   }
+
+
 
 
 }

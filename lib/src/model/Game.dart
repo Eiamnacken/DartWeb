@@ -1,5 +1,11 @@
 part of brickGame;
 
+
+///
+/// Gibt an wie viele Punkte das zerstören eines [Brick] gibt
+///
+const int pointPerBrick =10;
+
 ///
 /// Enthält alle objekte die sich momentan im Spiel befinden und stellt
 /// Funktionen zu dessen bewegung zu verfügung. Lädt außerdem das Level und
@@ -59,7 +65,7 @@ class Game {
       balls.forEach((ball) {
         ball.move(
             ball.direction, gameFields[countLevel].gameField, controller);
-        if (ball.yPosition == _getPlayer().yPosition) {
+        if (ball.destroyed) {
           gameFields[countLevel].balls.removeLast();
           controller.updateView(gameFields[countLevel].gameField);
         }
@@ -76,10 +82,12 @@ class Game {
   ///
   void moveItem(GameController controller) {
     gameFields[countLevel].items.forEach((item) {
-      item.move(
-          Direction.down, gameFields[countLevel].gameField, controller);
-      if (item.yPosition <= 0) {
-        gameFields[countLevel].items.remove(item);
+      if(item.released==true) {
+        item.move(
+            Direction.down, gameFields[countLevel].gameField, controller);
+        if (item.destroyed) {
+          gameFields[countLevel].items.remove(item);
+        }
       }
     });
   }
@@ -125,11 +133,13 @@ class Game {
     }
 
   }
-
+  ///
+  /// Erhöht die punkte im highscore um einen angegebenen Wert
+  ///
   void increasePoints(Health health){
     if(health==Health.grey) gameFields[countLevel].bricks.removeLast();
     if(health==Health.brown) return;
-    points += 10;
+    points += pointPerBrick;
   }
 
 

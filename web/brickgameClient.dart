@@ -1,3 +1,3 @@
-import 'package:DartWeb/BrickGame.dart';
+import 'packages/DartWeb/BrickGame.dart';
 
 main() => new GameController();

@@ -89,7 +89,8 @@ class Ball extends MoveableObject {
       GameController controller) {
     if (yPosition == gameField[0].length - 1) {
       gameField[xPosition][yPosition] =
-      new Field(xPosition, yPosition, width, height);
+      new Field.second(xPosition,yPosition);
+      destroyed=true;
       controller.updateView(gameField);
     }
     Map coordinates = getValuesForDirection(direction);

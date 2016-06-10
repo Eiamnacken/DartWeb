@@ -37,11 +37,17 @@ class Level {
   List<List<GameObject>> _gameField;
 
   Player _player;
-
+  ///
+  /// Anzahl der [Ball] die im moment auf dem Spielfeld sind
+  ///
   List<Ball> balls;
-
+  ///
+  /// Anzahl der Items auf dem Spielfeld
+  ///
   List<Item> items;
-
+  ///
+  /// Anzahl der Items auf dem Spielfeld
+  ///
   List<Brick> bricks;
 
   Level() {

@@ -1,9 +1,5 @@
-//part of DartWeb;
-import 'dart:io';
-import 'dart:async';
-import 'dart:isolate';
-import 'dart:convert' show UTF8, JSON;
-import 'package:DartWeb/src/gamekey/GameKey.dart';
+part of DartWeb;
+
 
 /**
  *  Implementation of GameKey Server REST API in Dart

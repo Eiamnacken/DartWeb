@@ -74,7 +74,9 @@ class View {
         GameObject object = field[row][col];
         td.classes.add(object.toString());
         td = _setWidthAndLength(td,object);
-
+        if(object.itemsBuffer.isNotEmpty){
+          object.itemsBuffer.forEach((item) => td.classes.add(item.toString()));
+        }
       }
     }
   }
@@ -98,6 +100,10 @@ class View {
 
 
   }
+
+
+
+
 
   closeForm() => overlay.innerHtml = "";
 

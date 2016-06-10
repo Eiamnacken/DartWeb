@@ -67,10 +67,7 @@ enum Effect {
   ///
   secondBall,
 
-  ///
-  /// Verlangsamt die Bewegungsgeschwindigkeit des [Player]
-  ///
-  slowerPLayer,
+
 
   ///
   /// Invertiert die Steuerung des [Player]

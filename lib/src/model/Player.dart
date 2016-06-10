@@ -17,7 +17,7 @@ class Player extends MoveableObject {
   /// Ändert die Länge des [Player]
   ///
   void changeLength(int length) {
-    length = length;
+    length += length;
   }
 
   ///
@@ -50,7 +50,9 @@ class Player extends MoveableObject {
 
   @override
   void collision(List<List<GameObject>> gameField, GameObject collisionObject) {
-    return;
+    if(collisionObject is Item){
+      collisionObject._activateItem(this);
+    }
   }
 
   String toString() {
