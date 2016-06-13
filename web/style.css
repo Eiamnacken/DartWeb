@@ -3,7 +3,14 @@ html {
   font-size: 20px;
   margin: 0px;
   padding: 0px;
-  color: rgba(255, 255, 255, 0.6); }
+  background-color: silver;
+  background-image: linear-gradient(335deg, #b10 23px, transparent 23px),
+  linear-gradient(155deg, #d10 23px, transparent 23px),
+  linear-gradient(335deg, #b10 23px, transparent 23px),
+  linear-gradient(155deg, #d10 23px, transparent 23px);
+  background-size: 58px 58px;
+  background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px; }
+
 
 #warningoverlay:empty, #overlay:empty {
   display: none; }
@@ -21,43 +28,93 @@ html {
   left: 0px;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  height: 100%; }
+  height: 100%;
+  text-align: center; }
 
-.container {
-  width: 100%;
+#menuview {
+  width: 45%;
   height: 100%;
   margin: 0px auto 0px auto;
   text-align: center;
-  padding: 0px 0px 100px 0px; }
+  background-color: #ff9933;
+  border: 3px solid black;
+  border-radius: 15px;
+  padding: 0px 0px 25px 0px;  }
+
+#help {
+  width: 45%;
+  height: 100%;
+  margin: 0px auto 0px auto;
+  text-align: left;
+  background-color: #ff9933;
+  border: 3px solid black;
+  border-radius: 15px;
+  padding: 0px 0px 30px 25px;
+  display: none;
+}
+
+/* test gameview display: none display: none;*/
+#gameview {
+  width: 45%;
+  height: 100%;
+  margin: 0px auto 0px auto;
+  text-align: center;
+  background-color: #ff9933;
+  border: 3px solid black;
+  border-radius: 15px;
+  padding: 0px 0px 25px 0px;
+  display: none;  }
 
 h1 {
-  font-size: 2rem;
-  padding: 25px;
-  background-color: olive;
-  margin-bottom: 50px; }
+  font-size: 3rem;
+  margin-bottom: 70px;
+}
 
-a {
-  text-decoration: none;
-  font-style: italic;
-  color: white;
-  font-weight: normal; }
+h2 {
+  font-size: 2rem;
+}
+
+#start, #startgame, #backmenu, #score, #howto, #level,#points, #leftbutton, #rightbutton  {
+  padding: 7px 20px 7px 20px;
+  font-size: 2rem;
+  color: black;
+  background: rgba(255, 255, 255, 0.5);
+  border: 3px solid black;
+  border-radius: 10px;
+}
+
+#button {
+  display: none;
+}
+
+#leftbutton, #rightbutton {
+  font-size: 1rem;
+  margin: 0px 5px 0px 5px;
+}
+
+#cancelbutton {
+  font-size: 2rem;
+  height: auto;
+  position: fixed;
+  right: 13em;
+}
 
 /* Game controls */
-#welcome, #message, #controls, #button {
+#firstoption, #secondoption, #thirdoption, #welcome, #back, #message, #controls, #button {
   margin: 50px 0px 60px 0px; }
-
-#message #gameover:empty {
-  visibilty: hidden; }
 
 #message #gameover {
   font-size: 3rem;
   color: black;
   text-align: center; }
 
+
 /* highscore */
+
 #highscoreform {
   margin: 40px;
-  background: rgba(255, 255, 255, 0.5); }
+  background: rgba(255, 255, 255, 0.5);
+}
 
 #highscoreform input {
   color: white;
@@ -67,18 +124,22 @@ a {
   box-shadow: none;
   border-radius: 5px;
   padding: 5px;
-  margin: 10px; }
+  margin: 10px;
+}
 
 #highscorewarning {
   background: lightpink;
   color: darkred;
-  padding: 50px; }
+  padding: 50px;
+}
 
 #highscorewarning:empty {
-  display: none; }
+  display: none;
+}
 
 #scorelist:empty {
-  display: none; }
+  display: none;
+}
 
 #scorelist {
   padding: 20px;
@@ -89,12 +150,14 @@ a {
   margin-right: auto;
   border: 1px solid white;
   border-radius: 10px;
-  background: rgba(1, 1, 1, 0.1); }
+  background: rgba(1,1,1,0.1);
+}
 
 #scorelist ul {
   list-style-type: none;
   list-style-position: outside;
-  margin: 0px; }
+  margin: 0px;
+}
 
 #scorelist li {
   font-size: 1.1em;
@@ -102,52 +165,32 @@ a {
   padding: 5px;
   color: white;
   display: block;
-  border-radius: 20px; }
+  border-radius: 20px;
+}
+/*
+#scorelist li:nth-child(even) {
+  background: rgba(1,1,1,0.25);
+}
+#scorelist li:nth-child(odd) {
+  background: rgba(1,1,1,0.5);
+}
+*/
 
-input::-webkit-input-placeholder {
-  color: lightgray;
-  font-style: italic; }
+input::-webkit-input-placeholder { color: lightgray; font-style: italic; }
+input::-moz-placeholder { color: lightgray; font-style: italic; }
+/*End High Score */
 
-input::-moz-placeholder {
-  color: lightgray;
-  font-style: italic; }
-
-/* --- */
-#level, #points, #welcome #start {
-  padding: 7px 20px 7px 20px;
-  font-style: normal;
-  font-size: 2rem;
-  text-decoration: none;
-  color: black;
-  background: rgba(255, 255, 255, 0.5);
-  border: 3px solid black;
-  border-radius: 10px;
-  cursor: hand; }
-
-#leftbutton, #rightbutton {
-  padding: 7px 20px 7px 20px;
-  font-style: normal;
-  font-size: 1rem;
-  text-decoration: none;
-  color: black;
-  background: rgba(255, 255, 255, 0.5);
-  border: 3px solid black;
-  border-radius: 10px;
-  cursor: hand; }
-  #leftbutton :hover, #rightbutton :hover {
-    cursor: hand; }
 
 /* Gamefield */
-body {
-  background-color: olive; }
 
 #game {
   margin: 50px auto 50px auto;
+  /* background-image: url('img/brickwall.jpg');
+   background-repeat: no-repeat;*/
   background-color: black;
-  ///background-image: url('img/brickwall.jpg');
-
   background-size: cover;
-  background-repeat: no-repeat; }
+
+}
 
 #game td {
   border: 1px solid rgba(255, 255, 255, 0.25);
@@ -160,7 +203,7 @@ body {
   position: absolute; }
 
 .ball {
-  background-color: #fcfaff !important;
+  background-color: red !important;
   border-radius: 50%;
   position: absolute; }
 
@@ -193,13 +236,3 @@ body {
   background: inherit !important;
   border: none !important;
   border-spacing: 0px; }
-
-/*
-green, yellow, red, grey
-.brick {
-  background-color:  !important;
-  border-radius: 10px;
-}
-*/
-
-/*# sourceMappingURL=style.css.map */
