@@ -67,8 +67,7 @@ class Level {
         ballHeight,
         ballLength,
         ballSpeed,
-        playerSpeed,
-        itemSpeed;
+        playerSpeed;
 
 
     Map jsonLevel = JSON.decode(config);
@@ -84,7 +83,6 @@ class Level {
     ballLength = int.parse(jsonLevel['ballLength'].toString());
     ballSpeed = int.parse(jsonLevel['ballSpeed'].toString());
     playerSpeed = int.parse(jsonLevel['playerSpeed'].toString());
-    //itemSpeed = int.parse(jsonLevel['itemSpeed'].toString());
 
     // level field from the json file (only contains strings like 'redbrick' or 'player')
     List<List<String>> jsonField = jsonLevel['levelField'];
@@ -94,16 +92,17 @@ class Level {
 
     for (int row = 0; row < jsonField.length; row++) {
       for (int col = 0; col < jsonField[row].length; col++) {
-        if (jsonField[row][col].compareTo('empty') == 0) {
+        if (jsonField[row][col].compareTo('e') == 0) {
           _gameField[col][row] = new Field(col,row,brickLength,brickHeight);
-        } else if (jsonField[row][col].compareTo('redbrick') == 0) {
+        } else if (jsonField[row][col].compareTo('rb') == 0) {
           Brick brick = new Brick(col, row, brickHeight, brickLength, 'red');
           _gameField[col][row] = brick;
           bricks.add(brick);
-        } else if (jsonField[row][col].compareTo('yellowbrick') == 0) {
+        } else if (jsonField[row][col].compareTo('yb') == 0) {
           Brick brick = new Brick(col, row, brickHeight, brickLength, 'yellow');
           _gameField[col][row] = brick;
-        } else if (jsonField[row][col].compareTo('greenbrick') == 0) {
+          bricks.add(brick);
+        } else if (jsonField[row][col].compareTo('gb') == 0) {
           Brick brick = new Brick(col, row, brickHeight, brickLength, 'green');
           _gameField[col][row] = brick;
           bricks.add(brick);
@@ -124,9 +123,7 @@ class Level {
 
   }
 
-  void _createCss(){
 
-  }
 
   Player get player => _player;
 
