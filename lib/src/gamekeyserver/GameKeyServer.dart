@@ -1,4 +1,12 @@
-part of DartWeb;
+//part of DartWeb;
+import 'dart:io';
+import 'dart:async';
+import 'dart:isolate';
+import 'dart:convert' show UTF8, JSON;
+import 'package:DartWeb/src/gamekey/GameKey.dart';
+import 'package:DartWeb/src/gamekeyserver/User.dart';
+import 'package:DartWeb/src/gamekeyserver/Game.dart';
+import 'package:DartWeb/src/gamekeyserver/Gamestate.dart';
 
 
 /**
@@ -25,15 +33,15 @@ void handleIsolates(SendPort initialReplyTo){
 */
 //Just for testing till class gamekeyserver
 main() async{
-  //GameKeyServer apfel = new GameKeyServer("127.0.0.1",4000);
+  GameKeyServer apfel = new GameKeyServer("127.0.0.1",4000);
 
   pause(const Duration(milliseconds: 500));
 
-  //client();
+  client();
 
-  GameKey test = new GameKey("212.201.22.161", 50001);
+  //GameKey test = new GameKey("212.201.22.161", 50001);
   //GameKey test = new GameKey("127.0.0.1", 4000);
-
+/*
   Future<Map> registergame = test.registerGame("DontWorryAboutaThing","BrickGame");
   registergame.then((content) {
     print(content);
@@ -89,6 +97,7 @@ main() async{
   authenticate.then((content) {
     print(content);
   });
+  */
 }
 
 Future pause(Duration d) => new Future.delayed(d);
@@ -98,11 +107,12 @@ client() async{
     "name":"ananana",
     "password":"titten58",
   };
+  String json = "name=ananana&pwd=apfel";
 
   var request = await new HttpClient().post(
       "127.0.0.1", 4000, '/user');
   request.headers.contentType = ContentType.parse('application/x-www-form-urlencoded');
-  request.write(JSON.encode(jsonData));
+  request.write(json);
   HttpClientResponse response = await request.close();
   await for (var contents in response.transform(UTF8.decoder)) {
     print(contents);
@@ -117,14 +127,23 @@ class GameKeyServer {
   //holding the server
   HttpServer server;
 
-  //Holding all registered user
-  Map allUser;
+  //Holding all registered user since register
+  Map allOldUser;
 
-  //Holding all registered games
-  Map allGames;
+  //Holding all registered games since register
+  Map allOldGames;
 
-  //Holding all registered highscores
-  Map allHighscores;
+  //Holding all registered gamestates since register
+  Map allOldGamestates;
+
+  //Holding all new registered users since running the server
+  List<User> allUser = new List();
+
+  //Holding all new registered games since running the server
+  List allGames = new List();
+
+  //Holding all new registered gamestates since running the server
+  List allGamestates = new List();
 
   //Holding the uri of the server
   Uri _uri;
@@ -137,25 +156,29 @@ class GameKeyServer {
   /*
     Returns a map with all registered User
    */
-  Map get getallUser => this.allUser;
+  Map get getallOldUser => this.allOldUser;
 
   /*
     Returns a map with all registered Games
    */
-  Map get getallGames => this.allGames;
+  Map get getallOldGames => this.allOldGames;
 
   /*
-    Returns a map with all registered Highscores
+    Returns a map with all registered gamestsates
    */
-  Map get getallHighscores => this.allHighscores;
+  Map get getallOldGamestates => this.allOldGamestates;
 
-  //void set setAllUser(Map newUser) => this.allUser.addAll(newUser);
+  List get getallUser => this.allUser;
+
+  List get getallGames => this.allGames;
+
+  List get getallGamestates => this.allGamestates;
 
   /*
     Constructor
     - read all registered user from textfile
     - read all registered games from textfile
-    - read all registered highscores from textfile
+    - read all registered gamestates from textfile
     - set up the server and waiting for clients
    */
   GameKeyServer(String host, int port){
@@ -171,25 +194,23 @@ class GameKeyServer {
     print(getUri);
     pause(const Duration(milliseconds: 400));
 
-    print("List of all User :");
-    print(getallUser);
-
+    print("List of all old User :");
+    print(getallOldUser);
   }
 
   /*
-    Read all registered users, games and highscores from textfile
-    -These textfiles have to exist in the root file of the project although
+    Read all registered users, games and gamestates from textfile
+    - these textfiles have to exist in the root file of the project although
       they have to be in JSON format
    */
-  readConfig(){
+  readConfig() {
     try {
-      //TODO brings to work that it handle a list of user, games and highscores
-      var memoryuser = new File("memoryofallusers.txt").readAsStringSync();
-      var memorygames = new File("memoryofallgames.txt").readAsStringSync();
-      var memoryhighscores = new File("memoryofallhighscores.txt").readAsStringSync();
-      allUser = JSON.decode(memoryuser);
-      allGames = JSON.decode(memorygames);
-      allHighscores = JSON.decode(memoryhighscores);
+      var memoryuser = new File("memoryofallusers.json").readAsStringSync();
+      var memorygames = new File("memoryofallgames.json").readAsStringSync();
+      var memorygamestates = new File("memoryofallgamestates.json").readAsStringSync();
+      allOldUser = JSON.decode(memoryuser);
+      allOldGames = JSON.decode(memorygames);
+      allOldGamestates = JSON.decode(memorygamestates);
     } catch(error){
       print("Config could not read. " + error);
       exit(1);
@@ -197,18 +218,132 @@ class GameKeyServer {
   }
 
   /*
-    Update all txt files with the new registered users, games and highscores
+    Update all txt files with the new registered users, games and gamestates
+    - i Which List was updated (-1=all,0=user,1=games,2=gamestates)
    */
-  bool updateConfig() {
+  bool updateConfig(int i) {
     try {
-      //allUser.addAll(newMemory);
-      var memoryusers = new File("memoryofallusers.txt");
-      var memorygames = new File("memoryofallgames.txt");
-      var memoryhighscores = new File("memoryofallhighscores.txt");
-      memoryusers.writeAsStringSync(JSON.encode(getallUser));
-      memorygames.writeAsStringSync(JSON.encode(getallGames));
-      memoryhighscores.writeAsStringSync(JSON.encode(getallHighscores));
-      return true;
+      switch(i) {
+        case -1:
+          var memoryusers = new File("memoryofallusers.json");
+          var memorygames = new File("memoryofallgames.json");
+          var memorygamestates = new File("memoryofallgamestates.json");
+          int sizeusers = getallOldUser.keys.length + getallUser.length;
+          int sizegames = getallOldGames.keys.length + getallGames.length;
+          int sizegamestates = getallOldGamestates.keys.length + getallGamestates.length;
+          final writeuser = memoryusers.openWrite();
+          final writegames = memorygames.openWrite();
+          final writegamestates = memorygamestates.openWrite();
+          writeuser.write("{");
+          getallOldUser.forEach((value, key) {
+            writeuser.write('"$sizeusers":');
+            writeuser.write(JSON.encode(key));
+            writeuser.write(",");
+            sizeusers--;
+          });
+          getallUser.forEach((user) {
+            writeuser.write('"$sizeusers":');
+            writeuser.write(user.toString());
+            if (sizeusers != 1)
+              writeuser.write(",");
+            sizeusers--;
+          });
+          writeuser.write("}");
+
+          writegames.write("{");
+          getallOldGames.forEach((value, key) {
+            writegames.write('"$sizegames":');
+            writegames.write(JSON.encode(key));
+            writegames.write(",");
+            sizegames--;
+          });
+          getallGames.forEach((user) {
+            writegames.write('"$sizegames":');
+            writegames.write(user.toString());
+            if (sizegames != 1)
+              writegames.write(",");
+            sizegames--;
+          });
+          writegames.write("}");
+
+          writegamestates.write("{");
+          getallOldGamestates.forEach((value, key) {
+            writegamestates.write('"$sizegamestates":');
+            writegamestates.write(JSON.encode(key));
+            writegamestates.write(",");
+            sizegamestates--;
+          });
+          getallGamestates.forEach((user) {
+            writegamestates.write('"$sizegamestates":');
+            writegamestates.write(user.toString());
+            if (sizegamestates != 1)
+              writegamestates.write(",");
+            sizegamestates--;
+          });
+          writegamestates.write("}");
+          return true;
+        case 0:
+          var memoryusers = new File("memoryofallusers.json");
+          int sizeusers = getallOldUser.keys.length + getallUser.length;
+          final writeuser = memoryusers.openWrite();
+          writeuser.write("{");
+          getallOldUser.forEach((value, key) {
+            writeuser.write('"$sizeusers":');
+            writeuser.write(JSON.encode(key));
+            writeuser.write(",");
+            sizeusers--;
+          });
+          getallUser.forEach((user) {
+            writeuser.write('"$sizeusers":');
+            writeuser.write(user.toString());
+            if (sizeusers != 1)
+              writeuser.write(",");
+            sizeusers--;
+          });
+          writeuser.write("}");
+          return true;
+        case 1:
+          var memorygames = new File("memoryofallgames.json");
+          int sizegames = getallOldGames.keys.length + getallGames.length;
+          final writegames = memorygames.openWrite();
+          writegames.write("{");
+          getallOldGames.forEach((value, key) {
+            writegames.write('"$sizegames":');
+            writegames.write(JSON.encode(key));
+            writegames.write(",");
+            sizegames--;
+          });
+          getallGames.forEach((user) {
+            writegames.write('"$sizegames":');
+            writegames.write(user.toString());
+            if (sizegames != 1)
+              writegames.write(",");
+            sizegames--;
+          });
+          writegames.write("}");
+          return true;
+        case 2:
+          var memorygamestates = new File("memoryofallgamestates.json");
+          int sizegamestates = getallOldGamestates.keys.length + getallGamestates.length;
+          final writegamestates = memorygamestates.openWrite();
+          writegamestates.write("{");
+          getallOldGamestates.forEach((value, key) {
+            writegamestates.write('"$sizegamestates":');
+            writegamestates.write(JSON.encode(key));
+            writegamestates.write(",");
+            sizegamestates--;
+          });
+          getallGamestates.forEach((user) {
+            writegamestates.write('"$sizegamestates":');
+            writegamestates.write(user.toString());
+            if (sizegamestates != 1)
+              writegamestates.write(",");
+            sizegamestates--;
+          });
+          writegamestates.write("}");
+          return true;
+      }
+      return false;
     } catch (exception) {
       print("Could not update the config.");
       print(exception);
@@ -227,7 +362,6 @@ class GameKeyServer {
       //the server waits for incoming messages to handle
       await for (var Httpreq in server) {
         handleMessages(Httpreq);
-
         /*
         //var httpRequest = [Httpreq.method, Httpreq.headers.contentType,
         //                  Httpreq.headers.contentType.mimeType];
@@ -251,10 +385,10 @@ class GameKeyServer {
         */
 
       }
-    } catch (exception, stackTrace) {
+      closeTheServer();
+    } catch (exception) {
       print("Server could not start. ");
       print(exception);
-      print(stackTrace);
       exit(1);
     }
   }
@@ -298,33 +432,32 @@ class GameKeyServer {
 
     //which request is it ? ...
 
-    //Request for add an user
-    if (msg.method == 'POST'  && msg.uri.toString() == '/user'){
+    //Request for create an user
+    if (msg.method == 'POST' && msg.uri.toString() == '//user' || msg.uri.toString() == '/user'){
       try {
-        //Map jsonData = JSON.decode(await msg.transform(UTF8.decoder).join());
         var incmsg = await msg.transform(UTF8.decoder).join();
-        var nanemandpassword = incmsg.split("&");
-        var name = nanemandpassword.first.replaceAll("name=","");
-        var password = nanemandpassword.last.replaceAll("pwd=","");
-        Map jsonData = {
-          "name":"$name",
-          "pwd":"$password"
-        };
+        var nameandpasswordandmail = incmsg.split("&");
+        var name = nameandpasswordandmail.first.replaceAll("name=","");
+        var password = nameandpasswordandmail.last.replaceAll("pwd=","");
+        var mail = null;
+        if (nameandpasswordandmail.toString().contains("mail"))
+          mail = nameandpasswordandmail.first.replaceAll("mail=","");
         if (name.isNotEmpty && password.isNotEmpty) {
-          if (addUser(jsonData)) {
+          User newuser = addUser(name,password,mail);
+          if (newuser!=null) {
             msg.response
               ..statusCode = HttpStatus.OK
-              ..write(JSON.encode(jsonData))
+              ..write(JSON.encode(newuser.toMap())) //JSON.encode(newuser.toMap()) || JSON.encode(newuser.toString())
               ..close();
           } else {
             msg.response
-              ..statusCode = HttpStatus.CONFLICT
-              ..write("Some User mind exist with that name and password.")
+              ..statusCode = 401
+              ..write("Some User mind exist with that name.")
               ..close();
           }
         } else {
           msg.response
-              ..statusCode = HttpStatus.CONFLICT
+              ..statusCode = 400
               ..write("Name and password must be set.")
               ..close();
         }
@@ -335,8 +468,7 @@ class GameKeyServer {
       }
     } else {
       msg.response
-        ..statusCode = HttpStatus.METHOD_NOT_ALLOWED
-        ..write("Unsupported request: ${msg.method}.")
+        ..statusCode = HttpStatus.NOT_FOUND
         ..close();
     }
   }
@@ -345,43 +477,49 @@ class GameKeyServer {
   /*
     Remove a registered user
    */
-  removeUser(Map o){
-    allUser.remove(o);
-    updateConfig();
+  bool removeUser(Map o){
+    allUser.forEach((user) {
+      if (user.name == o['name']) {
+        if(allUser.remove(user)) {
+          updateConfig(0);
+          return true;
+        }
+        return false;
+      }
+    });
+    return false;
   }
 
-  //TODO
   /*
-    Generate a gameid and userid and add the user to the map
+    Add a user to the allUser List
    */
-  bool addUser(Map o){
-    if (!allUser.containsKey(o['name']) && !allUser.containsValue(o['pwd'])) {
-      allUser.addAll(o);
-      updateConfig();
-      return true;
-    } else {
-      return false;
+  User addUser(String name, String password, mail) {
+    bool isinList = false;
+    getallOldUser.forEach((key,value) {
+      if (value['name']==name)
+        isinList = true;
+    });
+    allUser.forEach((user) {
+      if (user.getName == name) {
+        isinList = true;
+      }
+    });
+    if(!isinList) {
+      User newuser = new User(name, password, mail);
+      allUser.add(newuser);
+      updateConfig(0);
+      return newuser;
     }
-  }
-
-  int generateGameID(String name, String password, String secret){
-    return 0;
-  }
-
-  /*
-    This method generates a new user id
-    - it will only called by 'addUser'
-   */
-  int generateUserID(){
-
+    return null;
   }
 
   /*
     Save all updates to textfile and close the program
+    - only calls
    */
   closeTheServer() async{
-    if (updateConfig()) {
-      await server.close();
+    if (updateConfig(-1)) {
+      //await server.close();
       print("Server succesfull shutting down ...");
       exit(0);
     }
