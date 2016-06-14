@@ -1,31 +1,50 @@
 part of brickGame;
 
 class View {
-  final warningoverlay = querySelector("#warningoverlay");
+  final warningoverlay = html.querySelector("#warningoverlay");
 
-  final title = querySelector("#title");
+  final title = html.querySelector("#title");
 
-  final level = querySelector("#level");
+  final level = html.querySelector("#level");
 
-  final gameover = querySelector("#gameover");
+  final gameover = html.querySelector("#gameover");
 
-  final game = querySelector("#game");
+  final game = html.querySelector("#game");
 
-  final points = querySelector("#points");
+  final points = html.querySelector("#points");
 
-  final highscore = querySelector("#highscore");
+  final highscore = html.querySelector("#highscore");
 
-  final welcome = querySelector("#welcome");
+  final menuview = html.querySelector("#menuview");
 
-  final overlay = querySelector("#overlay");
+  final gameview = html.querySelector("#gameview");
 
-  HtmlElement get startButton => querySelector("#start");
+  final welcome = html.querySelector("#welcome");
 
-  HtmlElement get rightButton => querySelector("#rightbutton");
+  final overlay = html.querySelector("#overlay");
 
-  HtmlElement get leftButton => querySelector("#leftbutton");
+  final back = html.querySelector("#back");
 
-  List<List<HtmlElement>> gameFields;
+  final help = html.querySelector("#help");
+
+  final vanishedButton = html.querySelector("#button");
+
+  html.HtmlElement get startGameButton => html.querySelector("#startgame");
+
+  html.HtmlElement get startButton => html.querySelector("#start");
+
+  html.HtmlElement get backMenuButton => html.querySelector("#backmenu");
+
+  html.HtmlElement get helpButton => html.querySelector("#howto");
+
+  html.HtmlElement get cancelButton => html.querySelector("#cancelbutton");
+
+  html.HtmlElement get rightButton => html.querySelector("#rightbutton");
+
+  html.HtmlElement get leftButton => html.querySelector("#leftbutton");
+
+  List<List<html.HtmlElement>> gameFields;
+
 
   void generateField(Game model) {
     final List<List<GameObject>> field = model.gameFields[model.countLevel]
@@ -45,7 +64,7 @@ class View {
     }
     game.innerHtml = table;
 
-    gameFields = new List<List<HtmlElement>>(field.length);
+    gameFields = new List<List<html.HtmlElement>>(field.length);
     for (int row = 0; row < field.length; row++) {
       gameFields[row] = [];
       for (int col = 0; col < field[row].length; col++) {
@@ -60,6 +79,10 @@ class View {
     gameover.innerHtml = model.gameOver() ? "Game Over" : "";
 
     welcome.style.display = model.gameOver() ? "block" : "none";
+    back.style.display = model.gameOver() ? "block" : "none";
+    vanishedButton.style.display = model.gameOver() ? "none" : "block";
+
+
     level.innerHtml="Level: ${model.countLevel + 1}";
     highscore.innerHtml = model.gameOver() ? generateHighscore(scores) : "";
     points.innerHtml = "Points: ${model.points}";
@@ -81,7 +104,7 @@ class View {
     }
   }
 
-  HtmlElement _setWidthAndLength(HtmlElement element,GameObject gameObject){
+  html.HtmlElement _setWidthAndLength(html.HtmlElement element,GameObject gameObject){
     if(element==null|| gameObject==null) return null;
     var width = gameObject.width;
     if(gameObject is Player){
@@ -96,6 +119,7 @@ class View {
             ..setProperty("padding-right","0px")
         ..setProperty("padding-left","0px");
     }
+    return element;
 
 
 
@@ -108,7 +132,7 @@ class View {
   closeForm() => overlay.innerHtml = "";
 
   void warning(String message) {
-    document
+    html.document
         .querySelector('#warningoverlay')
         .innerHtml = message;
   }
@@ -122,8 +146,7 @@ class View {
   void showHighscore(Game model, List<Map> scores) {
 
     if (overlay.innerHtml != "") return;
-//Platzhalter final score = model.brickCounter;
-    final score = 0;
+    final score = model.points;
 
     overlay.innerHtml =
     "<div id='highscore'>"
@@ -151,11 +174,11 @@ class View {
   /**
    * Gets the user input from the highscore form.
    */
-  String get user => (document.querySelector('#user') as InputElement).value;
+  String get user => (html.document.querySelector('#user') as html.InputElement).value;
 
   /**
    * Gets the password input from the highscore form.
    */
-  String get password => (document.querySelector('#password') as InputElement).value;
+  String get password => (html.document.querySelector('#password') as html.InputElement).value;
 
 }

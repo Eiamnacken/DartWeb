@@ -1,6 +1,4 @@
 part of brickGame;
-
-
 ///
 /// Gibt an wie viele Punkte das zerstören eines [Brick] gibt
 ///
@@ -150,13 +148,14 @@ class Game {
   Future<bool> _readConfig() async {
     /// liest .json aus einem Ordner in einen String
     for(int i = 0; i < 5; i++) {
-      final answer = await HttpRequest.getString('level${i}.json');
+      final answer = await html.HttpRequest.getString('level${i}.json');
 
       String jsonLevel = answer;
       Level level = new Level();
       level.readLevel(jsonLevel);
       gameFields.add(level);
     }
+    return true;
   }
 
   ///

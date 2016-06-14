@@ -6,6 +6,7 @@ part of brickGame;
 ///
 const int changePLayerLength = 10;
 
+const active = const Duration(seconds: 5);
 ///
 /// [Item] sind die Positiven oder Negativen effekte die der Player im laufe des
 /// Spieles einsammeln kann
@@ -24,11 +25,15 @@ class Item extends MoveableObject {
   /// Gibt an ob dieses Item erstellt wurde so das es sich bewegen kann
   ///
   bool _released=false;
-
-
+  ///
+  /// Wie lange ist ein Item aktiv
+  ///
+  Timer _activeItem;
   Item(int xPosition, int yPosition, int width, int length, int moveSpeed,
       Direction direction)
       : super(xPosition, yPosition, width, length, moveSpeed, direction);
+
+
 
   ///
   /// Gibt an ob es ein Positiv Effekt ist
@@ -59,6 +64,9 @@ class Item extends MoveableObject {
       case Effect.longerPLayer:
         {
           player.changeLength(changePLayerLength);
+          _activeItem = new Timer(active, (){
+          _deactivateItem(player);
+          });
         }
         break;
       case Effect.secondBall:
@@ -70,7 +78,24 @@ class Item extends MoveableObject {
       case Effect.smallerPlayer:
         {
           player.changeLength(-changePLayerLength);
+          _activeItem = new Timer(active, (){
+            _deactivateItem(player);
+          });
         }
+        break;
+    }
+  }
+
+  void _deactivateItem(Player player){
+    switch(effect){
+      case Effect.longerPLayer:{
+        player.changeLength(-changePLayerLength);
+      }
+        break;
+      case Effect.smallerPlayer:{
+        player.changeLength(changePLayerLength);
+      }break;
+      default:
         break;
     }
   }

@@ -1,11 +1,9 @@
 library brickGame;
 
-import 'dart:html';
+import 'dart:html' as html;
 import 'dart:async';
 import 'dart:convert';
-import 'dart:math';
-import 'dart:convert';
-import 'dart:isolate';
+import 'dart:io';
 
 part 'src/controller/GameController.dart';
 
@@ -19,5 +17,6 @@ part 'src/model/Level.dart';
 part 'src/model/Player.dart';
 part 'src/model/Model.dart';
 part 'src/model/Field.dart';
+part 'src/gamekey/GameKey.dart';
 
 part 'src/view/View.dart';
