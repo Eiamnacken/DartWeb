@@ -1,11 +1,10 @@
 import 'dart:io';
 import 'dart:async';
-import 'dart:isolate';
+//import 'dart:isolate';
 import 'dart:convert' show UTF8, JSON;
 import 'dart:math';
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
-import 'package:DartWeb/src/gamekey/GameKey.dart';
 import 'dart:core';
 
 /**
@@ -13,6 +12,9 @@ import 'dart:core';
  *  by Markus Krebs
  */
 
+main() async {
+  GameKeyServer apfel = await new GameKeyServer("127.0.0.1", 4000);
+}
 /*
   TOP-Level Method: handling the Isolates
   NOTE: Not in use because it is not possible to send a HttpRequest over to an Isolate
@@ -31,102 +33,13 @@ void handleIsolates(SendPort initialReplyTo){
 
 }
 */
-//Just for testing till class gamekeyserver
-main() async {
-  GameKeyServer apfel = await new GameKeyServer("127.0.0.1", 4000);
-
-  pause(const Duration(milliseconds: 500));
-
-  //client();
-
-  //GameKey test = new GameKey("212.201.22.161", 50001);
-  GameKey test = new GameKey("127.0.0.1", 4000);
-
-  Future<Map> registergame = test.registerGame(
-      "DontWorryAboutaThing", "BrickGame");
-  registergame.then((content) {
-    print(content);
-  });
-
-  Future<Map> registereduser = test.registerUser("aa", "dasdsads");
-  pause(const Duration(milliseconds: 500));
-  registereduser.then((content) {
-    print(content);
-  });
-
-  pause(const Duration(milliseconds: 500));
-  Future<Map> getUser = test.getUser("aan", "dasdsads");
-  getUser.then((content) {
-    print(content);
-  });
-
-  pause(const Duration(milliseconds: 500));
-  Future<List> getUsers = test.listUsers();
-  getUsers.then((content) {
-    print(content);
-  });
-
-  pause(const Duration(milliseconds: 500));
-  Future<List> getGames = test.listGames();
-  getGames.then((content) {
-    print(content);
-  });
-/*
-  pause(const Duration(milliseconds: 500));
-  Future<String> getUserId = test.getUserId("aan");
-  getUserId.then((content) {
-    print(content);
-  });
-    */
-
-
-  pause(const Duration(milliseconds: 500));
-  final state = {
-    'state':"50"
-  };
-  Future<bool> storestate = test.storeState("791781819",state);
-  storestate.then((content) {
-    print(content);
-  });
-
-  pause(const Duration(milliseconds: 500));
-  Future<List> getstates = test.getStates();
-  getstates.then((content) {
-    print(content);
-  });
-/*
-  pause(const Duration(milliseconds: 500));
-  Future<bool> authenticate = test.authenticate();
-  authenticate.then((content) {
-    print(content);
-  });*/
-
-}
-
-Future pause(Duration d) => new Future.delayed(d);
-
-client() async {
-  Map jsonData = {
-    "pwd":"dasdsads",
-  };
-  //String json = "name=ananana&pwd=apfel";
-  Uri uri = new Uri.http("127.0.0.1:4000", "/");
-  final link = uri.resolve("/user/432081610").resolveUri(
-      new Uri(queryParameters: {'id':"432081610"}));
-  var request = await new HttpClient().deleteUrl(link);
-  request.write(JSON.encode(jsonData));
-  HttpClientResponse response = await request.close();
-  await for (var contents in response.transform(UTF8.decoder)) {
-    print(contents);
-  }
-}
 
 /*
   This server handles the GameKey Service
  */
 class GameKeyServer {
 
-  //holding the server
+  //Holding the server
   HttpServer server;
 
   //Holding all registered user since register
@@ -181,9 +94,9 @@ class GameKeyServer {
    */
   Future<bool> readConfig() async {
     try {
-      var memoryuser = new File("memoryofallusers.json").readAsStringSync();
-      var memorygames = new File("memoryofallgames.json").readAsStringSync();
-      var memorygamestates = new File("memoryofallgamestates.json")
+      final memoryuser = new File("memoryofallusers.json").readAsStringSync();
+      final memorygames = new File("memoryofallgames.json").readAsStringSync();
+      final memorygamestates = new File("memoryofallgamestates.json")
           .readAsStringSync();
       textfileUsers = JSON.decode(memoryuser);
       textfileGames = JSON.decode(memorygames);
@@ -200,7 +113,7 @@ class GameKeyServer {
     Update all txt files with the new registered users, games and gamestates
     - i Which List was updated (0=user,1=games,2=gamestates)
    */
-  Future<bool> updateConfig(int i, [List listtoupdate]) async {
+  Future<bool> updateConfig(int i) async {
     try {
       switch (i) {
         case 0:
@@ -234,7 +147,6 @@ class GameKeyServer {
       print("Config loaded ...");
       print("All existing User: ${gettextfileUsers}");
     }
-
     try {
       //binds the server on given host and port
       this.server = await HttpServer.bind(host, port);
@@ -326,11 +238,11 @@ class GameKeyServer {
 
       //Request for create an user
       RegExp postuser = new RegExp("/user");
-      if (msg.method == 'POST' && (postuser.hasMatch(msg.requestedUri.path)|| msg.requestedUri.path == '//user')) {
+      if (msg.method == 'POST' && postuser.hasMatch(msg.requestedUri.path)) {
         final name = parameter["name"];
         final password = parameter["pwd"];
         final mail = parameter["mail"];
-        if (name != null && password != null) {
+        if (name != null && name != "" && password != null && password != "") {
           Map newuser = await addUser(name, password, mail);
           if (newuser != null) {
             msg.response
@@ -350,58 +262,63 @@ class GameKeyServer {
           return 1;
         }
       }
+
       //Request for get a user
-      RegExp user = new RegExp(r'/user/(\w+)\/?');
-      if (msg.method == 'GET' && user.hasMatch(msg.requestedUri.path)) {
-       // RegExp user = new RegExp(r'(\w+)\/?');
-        final id = user.stringMatch(msg.requestedUri.path);
-        final password = msg.requestedUri.queryParametersAll["pwd"];
-
+      RegExp getuser = new RegExp(r'/user/(\d+)\/?');
+      if (msg.method == 'GET' && getuser.hasMatch(msg.requestedUri.path)) {
+        RegExp user = new RegExp(r'(\d+)\/?');
+       // final id = user.stringMatch(msg.requestedUri.path);
+        final id = msg.requestedUri.pathSegments[1];
+        final password = parameter["pwd"];
+        final checkbyname = parameter["byname"];
+        if (checkbyname != null && checkbyname != "true" &&
+            checkbyname != "false") {
+          msg.response
+            ..statusCode = 400
+            ..write("Byname must be set [true|false|''].");
+          return 1;
+        }
         bool byname = false;
-
-        if (msg.requestedUri.queryParametersAll["byname"][0].toString() == "true")
+        if (parameter["byname"] == true)
           byname = true;
-        print("-------------to debug 2222");
-        print(" $id $password $byname");
-        Map getuser = await getUser(id, password, byname);
-
         if (id != null && password != null) {
+          Map getuser = await getUser(id, password, byname);
           if (getuser != null) {
-
-            if (getuser.length > 0) {
+            if (getuser.isNotEmpty) {
               msg.response
                 ..statusCode = 200
                 ..write(JSON.encode(getuser));
               return 1;
             } else {
               msg.response
-                ..statusCode = 404
+                ..statusCode = 401
                 ..write("Authentication problem, check ID and Password.");
               return 1;
             }
           } else {
             msg.response
-              ..statusCode = 401
-              ..write("No existing game with that id.");
+              ..statusCode = 404
+              ..write("No existing user with that id.");
             return 1;
           }
         } else {
           msg.response
-            ..statusCode = 404
-            ..write("ID and Password must be set.");
+            ..statusCode = 401
+            ..write("Name and Password must be set.");
           return 1;
         }
       }
+
       //Request for delete an user && all stored gamestates
       RegExp removeuser = new RegExp(r'/user/(\d+)\/?');
       if (msg.method == 'DELETE' &&
           removeuser.hasMatch(msg.requestedUri.path)) {
         RegExp user = new RegExp(r'(\d+)\/?');
-
-        final password = parameter["pwd"];
         final id = user.stringMatch(msg.requestedUri.path);
-        bool remuser = await removeUser(id, password);
+        final password = parameter["pwd"];
+        //final id = msg.requestedUri.pathSegments[1];
         if (id != null && password != null) {
+          bool remuser = await removeUser(id, password);
           if (remuser != null) {
             if (remuser) {
               msg.response
@@ -417,7 +334,7 @@ class GameKeyServer {
             }
           } else {
             msg.response
-              ..statusCode = 401
+              ..statusCode = 404
               ..write("No existing user with that id.");
             return 1;
           }
@@ -430,14 +347,14 @@ class GameKeyServer {
       }
 
       //Request for get all users
-      if (msg.method == 'GET' && (msg.requestedUri.path == '/users' ||
-          msg.requestedUri.path == '//users')) {
-        readConfig();
+      if (msg.method == 'GET' && (msg.requestedUri.path == '/users')) {
+        await readConfig();
         msg.response
           ..statusCode = HttpStatus.OK
           ..write(JSON.encode(gettextfileUsers));
         return 1;
       }
+
       //Request for update an user
       RegExp updateuser = new RegExp(r'/user/(\d+)\/?');
       if (msg.method == 'PUT' && updateuser.hasMatch(msg.requestedUri.path)) {
@@ -451,21 +368,21 @@ class GameKeyServer {
             id, password, newname, newpassword, newmail);
         if (id != null && password != null) {
           if (updateduser != null) {
-              if (updateduser.length>0) {
-                msg.response
-                  ..statusCode = 200
-                  ..write(JSON.encode(updateduser));
-                return 1;
-              } else {
-                msg.response
-                    ..statusCode = 401
-                    ..write("Authentication problem, check ID and Password");
-                return 1;
-              }
+            if (updateduser.length > 0) {
+              msg.response
+                ..statusCode = 200
+                ..write(JSON.encode(updateduser));
+              return 1;
+            } else {
+              msg.response
+                ..statusCode = 401
+                ..write("Authentication problem, check ID and Password");
+              return 1;
+            }
           } else {
             msg.response
-              ..statusCode = 401
-              ..write("No existing user with that id");
+              ..statusCode = 404
+              ..write("No existing user with that id.");
             return 1;
           }
         } else {
@@ -501,14 +418,15 @@ class GameKeyServer {
           return 1;
         }
       }
+
       //Request for get a game
       RegExp getgame = new RegExp(r'/game/(\d+)\/?');
       if (msg.method == 'GET' && getgame.hasMatch(msg.requestedUri.path)) {
         RegExp game = new RegExp(r'(\d+)\/?');
         final id = game.stringMatch(msg.requestedUri.path);
         final password = parameter["secret"];
-        Map getgame = await getGame(id, password);
         if (id != null && password != null) {
+          Map getgame = await getGame(id, password);
           if (getgame != null) {
             if (getgame.length > 0) {
               msg.response
@@ -534,6 +452,7 @@ class GameKeyServer {
           return 1;
         }
       }
+
       //Request for get all games
       if (msg.method == 'GET' && msg.uri.toString() == '/games') {
         await readConfig();
@@ -542,6 +461,7 @@ class GameKeyServer {
           ..write(JSON.encode(gettextfileGames));
         return 1;
       }
+
       //Request for update a game
       RegExp updategame = new RegExp(r'/game/(\d+)\/?');
       if (msg.method == 'PUT' && updategame.hasMatch(msg.requestedUri.path)) {
@@ -551,9 +471,9 @@ class GameKeyServer {
         final newpassword = parameter["newsecret"];
         final newname = parameter["name"];
         final newuri = parameter["url"];
-        Map updatedgame = await updateGame(
-            id, password, newname, newpassword, newuri);
         if (id != null && password != null) {
+          Map updatedgame = await updateGame(
+              id, password, newname, newpassword, newuri);
           if (updatedgame != null) {
             if (updatedgame.length > 0) {
               msg.response
@@ -579,18 +499,19 @@ class GameKeyServer {
           return 1;
         }
       }
-      //Request for delete a game
+
+      //Request for delete a game && all stored gamestates for this game
       RegExp removegame = new RegExp(r'/game/(\d+)\/?');
       if (msg.method == 'DELETE' &&
           removegame.hasMatch(msg.requestedUri.path)) {
         RegExp game = new RegExp(r'(\d+)\/?');
         final password = parameter["secret"];
-        final id = game.stringMatch(msg.requestedUri.path);
+        var id = game.stringMatch(msg.requestedUri.path);
+        //var id = msg.requestedUri.pathSegments[1];
 
-        bool remgame = await removeGame(id, password);
-        if (game != null) {
-          if ((password.toString().contains("null") != true) &&
-              (id.toString().contains("null") != true)) {
+        if (id != null && password != null) {
+          bool remgame = await removeGame(id, password);
+          if (remgame != null) {
             if (remgame) {
               msg.response
                 ..statusCode = 200
@@ -616,39 +537,45 @@ class GameKeyServer {
           return 1;
         }
       }
+
       //Request for storing gamestate for a game and a user
       RegExp id = new RegExp(r'(\d+)\/?');
-      RegExp postgamestate = new RegExp(r'/gamestate/(\d+)\/?/(\d+)\/?');
+      RegExp postgamestate = new RegExp(r'/gamestate/');
       if (msg.method == 'POST' &&
-          postgamestate.hasMatch(msg.requestedUri.path)) {
+          postgamestate.hasMatch(msg.requestedUri.path) &&
+          msg.requestedUri.pathSegments.length > 2) {
         RegExp gameid = new RegExp(r'/(\d+)\/?/');
         RegExp userid = new RegExp(r'(\d+)\/?');
-       // final password = parameter["secret"];
-        var password = msg.requestedUri.queryParametersAll["secret"][0];
-        var state = msg.requestedUri.queryParametersAll["state"][0];
-
+        // final password = parameter["secret"];
+        var password = parameter["secret"];
+        var state = parameter["state"];
+        /* if (password == null)
+          password = msg.requestedUri.queryParametersAll["secret"][0];
+        if (state == null)
+          state = msg.requestedUri.queryParametersAll["state"][0];*/
         //final state = parameter["state"];
         final gid = msg.requestedUri.pathSegments[1];
         final uid = msg.requestedUri.pathSegments[2];
 
+
         if (gid != null && uid != null && password != null) {
-          Map newgamestate = await addGameState(gid,uid,password,state);
-          if (newgamestate.length>0) {
-            if (newgamestate != null) {
+          Map newgamestate = await addGameState(gid, uid, password, state);
+          if (newgamestate != null) {
+            if (newgamestate.length > 0) {
               msg.response
                 ..statusCode = 200
                 ..write(JSON.encode(newgamestate));
               return 1;
             } else {
               msg.response
-                  ..statusCode = 401
-                  ..write("No existing game or user with that id");
+                ..statusCode = 401
+                ..write("No existing game or user with that id");
               return 1;
             }
           } else {
             msg.response
-                ..statusCode = 401
-                ..write("Authentication problem, please check ID and Password.");
+              ..statusCode = 401
+              ..write("Authentication problem, please check ID and Password.");
             return 1;
           }
         }
@@ -659,15 +586,17 @@ class GameKeyServer {
       }
 
       //Request for get a gamestore with given game and user
-      RegExp getgsgamestate = new RegExp(r'/gamestate/(\d+)\/?/(\d+)\/?');
-      if (msg.method == 'GET' && getgsgamestate.hasMatch(msg.requestedUri.path)) {
-        final password = msg.requestedUri.queryParametersAll["secret"][0];
+      RegExp getgsgamestate = new RegExp(r'/gamestate/');
+      if (msg.method == 'GET' &&
+          getgsgamestate.hasMatch(msg.requestedUri.path) &&
+          msg.requestedUri.pathSegments.length > 2) {
+        final password = parameter["secret"];
         final gid = msg.requestedUri.pathSegments[1];
         final uid = msg.requestedUri.pathSegments[2];
         if (gid != null && uid != null && password != null) {
-          final getgamestate = await getGameState(gid,uid,password);
-          if (getgamestate.length>0) {
-            if (getgamestate != null) {
+          final getgamestate = await getGameState(gid, uid, password);
+          if (getgamestate != null) {
+            if (getgamestate.length > 0) {
               msg.response
                 ..statusCode = 200
                 ..write(JSON.encode(getgamestate));
@@ -694,16 +623,14 @@ class GameKeyServer {
 
       //Request for get a gamestore with given game
       RegExp getggamestate = new RegExp(r'/gamestate/(\d+)\/?');
-      if (msg.method == 'GET' && getggamestate.hasMatch(msg.requestedUri.path)) {
-        final password = msg.requestedUri.queryParametersAll["secret"][0];
+      if (msg.method == 'GET' &&
+          getggamestate.hasMatch(msg.requestedUri.path)) {
+        final password = parameter["secret"];
         final gid = msg.requestedUri.pathSegments[1];
-        print("get params: ${msg.requestedUri.queryParametersAll} header params: ${msg.requestedUri.pathSegments}");
-        print("--------------to debug");
-
         if (gid != null && password != null) {
-          final getgamestate = await getGameStatewithGame(gid,password);
-          if (getgamestate.length>0) {
-            if (getgamestate != null) {
+          final getgamestate = await getGameStatewithGame(gid, password);
+          if (getgamestate != null) {
+            if (getgamestate.length > 0) {
               msg.response
                 ..statusCode = 200
                 ..write(JSON.encode(getgamestate));
@@ -711,19 +638,20 @@ class GameKeyServer {
             } else {
               msg.response
                 ..statusCode = 401
-                ..write("No existing game or user with that id");
+                ..write(
+                    "Authentication problem, please check ID and Password.");
               return 1;
             }
           } else {
             msg.response
               ..statusCode = 401
-              ..write("Authentication problem, please check ID and Password.");
+              ..write("No existing game or user with that id");
             return 1;
           }
         } else {
           msg.response
             ..statusCode = 401
-            ..write("Gameid, userid and password must be set.");
+            ..write("Gameid and Secret must be set.");
           return 1;
         }
       }
@@ -750,24 +678,56 @@ class GameKeyServer {
         .encode(sha256
         .convert(UTF8.encode("$id,$password"))
         .bytes);
-    try {
-      Map existinguser = gettextfileUsers.singleWhere((
-          user) => user["signature"] == oldsignature);
-      if (gettextfileUsers.any((user) => user['id'] == id)) {
-        if (existinguser != null) {
+      Map existinguser = new Map.from(gettextfileUsers.singleWhere((
+          user) =>  user['id'] == id));
+      if (existinguser != null) {
+        if (existinguser["signature"] == oldsignature) {
           existinguser["name"] = newname;
           existinguser["pwd"] = newpassword;
           existinguser["signature"] = BASE64
               .encode(sha256
               .convert(UTF8.encode("$id,$newpassword"))
               .bytes);
-
           if (newmail != null && newmail
               .toString()
               .isNotEmpty)
             existinguser["mail"] = newmail;
           gettextfileUsers.removeWhere((user) => user['id'] == id);
           gettextfileUsers.add(existinguser);
+          return existinguser;
+        } else
+          return emptymap;
+      } else
+        return null;
+  }
+
+  /*
+    Retrieves all data about an user
+    - return user on succes
+    - return empty map on authentication problem
+    - return null on finding none user with given id
+   */
+  Future<Map> getUser(String id, password, bool byname) async {
+    Map emptymap = new Map();
+    String signature = BASE64.encode(sha256
+        .convert(UTF8.encode("$id,$password"))
+        .bytes);
+    try {
+      Map existinguser;
+      if (byname)
+        existinguser = new Map.from(
+            gettextfileUsers.firstWhere((user) => user["name"] == id));
+      else
+        existinguser =
+        new Map.from(gettextfileUsers.firstWhere((user) => user["id"] == id));
+      if (existinguser["signature"] == signature) {
+        if (existinguser != null) {
+          existinguser["games"] = new List();
+          gettextfileGamestates.forEach((gamestate) {
+            if (gamestate["userid"] == id) {
+              existinguser["games"].add(gamestate["gameid"]);
+            }
+          });
           return existinguser;
         } else
           return null;
@@ -779,65 +739,34 @@ class GameKeyServer {
   }
 
   /*
-    Retrieves all data about an user
-    - return user on succes
-    - return empty map on authentication problem
-    - return null on finding none user with given id
-   */
-  Future<Map> getUser(String id, password, bool byname) async {
-    Map existinguser;
-    Map emptymap = new Map();
-    String signature = BASE64.encode(sha256
-        .convert(UTF8.encode("$id,$password"))
-        .bytes);
-    try {
-      if (byname == true) {
-        existinguser = new Map.from(
-            gettextfileUsers.firstWhere((user) => user["name"] == id));
-      } else {
-        existinguser = new Map.from(gettextfileUsers.firstWhere((user) => user["id"] == id));
-      }
-      if (existinguser != null) {
-        if ((existinguser["signature"] == signature))
-          return existinguser;
-        else
-          return emptymap;
-      }
-      return null;
-    } catch (error) {
-      return null;
-    }
-  }
-
-  /*
     Retrieves a gamestate stored for a game and a user
     - return gamestate on succes
     - returns empty map on authentication problem
-    - return null on finding none user with given id
+    - return null on finding none user or game with given id
    */
-  Future<List> getGameState(String gameid, userid, secret) async{
+  Future<List> getGameState(String gameid, userid, secret) async {
     List emptymap = new List();
     String signature = BASE64
         .encode(sha256
         .convert(UTF8.encode("$gameid,$secret"))
         .bytes);
-    if (gettextfileGames.any((game) => game["id"] == gameid) &&
-        gettextfileUsers.any((user) => user["id"] == userid)) {
-      if (gettextfileGames.any((game) => game["id"] == gameid &&
-          game["signature"] == signature)) {
-        final gamestate = gettextfileGamestates.where(( gamestate) =>
-          gamestate["gameid"] == gameid && gamestate["userid"] == userid);
-        if (gamestate != null) {
-          List allstates = gamestate.toList();
-          //print(allstates);
-          allstates.sort((a,b) => DateTime.parse(b["created"]).compareTo(DateTime.parse(a["created"])));
-          //print(allstates);
-          return allstates;
-        }
-      } else
-        return emptymap;
-    } else
+    if (!gettextfileUsers.any((user) => user["id"] == userid))
       return null;
+    if (!gettextfileGames.any((game) => game["id"] == gameid))
+      return null;
+    if (!(gettextfileGames.any((game) => game["id"] == gameid &&
+        game["signature"] == signature)))
+      return emptymap;
+    final gamestate = gettextfileGamestates.where((gamestate) =>
+    gamestate["gameid"] == gameid && gamestate["userid"] == userid);
+    if (gamestate != null) {
+      List allstates = gamestate.toList();
+      //print(allstates);
+      allstates.sort((a, b) =>
+          DateTime.parse(b["created"]).compareTo(DateTime.parse(a["created"])));
+      //print(allstates);
+      return allstates;
+    }
   }
 
   /*
@@ -846,7 +775,7 @@ class GameKeyServer {
     - returns empty map on authentication problem
     - return null on finding none gamestate with given id
    */
-  Future<List> getGameStatewithGame(String gameid, secret) async{
+  Future<List> getGameStatewithGame(String gameid, secret) async {
     List emptymap = new List();
     String signature = BASE64
         .encode(sha256
@@ -855,11 +784,12 @@ class GameKeyServer {
     if (gettextfileGames.any((game) => game["id"] == gameid)) {
       if (gettextfileGames.any((game) => game["id"] == gameid &&
           game["signature"] == signature)) {
-        final gamestate = gettextfileGamestates.where(( gamestate) =>
+        final gamestate = gettextfileGamestates.where((gamestate) =>
         gamestate["gameid"] == gameid);
         if (gamestate != null) {
           List allstates = gamestate.toList();
-          allstates.sort((a,b) => DateTime.parse(b["created"]).compareTo(DateTime.parse(a["created"])));
+          allstates.sort((a, b) => DateTime.parse(b["created"]).compareTo(
+              DateTime.parse(a["created"])));
           return allstates;
         }
       } else
@@ -872,7 +802,7 @@ class GameKeyServer {
     Retrieves all data about a game
     - return game on succes
     - return empty map on authentication problem
-    - return null on finding none user with given id
+    - return null on finding none game with given id
    */
   Future<Map> getGame(String id, password) async {
     Map emptymap = new Map();
@@ -880,12 +810,19 @@ class GameKeyServer {
         .convert(UTF8.encode("$id,$password"))
         .bytes);
     try {
-      Map existinggame = gettextfileGames.singleWhere((game) => game["id"] ==
-          id);
+      Map existinggame = new Map.from(
+          gettextfileGames.singleWhere((game) => game["id"] ==
+              id));
       if (existinggame["signature"] == signature) {
-        if (existinggame != null)
+        if (existinggame != null) {
+          existinggame["users"] = new List();
+          gettextfileGamestates.forEach((gamestate) {
+            if (gamestate["gameid"] == id) {
+              existinggame["users"].add(gamestate["userid"]);
+            }
+          });
           return existinggame;
-        else
+        } else
           return null;
       } else
         return emptymap;
@@ -907,12 +844,11 @@ class GameKeyServer {
         .convert(UTF8.encode("$id,$secret"))
         .bytes);
     try {
-      Map existinggame = gettextfileGames.singleWhere((
-          game) => game["signature"] == oldsignature);
-      if (gettextfileGames.any((game) => game['id'] == id)) {
-        if (existinggame != null) {
+      Map existinggame = new Map.from(
+          gettextfileGames.firstWhere((game) => game["id"] == id));
+      if (existinggame != null) {
+        if (existinggame["signature"] == oldsignature) {
           existinggame["name"] = newname;
-          //existinggame["users"] = new List();
           existinggame["pwd"] = newsecret;
           existinggame["signature"] = BASE64
               .encode(sha256
@@ -950,8 +886,10 @@ class GameKeyServer {
         gettextfileUsers.any((user) => user["id"] == userid)) {
       if (gettextfileGames.any((game) => game["id"] == gameid &&
           game["signature"] == signature)) {
-        final nameofgame = gettextfileGames.firstWhere((game) => game["id"] == gameid)["name"];
-        final nameofuser = gettextfileUsers.firstWhere((user) => user["id"] == userid)["name"];
+        final nameofgame = gettextfileGames.firstWhere((game) => game["id"] ==
+            gameid)["name"];
+        final nameofuser = gettextfileUsers.firstWhere((user) => user["id"] ==
+            userid)["name"];
         Map newstate = {
           "type":"gamestate",
           "gamename":"$nameofgame",
@@ -967,6 +905,7 @@ class GameKeyServer {
         return emptymap;
       }
     }
+    return null;
   }
 
   /*
@@ -978,14 +917,13 @@ class GameKeyServer {
   {
     bool isinList = gettextfileGames.any((game) => game["name"] == "$name");
     gettextfileGames.forEach((game) {
-      if (game['name'] == name) {
+      if (game["name"] == name) {
         isinList = true;
       }
     });
     if (!isinList) {
       final id = new Random.secure().hashCode.toString();
       Map newgame = {
-        // "users":"",
         "type":"game",
         "name":"$name",
         "id":"$id",
@@ -996,23 +934,6 @@ class GameKeyServer {
             .convert(UTF8.encode("$id,$secret"))
             .bytes)}"
       };
-      if (gettextfileGamestates.length>2) {
-        newgame["users"] = new List();
-        gettextfileGamestates.forEach((gamestate) {
-          if (gamestate["gameid"] == id) {
-            newgame["users"].add(gamestate["userid"]);
-          }
-        });
-      }
-     /* for (List lists in gettextfileGamestates) {
-        for (Map gamestate in lists) {
-          if (gamestate["gameid"] == id) {
-            print(gamestate);
-            newgame["users"]=new List();
-            newgame["users"].add(gamestate["userid"]);
-          }
-        }
-      }*/
       gettextfileGames.add(newgame);
       return newgame;
     } else
@@ -1026,31 +947,22 @@ class GameKeyServer {
     - returns null on no existing user with given id
    */
   Future<bool> removeUser(String id, password) async {
-    //TODO remove all highscores from that user
-    try {
+    String signature = BASE64
+        .encode(sha256
+        .convert(UTF8.encode("$id,$password"))
+        .bytes);
+    if (gettextfileUsers.any((user) => user["id"] == id)) {
       Map user = gettextfileUsers.firstWhere((user) => user["id"] == id);
-      String signature = BASE64
-          .encode(sha256
-          .convert(UTF8.encode("$id,$password"))
-          .bytes);
-      if (gettextfileUsers.any((user) => user["id"] == id)) {
-        Map user = gettextfileUsers.firstWhere((user) => user["id"] == id);
-        if (user != null) {
-          if (user["signature"] == signature) {
-            if(gettextfileUsers.remove(user))
-              return true;
-            else
-              return false;
-          }
-          return null;
-        }
+      if (user["signature"] == signature) {
+        gettextfileUsers.removeWhere((user) => user["id"] == id);
+        gettextfileGamestates.removeWhere((gamestate) => gamestate["userid"] ==
+            id);
+        return true;
+      } else {
         return false;
       }
-      return false;
-    } catch (error, stacktrace) {
-      print(error);
-      print(stacktrace);
-      return false;
+    } else {
+      return null;
     }
   }
 
@@ -1061,26 +973,22 @@ class GameKeyServer {
     - returns null on no existing user with given id
    */
   Future<bool> removeGame(String id, password) async {
-    //TODO remove all highscores from that game
-    try {
-      Map game = gettextfileGames.singleWhere((game) => game["id"] == id);
-      String signature = BASE64
-          .encode(sha256
-          .convert(UTF8.encode("$id,$password"))
-          .bytes);
-
+    String signature = BASE64
+        .encode(sha256
+        .convert(UTF8.encode("$id,$password"))
+        .bytes);
+    if (gettextfileGames.any((game) => game["id"] == id)) {
+      Map game = gettextfileGames.firstWhere((game) => game["id"] == id);
       if (game["signature"] == signature) {
-        if (gettextfileGames.any((game) => game["id"] == id)) {
-          gettextfileUsers.removeWhere((game) => game["id"] == id);
-          return true;
-        }
+        gettextfileGames.removeWhere((game) => game["id"] == id);
+        gettextfileGamestates.removeWhere((gamestate) => gamestate["gameid"] ==
+            id);
+        return true;
       } else {
         return false;
       }
-    } catch (error, stacktrace) {
-      print(error);
-      print(stacktrace);
-      return false;
+    } else {
+      return null;
     }
   }
 
@@ -1090,13 +998,12 @@ class GameKeyServer {
     - returns null  on failure
    */
   Future<Map> addUser(String name, password, mail) async {
-    bool isinList = false;
-
-    for (int i = 0; i < gettextfileUsers.length; i++) {
-      if (gettextfileUsers[i]["name"] == "$name") {
+    bool isinList = gettextfileUsers.any((game) => game["name"] == "$name");
+    gettextfileUsers.forEach((game) {
+      if (game['name'] == name) {
         isinList = true;
       }
-    }
+    });
     if (!isinList) {
       final id = new Random.secure().hashCode.toString();
       Map newuser = {
