@@ -286,39 +286,40 @@ class GameKeyServer {
       }
 
       //Request for get a user
-      RegExp getuser = new RegExp(r'/user/(\d+)\/?');
+      RegExp getuser = new RegExp(r'/user/(\d+|[a-zA-Z]+)\/?');
       if (msg.method == 'GET' && getuser.hasMatch(msg.requestedUri.path)) {
-        final id = msg.requestedUri.pathSegments[1];
+        var id = msg.requestedUri.pathSegments[1];
         final password = parameter["pwd"];
         final checkbyname = parameter["byname"];
-        if (checkbyname != null && checkbyname != "true" &&
+      /*  if (checkbyname != null && checkbyname != "true" &&
             checkbyname != "false") {
           msg.response
             ..statusCode = 400
-            ..write("Byname must be set [true|false|''].");
-          return 1;
-        }
+            ..write("Byname must be set [true|false|null].");
+          return 0;
+        }*/
         bool byname = false;
-        if (parameter["byname"] == true)
+        if (checkbyname == "true") {
           byname = true;
+        }
         if (id != null && password != null) {
           Map getuser = await getUser(id, password, byname);
           if (getuser != null) {
-            if (getuser.length>0) {
-              msg.response
-                ..statusCode = 200
-                ..write(JSON.encode(getuser));
-              return 0;
-            } else {
-              msg.response
-                ..statusCode = 401
-                ..write("Authentication problem, check ID and Password.");
-              return 0;
-            }
+             if (getuser.length>0) {
+            msg.response
+              ..statusCode = 200
+              ..write(JSON.encode(getuser));
+            return 0;
           } else {
             msg.response
-              ..statusCode = 401
+              ..statusCode = 200
               ..write("No existing user with that id.");
+            return 0;
+          }
+            } else {
+            msg.response
+              ..statusCode = 401
+              ..write("Authentication problem, check ID and Password.");
             return 0;
           }
         } else {
@@ -335,25 +336,24 @@ class GameKeyServer {
           removeuser.hasMatch(msg.requestedUri.path)) {
         final password = parameter["pwd"];
         final id = msg.requestedUri.pathSegments[1];
+        if (!(gettextfileUsers.any((user) => user["id"] == id))) {
+          msg.response
+            ..statusCode = 200
+            ..write("User with ID=$id was removed");
+          return 0;
+        }
         if (id != null && password != null) {
           bool remuser = await removeUser(id, password);
-          if (remuser != null) {
-            if (remuser) {
-              msg.response
-                ..statusCode = 200
-                ..write("User with id=$id was removed");
-              return 4;
-            } else {
-              msg.response
-                ..statusCode = 401
-                ..write(
-                    "Authentication problem, please check ID and Password.");
-              return 0;
-            }
+          if (remuser) {
+            msg.response
+              ..statusCode = 200
+              ..write("User with ID=$id was removed");
+            return 4;
           } else {
             msg.response
-              ..statusCode = 404
-              ..write("No existing user with that id.");
+              ..statusCode = 401
+              ..write(
+                  "Authentication problem, please check ID and Password.");
             return 0;
           }
         } else {
@@ -522,25 +522,24 @@ class GameKeyServer {
           removegame.hasMatch(msg.requestedUri.path)) {
         final password = parameter["secret"];
         final id = msg.requestedUri.pathSegments[1];
+        if (!(gettextfileGames.any((game) => game["id"] == id))) {
+          msg.response
+            ..statusCode = 200
+            ..write("Game with ID=$id was removed");
+          return 0;
+        }
         if (id != null && password != null) {
           bool remgame = await removeGame(id, password);
-          if (remgame != null) {
-            if (remgame) {
-              msg.response
-                ..statusCode = 200
-                ..write("Game with id=$id was removed.");
-              return 5;
-            } else {
-              msg.response
-                ..statusCode = 401
-                ..write(
-                    "Authentication problem, please check ID and Password.");
-              return 0;
-            }
+          if (remgame) {
+            msg.response
+              ..statusCode = 200
+              ..write("Game with ID=$id was removed.");
+            return 5;
           } else {
             msg.response
               ..statusCode = 401
-              ..write("No existing game with that ID.");
+              ..write(
+                  "Authentication problem, please check ID and Password.");
             return 0;
           }
         } else {
@@ -694,32 +693,38 @@ class GameKeyServer {
   /*
     Retrieves all data about an user
     - return user on succes
-    - return empty map on authentication problem
-    - return null on finding none user with given id
+    - return empty map on finding none user with given id
+    - return null on authentication problem
    */
   Future<Map> getUser(String id, password, bool byname) async {
-    //Map emptymap = new Map();
-    String signature = BASE64.encode(sha256
-        .convert(UTF8.encode("$id,$password"))
-        .bytes);
-      Map existinguser;
-      if (byname)
+    Map existinguser;
+    try {
+      if (byname) {
+        final name = Uri.decodeComponent(id);
         existinguser = new Map.from(
-            gettextfileUsers.firstWhere((user) => user["name"] == id));
-      else
+            gettextfileUsers.firstWhere((user) => user["name"] == name));
+      }
+      else {
         existinguser =
         new Map.from(gettextfileUsers.firstWhere((user) => user["id"] == id));
-      if (existinguser["signature"] == signature) {
-          existinguser["games"] = new List();
-          gettextfileGamestates.forEach((gamestate) {
-            if (gamestate["userid"] == id) {
-              existinguser["games"].add(gamestate["gameid"]);
-            }
-          });
-          return existinguser;
-        } else {
-          return null;
       }
+      String signature = BASE64.encode(sha256
+          .convert(UTF8.encode("${existinguser["id"]},$password"))
+          .bytes);
+      if (existinguser["signature"] == signature) {
+        existinguser["games"] = new List();
+        gettextfileGamestates.forEach((gamestate) {
+          if (gamestate["userid"] == id) {
+            existinguser["games"].add(gamestate["gameid"]);
+          }
+        });
+        return existinguser;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return new Map();
+    }
   }
 
   /*
@@ -913,25 +918,20 @@ class GameKeyServer {
     Remove a registered user and all registered highscores for that user
     - return true on success
     - return false on unauthorized
-    - return null on no existing user with given id
    */
   Future<bool> removeUser(String id, password) async {
     String signature = BASE64
         .encode(sha256
         .convert(UTF8.encode("$id,$password"))
         .bytes);
-    if (gettextfileUsers.any((user) => user["id"] == id)) {
-      Map user = gettextfileUsers.firstWhere((user) => user["id"] == id);
-      if (user["signature"] == signature) {
-        gettextfileUsers.removeWhere((user) => user["id"] == id);
-        gettextfileGamestates.removeWhere((gamestate) => gamestate["userid"] ==
-            id);
-        return true;
-      } else {
-        return false;
-      }
+    if (gettextfileUsers.any((user) => user["signature"] == signature)) {
+      gettextfileUsers.removeWhere((user) => user["id"] == id &&
+          user["signature"] == signature);
+      gettextfileGamestates.removeWhere((gamestate) => gamestate["userid"] ==
+          id);
+      return true;
     } else {
-      return null;
+      return false;
     }
   }
 
@@ -939,25 +939,20 @@ class GameKeyServer {
     Remove a registered game and all registered highscores for that game
     - return true on success
     - return false on unauthorized
-    - return null on no existing user with given id
    */
   Future<bool> removeGame(String id, password) async {
     String signature = BASE64
         .encode(sha256
         .convert(UTF8.encode("$id,$password"))
         .bytes);
-    if (gettextfileGames.any((game) => game["id"] == id)) {
-      Map game = gettextfileGames.firstWhere((game) => game["id"] == id);
-      if (game["signature"] == signature) {
-        gettextfileGames.removeWhere((game) => game["id"] == id);
-        gettextfileGamestates.removeWhere((gamestate) => gamestate["gameid"] ==
-            id);
-        return true;
-      } else {
-        return false;
-      }
+    if (gettextfileGames.any((game) => game["signature"] == signature)) {
+      gettextfileGames.removeWhere((game) => game["id"] == id &&
+          game["signature"] == signature);
+      gettextfileGamestates.removeWhere((gamestate) => gamestate["gameid"] ==
+          id);
+      return true;
     } else {
-      return null;
+      return false;
     }
   }
 
