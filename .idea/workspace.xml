@@ -2,13 +2,257 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9cb9305f-2716-4aad-9ae1-fa9b5723abd1" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/doc/DartWeb.asta" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/web/img/brickwall.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/web/img/packages" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/.packages" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/.travis.yml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/LICENSE" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/lib/BrickGame.dart" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/lib/src/controller/GameController.dart" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/lib/src/controller/test.dart" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/lib/src/gamekey/GameKey.dart" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/lib/src/model/Ball.dart" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/lib/src/model/Brick.dart" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/lib/src/model/Enums.dart" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/lib/src/model/Field.dart" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/lib/src/model/Game.dart" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/lib/src/model/GameObject.dart" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/lib/src/model/Item.dart" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/lib/src/model/Level.dart" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/lib/src/model/Model.dart" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/lib/src/model/Player.dart" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/lib/src/view/View.dart" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/pubspec.yaml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/web/brickgameClient.dart" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/web/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/web/level0.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/web/level1.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/web/level2.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/web/level3.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/web/level4.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/web/style.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/web/style.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/web/style.scss" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/lib/Server.dart" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/pubspec.yaml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.pub/bin/sdk-version" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.pub/bin/test/test.dart.snapshot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.sass-cache/8712e71c8a4fbc753a30404921029091210c0abc/style.scssc" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Game/Game-class.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Game/Game-library.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Game/Game/Game.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Game/Game/countLevel.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Game/Game/gameFields.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Game/Game/hashCode.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Game/Game/moveBall.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Game/Game/moveBalls.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Game/Game/moveItem.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Game/Game/moveItems.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Game/Game/movePLayer.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Game/Game/newLevel.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Game/Game/nextLevel.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Game/Game/noSuchMethod.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Game/Game/objects.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Game/Game/operator_equals.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Game/Game/runtimeType.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Game/Game/toString.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/GameController/GameController-class.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/GameController/GameController-library.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/GameController/GameController/GameController.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/GameController/GameController/hashCode.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/GameController/GameController/noSuchMethod.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/GameController/GameController/operator_equals.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/GameController/GameController/runtimeType.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/GameController/GameController/toString.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/GameController/ballSpeed-constant.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/GameController/gameKeyCheck-constant.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/GameController/gameKeyHost-constant.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/GameController/gameKeyPort-constant.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/GameController/itemSpeed-constant.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Ball-class.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Ball/Ball.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Ball/changeDamage.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Ball/changeSpeed.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Ball/collision.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Ball/hashCode.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Ball/noSuchMethod.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Ball/operator_equals.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Ball/runtimeType.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Ball/toString.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Brick-class.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Brick/Brick.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Brick/decHealth.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Brick/destroy.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Brick/hashCode.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Brick/health.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Brick/noSuchMethod.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Brick/operator_equals.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Brick/runtimeType.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Brick/toString.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Direction-class.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Effect-class.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/GameField-class.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/GameField/GameField.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/GameField/bricks.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/GameField/hashCode.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/GameField/noSuchMethod.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/GameField/operator_equals.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/GameField/removeBrick.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/GameField/runtimeType.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/GameField/toString.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/GameObject-class.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/GameObject/GameObject.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/GameObject/hashCode.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/GameObject/noSuchMethod.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/GameObject/operator_equals.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/GameObject/runtimeType.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/GameObject/toString.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Health-class.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Item-class.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Item/Item.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Item/collision.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Item/effect.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Item/hashCode.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Item/isPositive.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Item/noSuchMethod.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Item/operator_equals.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Item/runtimeType.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Item/toString.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Level-class.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Level/Level.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Level/gameField.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Level/hashCode.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Level/noSuchMethod.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Level/operator_equals.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Level/removeBrick.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Level/runtimeType.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Level/toString.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Model-library.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/MoveableObject-class.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/MoveableObject/MoveableObject.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/MoveableObject/collision.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/MoveableObject/collisionAhead.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/MoveableObject/hashCode.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/MoveableObject/move.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/MoveableObject/noSuchMethod.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/MoveableObject/operator_equals.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/MoveableObject/runtimeType.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/MoveableObject/toString.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Player-class.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Player/Player.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Player/changeLength.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Player/changeSpeed.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Player/collision.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Player/hashCode.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Player/noSuchMethod.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Player/operator_equals.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Player/runtimeType.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/Model/Player/toString.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/index.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/static-assets/css/bootstrap.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/static-assets/css/bootstrap.css.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/static-assets/css/bootstrap.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/static-assets/favicon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/static-assets/prettify.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/static-assets/prettify.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/static-assets/script.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/static-assets/styles.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/doc/api/static-assets/typeahead.bundle.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/packages" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dart.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out.js.deps" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/DartWeb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/analyzer" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/args" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/async" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/barback" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/boolean_selector" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/charcode" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/collection" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/convert" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/crypto" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/csslib" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/glob" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/http_multi_server" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/http_parser" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/logging" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/matcher" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/mime" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/package_config" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/path" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/plugin" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/pool" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/pub_semver" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/shelf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/shelf_static" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/shelf_web_socket" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/source_map_stack_trace" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/source_maps" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/source_span" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/stack_trace" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/stream_channel" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/string_scanner" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/test" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/typed_data" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/utf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/watcher" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/web_socket_channel" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/yaml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pubspec.lock" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/packages" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/style.css.map" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/.packages" afterPath="$PROJECT_DIR$/client/.packages" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/.travis.yml" afterPath="$PROJECT_DIR$/client/.travis.yml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LICENSE" afterPath="$PROJECT_DIR$/client/LICENSE" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/client/README.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/bin/doc/DartWeb.asta" afterPath="$PROJECT_DIR$/client/doc/DartWeb.asta" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/BrickGame.dart" afterPath="$PROJECT_DIR$/client/lib/BrickGame.dart" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/src/controller/GameController.dart" afterPath="$PROJECT_DIR$/client/lib/src/controller/GameController.dart" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/src/controller/test.dart" afterPath="$PROJECT_DIR$/client/lib/src/controller/test.dart" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/src/gamekey/GameKey.dart" afterPath="$PROJECT_DIR$/client/lib/src/gamekey/GameKey.dart" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/src/gamekeyserver/Game.dart" afterPath="$PROJECT_DIR$/server/lib/src/gamekeyserver/Game.dart" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/src/gamekeyserver/GameKeyServer.dart" afterPath="$PROJECT_DIR$/server/lib/src/gamekeyserver/GameKeyServer.dart" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/src/gamekeyserver/Gamestate.dart" afterPath="$PROJECT_DIR$/server/lib/src/gamekeyserver/Gamestate.dart" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/src/gamekeyserver/User.dart" afterPath="$PROJECT_DIR$/server/lib/src/gamekeyserver/User.dart" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/src/model/Ball.dart" afterPath="$PROJECT_DIR$/client/lib/src/model/Ball.dart" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/src/model/Brick.dart" afterPath="$PROJECT_DIR$/client/lib/src/model/Brick.dart" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/src/model/Enums.dart" afterPath="$PROJECT_DIR$/client/lib/src/model/Enums.dart" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/src/model/Field.dart" afterPath="$PROJECT_DIR$/client/lib/src/model/Field.dart" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/src/model/Game.dart" afterPath="$PROJECT_DIR$/client/lib/src/model/Game.dart" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/src/model/GameObject.dart" afterPath="$PROJECT_DIR$/client/lib/src/model/GameObject.dart" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/src/model/Item.dart" afterPath="$PROJECT_DIR$/client/lib/src/model/Item.dart" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/src/model/Level.dart" afterPath="$PROJECT_DIR$/client/lib/src/model/Level.dart" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/src/model/Model.dart" afterPath="$PROJECT_DIR$/client/lib/src/model/Model.dart" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/src/model/Player.dart" afterPath="$PROJECT_DIR$/client/lib/src/model/Player.dart" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/src/view/View.dart" afterPath="$PROJECT_DIR$/client/lib/src/view/View.dart" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/memoryofallgames.json" afterPath="$PROJECT_DIR$/server/memoryofallgames.json" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/memoryofallgamestates.json" afterPath="$PROJECT_DIR$/server/memoryofallgamestates.json" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/memoryofallusers.json" afterPath="$PROJECT_DIR$/server/memoryofallusers.json" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/pubspec.yaml" afterPath="$PROJECT_DIR$/client/pubspec.yaml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/web/brickgameClient.dart" afterPath="$PROJECT_DIR$/client/web/brickgameClient.dart" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/web/img/brickwall.jpg" afterPath="$PROJECT_DIR$/client/web/img/brickwall.jpg" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/web/img/packages" afterPath="$PROJECT_DIR$/client/web/img/packages" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/web/index.html" afterPath="$PROJECT_DIR$/client/web/index.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/web/level0.json" afterPath="$PROJECT_DIR$/client/web/level0.json" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/web/level1.json" afterPath="$PROJECT_DIR$/client/web/level1.json" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/web/level2.json" afterPath="$PROJECT_DIR$/client/web/level2.json" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/web/level3.json" afterPath="$PROJECT_DIR$/client/web/level3.json" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/web/level4.json" afterPath="$PROJECT_DIR$/client/web/level4.json" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/web/style.css" afterPath="$PROJECT_DIR$/client/web/style.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/web/style.scss" afterPath="$PROJECT_DIR$/client/web/style.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/DartWeb.iml" afterPath="$PROJECT_DIR$/.idea/DartWeb.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/src/controller/GameController.dart" afterPath="$PROJECT_DIR$/lib/src/controller/GameController.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/src/model/Ball.dart" afterPath="$PROJECT_DIR$/lib/src/model/Ball.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/src/model/Brick.dart" afterPath="$PROJECT_DIR$/lib/src/model/Brick.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/src/model/Player.dart" afterPath="$PROJECT_DIR$/lib/src/model/Player.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/testIsolate.dart" afterPath="$PROJECT_DIR$/test/testIsolate.dart" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="DartWeb.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,103 +273,107 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="GameController.dart" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/lib/src/controller/GameController.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="50" column="24" selection-start-line="50" selection-start-column="24" selection-end-line="50" selection-end-column="24" />
+              <folding>
+                <element signature="e#24#70#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameKeyServer.dart" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/lib/src/gamekeyserver/GameKeyServer.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="15" selection-start-line="0" selection-start-column="15" selection-end-line="0" selection-end-column="15" />
+              <folding>
+                <element signature="e#17#34#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Game.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/src/model/Game.dart">
+        <entry file="file://$PROJECT_DIR$/server/lib/src/gamekeyserver/Game.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.827586">
-              <caret line="97" column="3" selection-start-line="97" selection-start-column="3" selection-end-line="97" selection-end-column="3" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="View.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/src/view/View.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="62" column="49" selection-start-line="62" selection-start-column="49" selection-end-line="62" selection-end-column="49" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Item.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/src/model/Item.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="28" column="17" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="testField.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/testField.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="40" column="25" selection-start-line="40" selection-start-column="25" selection-end-line="40" selection-end-column="25" />
+            <state relative-caret-position="0">
+              <caret line="0" column="13" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="BrickGame.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/BrickGame.dart">
+        <entry file="file://$PROJECT_DIR$/client/lib/BrickGame.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="8" column="32" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
+            <state relative-caret-position="108">
+              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Gamestate.dart" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/lib/src/gamekeyserver/Gamestate.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="User.dart" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/lib/src/gamekeyserver/User.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="18">
+              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameKey.dart" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/lib/src/gamekey/GameKey.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1746">
+              <caret line="97" column="38" selection-start-line="97" selection-start-column="38" selection-end-line="97" selection-end-column="38" />
               <folding>
-                <element signature="e#20#39#0" expanded="true" />
+                <element signature="e#17#37#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Player.dart" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/src/model/Player.dart">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8233083">
-              <caret line="39" column="13" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+            <state relative-caret-position="234">
+              <caret line="13" column="8" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Ball.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/src/model/Ball.dart">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.551724">
-              <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
+            <state relative-caret-position="252">
+              <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameObject.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/src/model/GameObject.dart">
+      <file leaf-file-name="View.dart" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/lib/src/view/View.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="104" column="0" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Brick.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/src/model/Brick.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameController.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/src/controller/GameController.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="48" column="31" selection-start-line="48" selection-start-column="31" selection-end-line="48" selection-end-column="31" />
+            <state relative-caret-position="918">
+              <caret line="51" column="27" selection-start-line="51" selection-start-column="27" selection-end-line="51" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -146,7 +394,7 @@
         <option value="Sven Marquardt" />
       </list>
     </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/client" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="master" />
@@ -156,33 +404,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Model.dart" />
-        <option value="$PROJECT_DIR$/lib/model/MoveableObjekt.dart" />
-        <option value="$PROJECT_DIR$/lib/model/Direction.dart" />
-        <option value="$PROJECT_DIR$/lib/model/Enums.dart" />
-        <option value="$PROJECT_DIR$/lib/model/Ball.dart" />
-        <option value="$PROJECT_DIR$/lib/model/Item.dart" />
-        <option value="$PROJECT_DIR$/lib/model/Brick.dart" />
-        <option value="$PROJECT_DIR$/lib/model/Level.dart" />
-        <option value="$PROJECT_DIR$/lib/model/Player.dart" />
-        <option value="$PROJECT_DIR$/lib/model/GameObject.dart" />
-        <option value="$PROJECT_DIR$/lib/model/GameController.dart" />
-        <option value="$PROJECT_DIR$/lib/model/Game.dart" />
-        <option value="$PROJECT_DIR$/lib/model/Model.dart" />
-        <option value="$PROJECT_DIR$/lib/src/model/Model.dart" />
-        <option value="$PROJECT_DIR$/web/brickgameClient.dart" />
-        <option value="$PROJECT_DIR$/lib/src/model/FieldHandler.dart" />
-        <option value="$PROJECT_DIR$/pubspec.yaml" />
-        <option value="$PROJECT_DIR$/lib/test/testField.dart" />
-        <option value="$PROJECT_DIR$/lib/BrickGame.dart" />
-        <option value="$PROJECT_DIR$/test/testField.dart" />
-        <option value="$PROJECT_DIR$/test/testIsolate.dart" />
-        <option value="$PROJECT_DIR$/lib/src/model/Field.dart" />
-        <option value="$PROJECT_DIR$/lib/src/controller/test.dart" />
-        <option value="$PROJECT_DIR$/web/style.css" />
         <option value="dart:async-patch/timer_patch.dart" />
         <option value="dart:core-patch/array_patch.dart" />
-        <option value="$PROJECT_DIR$/lib/src/model/Enums.dart" />
         <option value="$PROJECT_DIR$/lib/src/model/Item.dart" />
         <option value="dart:core-patch/string_patch.dart" />
         <option value="dart:core-patch/errors_patch.dart" />
@@ -193,27 +416,58 @@
         <option value="vm:77" />
         <option value="dart:core-patch/growable_array.dart" />
         <option value="$PROJECT_DIR$/web/style.scss" />
-        <option value="$PROJECT_DIR$/lib/src/model/Level.dart" />
-        <option value="$PROJECT_DIR$/web/index.html" />
         <option value="dart:core-patch/object_patch.dart" />
-        <option value="$PROJECT_DIR$/lib/src/view/View.dart" />
         <option value="$PROJECT_DIR$/lib/src/model/GameObject.dart" />
-        <option value="$PROJECT_DIR$/lib/src/model/Game.dart" />
         <option value="$PROJECT_DIR$/lib/src/controller/GameController.dart" />
         <option value="$PROJECT_DIR$/lib/src/model/Ball.dart" />
         <option value="$PROJECT_DIR$/lib/src/model/Brick.dart" />
         <option value="$PROJECT_DIR$/lib/src/model/Player.dart" />
+        <option value="$PROJECT_DIR$/lib/src/model/Enums.dart" />
+        <option value="$PROJECT_DIR$/web/index.html" />
+        <option value="$PROJECT_DIR$/lib/src/view/View.dart" />
+        <option value="$PROJECT_DIR$/lib/src/model/Game.dart" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/lib/BrickGame.dart" />
+        <option value="$PROJECT_DIR$/web/style.css" />
+        <option value="$PROJECT_DIR$/lib/src/model/Level.dart" />
+        <option value="$PROJECT_DIR$/lib/src/gamekey/GameKey.dart" />
+        <option value="$PROJECT_DIR$/lib/src/gamekeyserver/GameKeyServer.dart" />
+        <option value="$PROJECT_DIR$/server/Server.dart" />
+        <option value="$PROJECT_DIR$/server/pubspec.yaml" />
+        <option value="$PROJECT_DIR$/client/web/brickgameClient.dart" />
+        <option value="$PROJECT_DIR$/client/lib/src/model/Model.dart" />
+        <option value="$PROJECT_DIR$/client/lib/src/model/Brick.dart" />
+        <option value="$PROJECT_DIR$/client/lib/src/model/Enums.dart" />
+        <option value="$PROJECT_DIR$/client/lib/src/model/Field.dart" />
+        <option value="$PROJECT_DIR$/client/lib/src/model/Game.dart" />
+        <option value="$PROJECT_DIR$/client/lib/src/model/GameObject.dart" />
+        <option value="$PROJECT_DIR$/client/lib/src/model/Level.dart" />
+        <option value="$PROJECT_DIR$/client/lib/src/model/Player.dart" />
+        <option value="$PROJECT_DIR$/client/lib/src/model/Item.dart" />
+        <option value="$PROJECT_DIR$/client/lib/src/model/Ball.dart" />
+        <option value="$PROJECT_DIR$/client/lib/src/controller/GameController.dart" />
+        <option value="$PROJECT_DIR$/client/lib/BrickGame.dart" />
+        <option value="$PROJECT_DIR$/client/lib/src/view/View.dart" />
+        <option value="$PROJECT_DIR$/client/lib/src/gamekey/GameKey.dart" />
+        <option value="$PROJECT_DIR$/server/.gitignore" />
+        <option value="$PROJECT_DIR$/server/lib/src/gamekeyserver/GameKeyServer.dart" />
+        <option value="$PROJECT_DIR$/server/lib/src/gamekeyserver/Game.dart" />
+        <option value="$PROJECT_DIR$/server/lib/src/gamekeyserver/User.dart" />
+        <option value="$PROJECT_DIR$/server/lib/src/gamekeyserver/Gamestate.dart" />
+        <option value="$PROJECT_DIR$/client/.gitignore" />
       </list>
     </option>
   </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" />
-  <component name="JsBuildToolPackageJson" detection-done="true" />
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
+    <option name="y" value="37" />
     <option name="width" value="1920" />
-    <option name="height" value="1050" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -292,7 +546,7 @@
       </profile-state>
     </entry>
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
@@ -318,7 +572,6 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -336,36 +589,8 @@
               <option name="myItemId" value="DartWeb" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="DartWeb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DartWeb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="style.scss" />
-              <option name="myItemType" value="com.intellij.plugins.watcher.projectView.NestingTreeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DartWeb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DartWeb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
+              <option name="myItemId" value="server" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -379,17 +604,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DartWeb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DartWeb" />
+              <option name="myItemId" value="server" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -404,6 +619,86 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="DartWeb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gamekeyserver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DartWeb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DartWeb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DartWeb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DartWeb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DartWeb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DartWeb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DartWeb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DartWeb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -429,6 +724,10 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="lib" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -451,6 +750,36 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gamekey" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DartWeb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DartWeb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="lib" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -465,6 +794,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -477,23 +807,25 @@
     <property name="settings.editor.selected.configurable" value="watcher.settings" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="SearchEverywhereHistoryKey" value="print&#9;null&#9;null&#10;readconfig&#9;null&#9;null&#10;gameover&#9;null&#9;null" />
+    <property name="ignore_missing_gitignore" value="true" />
+    <property name="prop_add_unversioned_files" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/client" />
+      <recent name="$PROJECT_DIR$/server/lib/src" />
+      <recent name="$PROJECT_DIR$/server/lib" />
+      <recent name="$PROJECT_DIR$/server" />
+      <recent name="$PROJECT_DIR$/client/doc" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/web" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/web" />
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/lib/src/controller" />
-      <recent name="$PROJECT_DIR$/lib/src" />
-      <recent name="$PROJECT_DIR$/lib/model" />
-    </key>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.Unnamed">
+  <component name="RunManager" selected="JavaScript Debug.index.html">
     <configuration default="false" name="brickgameClient.dart" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application" temporary="true" nameIsGenerated="true">
-      <option name="filePath" value="$PROJECT_DIR$/web/brickgameClient.dart" />
+      <option name="filePath" value="$PROJECT_DIR$/client/web/brickgameClient.dart" />
       <option name="workingDirectory" value="$PROJECT_DIR$" />
       <method />
     </configuration>
@@ -509,14 +841,16 @@
     <configuration default="true" type="DartTestRunConfigurationType" factoryName="Dart Test">
       <method />
     </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma">
+      <config-file value="" />
+      <node-interpreter value="project" />
       <envs />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
       <method />
     </configuration>
-    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" working-dir="">
       <method />
     </configuration>
     <configuration default="true" type="cucumber.js" factoryName="Cucumber.js">
@@ -526,6 +860,7 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
       <node-options />
       <gulpfile />
       <tasks />
@@ -536,10 +871,12 @@
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
       <command value="run-script" />
       <scripts />
+      <node-interpreter value="project" />
       <envs />
       <method />
     </configuration>
     <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
+      <node-interpreter />
       <node-options />
       <working-directory>$PROJECT_DIR$</working-directory>
       <pass-parent-env>true</pass-parent-env>
@@ -558,14 +895,14 @@
       <option name="dartProjectPath" value="$PROJECT_DIR$" />
       <method />
     </configuration>
-    <configuration default="false" name="Unnamed" type="JavascriptDebugType" factoryName="JavaScript Debug" engineId="bfee1b69-a97d-4338-8ba4-25170adcbaa6" uri="http://localhost:63342/DartWeb/web/index.html">
+    <configuration default="false" name="index.html" type="JavascriptDebugType" factoryName="JavaScript Debug" engineId="bfee1b69-a97d-4338-8ba4-25170adcbaa6" uri="http://localhost:63342/DartWeb/web/index.html">
       <method />
     </configuration>
     <list size="4">
       <item index="0" class="java.lang.String" itemvalue="Chromium Remote.Unnamed" />
-      <item index="1" class="java.lang.String" itemvalue="Dart Command Line App.brickgameClient.dart" />
-      <item index="2" class="java.lang.String" itemvalue="Dart Remote Debug.Unnamed" />
-      <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.Unnamed" />
+      <item index="1" class="java.lang.String" itemvalue="Dart Remote Debug.Unnamed" />
+      <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.index.html" />
+      <item index="3" class="java.lang.String" itemvalue="Dart Command Line App.brickgameClient.dart" />
     </list>
     <recent_temporary>
       <list size="1">
@@ -573,7 +910,9 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -582,172 +921,212 @@
       <changelist id="9cb9305f-2716-4aad-9ae1-fa9b5723abd1" name="Default" comment="" />
       <created>1462038958727</created>
       <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
       <updated>1462038958727</updated>
+      <workItem from="1464683149696" duration="1394000" />
+      <workItem from="1464687306406" duration="4554000" />
+      <workItem from="1464851903470" duration="30000" />
+      <workItem from="1465863936244" duration="296000" />
+      <workItem from="1465864244349" duration="231000" />
+      <workItem from="1465872248933" duration="558000" />
+      <workItem from="1466200269605" duration="21000" />
+      <workItem from="1466282096567" duration="4740000" />
+      <workItem from="1466344413172" duration="1872000" />
     </task>
     <task id="LOCAL-00001" summary="Angefangen mit der Dokumentation der Klassen und Funktionen">
       <created>1462042797547</created>
       <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
       <updated>1462042797547</updated>
     </task>
     <task id="LOCAL-00002" summary="Dokumentation für das Model beendet. Erstes Doc generiert.">
       <created>1462141396178</created>
       <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
       <updated>1462141396178</updated>
     </task>
     <task id="LOCAL-00003" summary="Dokumentation überarbeitet es fehlte noch Gamefield">
       <created>1462141987230</created>
       <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
       <updated>1462141987230</updated>
     </task>
     <task id="LOCAL-00004" summary="Dokumentation angefügt und projekt datei">
       <created>1462142168586</created>
       <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
       <updated>1462142168586</updated>
     </task>
     <task id="LOCAL-00005" summary="Kritik und Doku&#10;&#10;Kritik weiter übernommen. Doku in den Klassen angepasst und weiter KLassen hinzugefügt.">
       <created>1462305873957</created>
       <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
       <updated>1462305873957</updated>
     </task>
     <task id="LOCAL-00006" summary="Neue Doku erstellen lassen">
       <created>1462306000297</created>
       <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
       <updated>1462306000297</updated>
     </task>
     <task id="LOCAL-00007" summary="Fixed typo">
       <created>1462306302962</created>
       <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
       <updated>1462306302962</updated>
     </task>
     <task id="LOCAL-00008" summary="Bewegung des player beschrieben collision abgenommen. Klären wir gamfield für das update im view behandelt wird vielleicht als property? #2">
       <created>1462401546429</created>
       <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
       <updated>1462401546429</updated>
     </task>
     <task id="LOCAL-00009" summary="Die Bewegung des Spielers komplett beschrieben durch alle klassen #2">
       <created>1462403047710</created>
       <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
       <option name="project" value="LOCAL" />
       <updated>1462403047710</updated>
     </task>
     <task id="LOCAL-00010" summary="Collisionen werden dem MovableObjekt nun übergeben #2 vielleicht eine asynchrone funktion dafür? Probleme mit der Liste klären mehrere prozesse greifen auf Liste zu wie kann man diese sperren">
       <created>1462578691844</created>
       <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
       <option name="project" value="LOCAL" />
       <updated>1462578691844</updated>
     </task>
     <task id="LOCAL-00011" summary="Packages organisiert">
       <created>1462900862844</created>
       <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
       <option name="project" value="LOCAL" />
       <updated>1462900862844</updated>
     </task>
     <task id="LOCAL-00012" summary="Spieler kann sich bewegen entdeckt gegenstände und ende des Levels">
       <created>1462993243059</created>
       <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
       <option name="project" value="LOCAL" />
       <updated>1462993243059</updated>
     </task>
     <task id="LOCAL-00013" summary="Nochmal überdenken was passiert mit dem Ball wenn er den Spieler trifft API noch mal neu überdenken #2">
       <created>1463177153991</created>
       <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
       <option name="project" value="LOCAL" />
       <updated>1463177153991</updated>
     </task>
     <task id="LOCAL-00014" summary="Bewegungen der MoveableOjbekte fertig testen mit richtiger Karte fehlt nur noch. #2 Einbinden der View noch vornehmen absprache mit @LPLoki&#10;">
       <created>1463391524127</created>
       <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
       <option name="project" value="LOCAL" />
       <updated>1463391524127</updated>
     </task>
     <task id="LOCAL-00015" summary="Umrechnungsmethode um aus einem String ein Health zu generieren #2">
       <created>1463399870538</created>
       <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
       <option name="project" value="LOCAL" />
       <updated>1463399870538</updated>
     </task>
     <task id="LOCAL-00016" summary="Es wurde alles nun zusammen gestellt.">
       <created>1463408178506</created>
       <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
       <option name="project" value="LOCAL" />
       <updated>1463408178506</updated>
     </task>
     <task id="LOCAL-00017" summary="Kleiner Fehler behoben beim aufruf der Main">
       <created>1463424947175</created>
       <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1463424947175</updated>
     </task>
     <task id="LOCAL-00018" summary="Noch fehler in der Switch bzw move methode der einzelnen Objekte #2">
       <created>1463428740991</created>
       <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
       <option name="project" value="LOCAL" />
       <updated>1463428740991</updated>
     </task>
     <task id="LOCAL-00019" summary="Noch fehler in der Switch bzw move methode der einzelnen Objekte #2">
       <created>1463429284696</created>
       <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
       <option name="project" value="LOCAL" />
       <updated>1463429284696</updated>
     </task>
     <task id="LOCAL-00020" summary="Bewegung nur Gedreht #2">
       <created>1463431688991</created>
       <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
       <option name="project" value="LOCAL" />
       <updated>1463431688991</updated>
     </task>
     <task id="LOCAL-00021" summary="Ignoriere MoveSpeed für richtige bewegung #2">
       <created>1463432923891</created>
       <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
       <updated>1463432923891</updated>
     </task>
     <task id="LOCAL-00022" summary="Das Spiel ist nun richtig herum es fehlt nur noch eine bessere kollisonsabfrage #5">
       <created>1463438484545</created>
       <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
       <option name="project" value="LOCAL" />
       <updated>1463438484545</updated>
     </task>
     <task id="LOCAL-00023" summary="GameOver implementiert #2">
       <created>1463439061497</created>
       <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
       <option name="project" value="LOCAL" />
       <updated>1463439061497</updated>
     </task>
     <task id="LOCAL-00024" summary="Ball hat nun damage #2">
       <created>1463442214700</created>
       <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
       <option name="project" value="LOCAL" />
       <updated>1463442214700</updated>
     </task>
     <task id="LOCAL-00025" summary="Ball hat nun damage #2">
       <created>1463449341639</created>
       <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
       <option name="project" value="LOCAL" />
       <updated>1463449341639</updated>
     </task>
     <task id="LOCAL-00026" summary="Teste Isolates für bewegungen #2">
       <created>1463617322966</created>
       <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
       <option name="project" value="LOCAL" />
       <updated>1463617322966</updated>
     </task>
     <task id="LOCAL-00027" summary="Test läuft durch beispiel isolation  #2">
       <created>1463668165098</created>
       <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
       <option name="project" value="LOCAL" />
       <updated>1463668165098</updated>
     </task>
     <option name="localTasksCounter" value="28" />
     <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="13696000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -759,30 +1138,30 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1050" extended-state="6" />
-    <editor active="false" />
+    <frame x="0" y="37" width="1920" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="PlantUML" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2588047" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26093832" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32867885" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Pub Serve" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Dart Analysis" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34371644" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Dart Analysis" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34270832" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32867885" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32914045" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2497332" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24881391" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31256714" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39849624" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="PlantUML" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32914045" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33645833" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Pub Serve" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32914045" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32914045" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32867885" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328125" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.396875" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -828,30 +1207,20 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint type="Dart">
-          <url>file://$PROJECT_DIR$/lib/src/model/GameObject.dart</url>
-          <line>122</line>
+          <url>file://$PROJECT_DIR$/client/lib/src/model/GameObject.dart</url>
+          <line>125</line>
           <option name="timeStamp" value="47" />
         </line-breakpoint>
         <line-breakpoint type="Dart">
-          <url>file://$PROJECT_DIR$/lib/src/model/GameObject.dart</url>
-          <line>185</line>
+          <url>file://$PROJECT_DIR$/client/lib/src/model/GameObject.dart</url>
+          <line>188</line>
           <option name="timeStamp" value="50" />
-        </line-breakpoint>
-        <line-breakpoint type="Dart">
-          <url>file://$PROJECT_DIR$/lib/src/model/Ball.dart</url>
-          <line>77</line>
-          <option name="timeStamp" value="53" />
-        </line-breakpoint>
-        <line-breakpoint type="Dart">
-          <url>file://$PROJECT_DIR$/lib/src/controller/GameController.dart</url>
-          <line>46</line>
-          <option name="timeStamp" value="56" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="60" />
+      <option name="time" value="63" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="JavascriptDebugType">
@@ -860,382 +1229,324 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lib/src/model/Item.dart">
+    <entry file="file://$PROJECT_DIR$/bin/doc/api/static-assets/css/bootstrap.css" />
+    <entry file="file://$PROJECT_DIR$/bin/doc/api/static-assets/styles.css" />
+    <entry file="file://$PROJECT_DIR$/bin/doc/api/static-assets/script.js" />
+    <entry file="file://$PROJECT_DIR$/client/.travis.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="25" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/model/Brick.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="32" column="5" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/model/Level.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="40" column="28" selection-start-line="40" selection-start-column="28" selection-end-line="40" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/model/Game.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/controller/GameController.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/model/Game.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/controller/GameController.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/model/Game.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/controller/GameController.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/model/Game.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/controller/GameController.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.travis.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pubspec.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="5" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md" />
-    <entry file="file://$PROJECT_DIR$/lib/src/model/Game.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="40" column="2" selection-start-line="40" selection-start-column="2" selection-end-line="40" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.travis.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/ide/ide-scripting.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bin/doc/api/static-assets/css/bootstrap.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7666099">
-          <caret line="277" column="21" selection-start-line="277" selection-start-column="21" selection-end-line="277" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.packages">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.024549918">
-          <caret line="1" column="12" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bin/doc/api/static-assets/styles.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7410562">
-          <caret line="642" column="33" selection-start-line="642" selection-start-column="33" selection-end-line="642" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bin/doc/api/static-assets/script.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35679215">
-          <caret line="84" column="46" selection-start-line="84" selection-start-column="46" selection-end-line="84" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.travis.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
+    <entry file="file://$PROJECT_DIR$/client/README.md">
       <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Downloads/dart-sdk/lib/core/list.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="329" column="7" selection-start-line="329" selection-start-column="7" selection-end-line="329" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/testIsolate.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="2" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/style.css.map">
+    <entry file="file://$USER_HOME$/dart-sdk/lib/core/list.dart" />
+    <entry file="file://$PROJECT_DIR$/test/testIsolate.dart" />
+    <entry file="file://$PROJECT_DIR$/client/web/style.css.map">
       <provider editor-type-id="sourcemapFileViewerProvider">
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13812155">
+        <state relative-caret-position="0">
           <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/style.css">
+    <entry file="file://$PROJECT_DIR$/client/lib/src/controller/test.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.7797203">
+        <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pubspec.yaml">
+    <entry file="file://$PROJECT_DIR$/client/web/level0.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="20" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/controller/test.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.1530613">
-          <caret line="116" column="0" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/level0.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-18.125">
+        <state relative-caret-position="0">
           <caret line="29" column="111" selection-start-line="29" selection-start-column="111" selection-end-line="29" selection-end-column="111" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/brickgameClient.dart">
+    <entry file="file://$USER_HOME$/dart-sdk/lib/html/dartium/html_dartium.dart" />
+    <entry file="file://$USER_HOME$/dart-sdk/lib/core/errors.dart" />
+    <entry file="file://$PROJECT_DIR$/out.js" />
+    <entry file="file://$PROJECT_DIR$/client/web/style.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="15" selection-start-line="2" selection-start-column="15" selection-end-line="2" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Downloads/dart-sdk/lib/html/dartium/html_dartium.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="48779" column="0" selection-start-line="48779" selection-start-column="0" selection-end-line="48779" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Downloads/dart-sdk/lib/core/errors.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="517" column="0" selection-start-line="517" selection-start-column="0" selection-end-line="517" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/out.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41729322">
-          <caret line="6054" column="4" selection-start-line="6054" selection-start-column="4" selection-end-line="6054" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/model/Model.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="18" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/model/Field.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.724138">
-          <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/model/Level.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="67" column="40" selection-start-line="67" selection-start-column="40" selection-end-line="67" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/style.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-18.75">
+        <state relative-caret-position="0">
           <caret line="81" column="16" selection-start-line="81" selection-start-column="16" selection-end-line="81" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/index.html">
+    <entry file="file://$PROJECT_DIR$/test/testField.dart" />
+    <entry file="file://$PROJECT_DIR$/client/web/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.25">
-          <caret line="26" column="10" selection-start-line="26" selection-start-column="10" selection-end-line="26" selection-end-column="10" />
-          <folding />
+        <state relative-caret-position="523">
+          <caret line="36" column="22" selection-start-line="36" selection-start-column="22" selection-end-line="36" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/model/Enums.dart">
+    <entry file="file://$PROJECT_DIR$/memoryofallgames.txt" />
+    <entry file="file://$PROJECT_DIR$/memoryofallhighscores.txt" />
+    <entry file="file://$PROJECT_DIR$/memoryofallusers.txt" />
+    <entry file="file://$PROJECT_DIR$/style.css" />
+    <entry file="file://$PROJECT_DIR$/client/LICENSE">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="90" column="47" selection-start-line="90" selection-start-column="47" selection-end-line="90" selection-end-column="47" />
-          <folding />
+        <state relative-caret-position="360">
+          <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/model/GameObject.dart">
+    <entry file="file://$PROJECT_DIR$/client/.packages">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="104" column="0" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="18">
+          <caret line="1" column="12" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/view/View.dart">
+    <entry file="file://$PROJECT_DIR$/server/lib/Server.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="62" column="49" selection-start-line="62" selection-start-column="49" selection-end-line="62" selection-end-column="49" />
-          <folding />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/controller/GameController.dart">
+    <entry file="file://$PROJECT_DIR$/client/pubspec.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="48" column="31" selection-start-line="48" selection-start-column="31" selection-end-line="48" selection-end-column="31" />
-          <folding />
+        <state relative-caret-position="162">
+          <caret line="9" column="10" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="47" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/model/Item.dart">
+    <entry file="file://$PROJECT_DIR$/server/pubspec.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="17" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="17" />
-          <folding />
+        <state relative-caret-position="162">
+          <caret line="9" column="14" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/testField.dart">
+    <entry file="file://$PROJECT_DIR$/server/memoryofallgames.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="40" column="25" selection-start-line="40" selection-start-column="25" selection-end-line="40" selection-end-column="25" />
-          <folding />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/BrickGame.dart">
+    <entry file="file://$PROJECT_DIR$/server/memoryofallgamestates.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="32" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/memoryofallusers.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/web/brickgameClient.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="40" selection-start-line="0" selection-start-column="40" selection-end-line="0" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/lib/dart/lib/core/annotations.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="108" column="13" selection-start-line="108" selection-start-column="13" selection-end-line="108" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/web/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1758">
+          <caret line="270" column="0" selection-start-line="270" selection-start-column="0" selection-end-line="270" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/lib/src/model/Model.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="14" selection-start-line="0" selection-start-column="14" selection-end-line="0" selection-end-column="14" />
           <folding>
-            <element signature="e#20#39#0" expanded="true" />
+            <element signature="e#16#35#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/model/Ball.dart">
+    <entry file="file://$PROJECT_DIR$/client/lib/src/model/Brick.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.551724">
-          <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#1#52#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/lib/src/model/Enums.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/model/Brick.dart">
+    <entry file="file://$PROJECT_DIR$/client/lib/src/model/Field.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/model/Game.dart">
+    <entry file="file://$PROJECT_DIR$/client/lib/src/model/Game.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.827586">
-          <caret line="97" column="3" selection-start-line="97" selection-start-column="3" selection-end-line="97" selection-end-column="3" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#46#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/lib/src/model/GameObject.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#1#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/lib/src/model/Level.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#1#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/lib/src/model/Player.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#1#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/lib/src/model/Item.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="122" column="10" selection-start-line="122" selection-start-column="10" selection-end-line="122" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/model/Player.dart">
+    <entry file="file://$PROJECT_DIR$/client/lib/src/model/Ball.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8233083">
-          <caret line="39" column="13" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+        <state relative-caret-position="308">
+          <caret line="116" column="11" selection-start-line="116" selection-start-column="11" selection-end-line="116" selection-end-column="11" />
+          <folding>
+            <element signature="e#1#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/lib/src/controller/GameController.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="50" column="24" selection-start-line="50" selection-start-column="24" selection-end-line="50" selection-end-column="24" />
+          <folding>
+            <element signature="e#24#70#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/lib/BrickGame.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/lib/src/view/View.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="918">
+          <caret line="51" column="27" selection-start-line="51" selection-start-column="27" selection-end-line="51" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/lib/src/gamekey/GameKey.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1746">
+          <caret line="97" column="38" selection-start-line="97" selection-start-column="38" selection-end-line="97" selection-end-column="38" />
+          <folding>
+            <element signature="e#17#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/lib/src/gamekeyserver/GameKeyServer.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="15" selection-start-line="0" selection-start-column="15" selection-end-line="0" selection-end-column="15" />
+          <folding>
+            <element signature="e#17#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/lib/src/gamekeyserver/Game.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="13" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/lib/src/gamekeyserver/User.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/lib/src/gamekeyserver/Gamestate.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="8" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
           <folding />
         </state>
       </provider>
