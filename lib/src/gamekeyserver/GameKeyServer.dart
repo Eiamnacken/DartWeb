@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:async';
-
 //import 'dart:isolate';
 import 'dart:convert' show UTF8, JSON;
 import 'dart:math';
@@ -592,11 +591,11 @@ class GameKeyServer {
       if (msg.method == 'GET' &&
           getgsgamestate.hasMatch(msg.requestedUri.path) &&
           msg.requestedUri.pathSegments.length > 2) {
-        final password = parameter["secret"];
+        final passwordgame = parameter["secret"];
         final gid = msg.requestedUri.pathSegments[1];
         final uid = msg.requestedUri.pathSegments[2];
-        if (gid != null && uid != null && password != null) {
-          final getgamestate = await getGameState(gid, uid, password);
+        if (gid != null && uid != null && passwordgame != null) {
+          final getgamestate = await getGameState(gid, uid, passwordgame);
           if (getgamestate != null) {
             msg.response
               ..statusCode = 200

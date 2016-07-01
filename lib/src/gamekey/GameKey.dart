@@ -69,6 +69,7 @@ class GameKey{
             'charset': 'UTF-8'
           }
       );
+
       return answer.status == 200 ? JSON.decode(answer.responseText) : throw answer.responseText;
     } catch (error) {
       print("GameKey.registerGame() caused an error: '$error'");
