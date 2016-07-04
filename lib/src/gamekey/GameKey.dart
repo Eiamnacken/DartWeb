@@ -37,6 +37,20 @@ class GameKey{
   String get getSecret => this._secret;
 
   /*
+    Set the new id of the game
+   */
+  void setGameID(String gameid) {
+    this._gameid = gameid;
+  }
+
+  /*
+    Set the new secret of the game
+   */
+  void setGameSecret(String gamesecret) {
+    this._secret = gamesecret;
+  }
+
+  /*
     Helper method to generate parameter body for REST requests
    */
   static String parameter(Map<String, String> p) => (new Uri(queryParameters: p)).query;
