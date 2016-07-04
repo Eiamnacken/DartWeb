@@ -1,5 +1,4 @@
 import 'dart:html';
-//import 'dart:io';
 import 'dart:async';
 import 'dart:convert';
 
@@ -22,9 +21,6 @@ class GameKey{
   //Secret of the game, need to authenticate the current game with the GameKey service
   String _secret = "DontWorryAboutaThing";
 
-  //Name of the Game
-  String _nameofGame = "BrickGame";
-
  /*
     Uri of GameKey REST API
   */
@@ -46,7 +42,7 @@ class GameKey{
   static String parameter(Map<String, String> p) => (new Uri(queryParameters: p)).query;
 
   //Constructor
-  GameKey(String host, int port){
+  GameKey(String host, int port) {
     _uri = new Uri.http("$host:$port","");
   }
 
