@@ -254,7 +254,9 @@ class GameKeyServer {
       var parameter = await Uri
           .parse("?$msg1")
           .queryParameters;
-
+      if (parameter.isEmpty) {
+        parameter = msg.uri.queryParameters;
+      }
       //which request is it ? ...
 
       //Request for create an user
@@ -290,19 +292,21 @@ class GameKeyServer {
         var id = msg.requestedUri.pathSegments[1];
         final password = parameter["pwd"];
         final checkbyname = parameter["byname"];
-      /*  if (checkbyname != null && checkbyname != "true" &&
+        if (checkbyname != null && checkbyname != "true" &&
             checkbyname != "false") {
           msg.response
             ..statusCode = 400
             ..write("Byname must be set [true|false|null].");
           return 0;
-        }*/
+        }
         bool byname = false;
         if (checkbyname == "true") {
           byname = true;
         }
         if (id != null && password != null) {
           Map getuser = await getUser(id, password, byname);
+
+
           if (getuser != null) {
              if (getuser.length>0) {
             msg.response
@@ -311,8 +315,8 @@ class GameKeyServer {
             return 0;
           } else {
             msg.response
-              ..statusCode = 200
-              ..write("No existing user with that id.");
+              ..statusCode = 404
+              ..write("No existing user with that ID.");
             return 0;
           }
             } else {
@@ -707,7 +711,8 @@ class GameKeyServer {
         existinguser =
         new Map.from(gettextfileUsers.firstWhere((user) => user["id"] == id));
       }
-      String signature = BASE64.encode(sha256
+      String signature = BASE64
+          .encode(sha256
           .convert(UTF8.encode("${existinguser["id"]},$password"))
           .bytes);
       if (existinguser["signature"] == signature) {
@@ -719,10 +724,11 @@ class GameKeyServer {
         });
         return existinguser;
       } else {
-        return null;
+       return null;
       }
     } catch (error) {
-      return new Map();
+      print(error);
+      return existinguser;
     }
   }
 
@@ -968,7 +974,6 @@ class GameKeyServer {
       Map newuser = {
         "type":"user",
         "name":"$name",
-        "pwd" :"$password",
         "id":"$id",
         "created":"${new DateTime.now().toUtc().toIso8601String()}",
         "signature":"${BASE64

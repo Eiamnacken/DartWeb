@@ -12,7 +12,7 @@ The Server is watching on that host and port for incomming requests from any cli
 Only requests with the correct format[httpmethod && httpresource] will be handled,
 for more information look into the Documentation of DartWeb.
 
-Games, user and gamestates are in saved differently. So it is necessary to register a game and a user. Then it is
+Games, user and gamestates are saved differently. So it's necessary to register a game and a user. Then it is
 possible to save a gamestate for a game and an user.
 
 Register a Game:
